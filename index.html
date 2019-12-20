@@ -3,17 +3,34 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="Icons/style.css">
     <meta name="viewport" content="width=device-width">
     <title>Pagina web</title>
   </head>
   <body>
   	<div id="main-background">
+
 	    <div id="main">
-	    	<div class="joined">    	
-	    		<p class="tieneCuenta">¿Ya tienes una cuenta?</p>
-		    	<hr class="divSession">
-		    	<p class="iniciarSesion"><a href="#">Inicia sesión</a></p>
-	    	</div>
+
+			<div class="login">
+				<img class="Logo" src="Images/logo-de-una-letra.png" alt="logo">
+				<form method="POST" class="loginForm">
+					<div class="inputBox">	
+						<input type="text" name="Nombre" required="">
+						<label>Nombre de usuario</label>
+					</div>
+
+					<div class="inputBox">
+						<input type="password" name="Constraseña" required="">
+						<label>Constraseña</label>
+					</div>
+
+					<div class="submitButton">
+						<input type="submit" value=""><span class="icon-log-in"></span>
+					</div>
+					
+				</form>
+			</div>
 
 
 	    	<div class="mainMessage">
