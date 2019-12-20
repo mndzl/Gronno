@@ -112,7 +112,7 @@
 	left:0;
 	pointer-events: none;
 	color:white;
-	font-family: 'Montserrat',sans-serif;
+	font-family: 'Montserrat Light',sans-serif;
 	font-size:0.8em;
 	transition: .5s;
 }
@@ -154,6 +154,27 @@
 	pointer-events: none;
 }
 
+.login .divisor {
+	display:inline-block;
+	margin-left:0.5em;
+	height:1.5em;
+	border:0.5px solid gray;
+}
+.login .crearCuenta{
+	display:flex;
+	align-items: center;
+}
+
+.login .divisor{
+	display: inline-block;
+}
+
+.login .crearCuenta a{
+	margin-left:0.5em;
+	font-family: 'Montserrat', sans-serif;
+	font-size:1em;
+	color:#9e4b18;
+}
 a{
 	text-decoration: none;
 	color:white;
