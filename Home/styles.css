@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+*{
+	padding:0;
+	margin:0;
+}
+
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+
+a{
+	color:#000000;
+	text-decoration: none;
+}
+
+header{
+	background-color:#4b1d00;
+}
+nav{
+	display:flex;
+	max-height: 5em;
+}
+
+#logo{
+	display: inline-block;
+	margin:1em 0 0 1em;
+}
+#logo img{
+	height:6em;
+	width:6em;
+	border-radius:100%;
+}
+
+#divLogoPhoto{
+	height: 2.5em;
+	width: 1px;
+	background-color: #FFF;
+	opacity:.4;
+	display: inline-block;
+	margin: 1em;
+}
+#mainPhoto{
+	margin-top:0.5em;
+}
+#mainPhoto img{
+	height:4em;
+	width:4em;
+	border-radius: 100%;
+}
+
+#userData{
+	margin-left: 1em;
+	display: flex;
+	align-items: center;
+}
+
+#userData span{
+	color:white;
+	font-size: 0.8em;
+}
+
+#userData #username{
+	opacity: .4;
+}
+
+#projectReady{
+	margin-left:40%;
+	display: inline-block;
+	display: flex;
+	align-items: center;
+}
+#projectReady a{
+	color:white;
+	font-size: 0.9em;
+	color:#ffb141;
+}
+
+#search{
+	display: flex;
+	align-items: center;
+	margin-left:2em;
+	position: relative;
+}
+
+#searchMessage{
+	position:absolute;
+	font-size: 0.8em;
+	top:0;
+	left:3em;
+	top:2.3em;
+	color:white;
+	opacity: .4;
+	font-family: 'Montserrat Light', sans-serif;
+	pointer-events: none;
+	transition: .5s
+}
+
+#search .icon-search{
+	position: absolute;
+	color:white;
+	font-size: 1.5em;
+	left:0;
+	top:1em;
+	pointer-events: none;
+}
+#search #searchbar{
+	width:20em;
+	background-color:transparent;
+	border:none;
+	outline:none;
+	color:white;
+	border-bottom:1px solid gray;
+	font-family: 'Montserrat Light', sans-serif;
+	padding-left:2.5em;
+	padding-bottom: 0.5em;
+	transition:.5s;
+}
+#search #submitButton{
+	position:absolute;
+	padding:0.1em 0.5em;
+	left:0.3em;
+	top:2em;
+	background-color:transparent;
+	border:none;
+	outline:none;
+	cursor:pointer;
+}
+
+#searchbar:focus ~ #searchMessage,
+#searchbar:valid ~ #searchMessage{
+	opacity:0;
+}
+#search #searchbar:focus{
+	border-bottom:1px solid white;
+}
+
