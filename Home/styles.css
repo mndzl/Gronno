@@ -23,6 +23,12 @@ a{
 	color:#000000;
 }
 
+@media screen and (max-width: 1070px){
+	.medallas{
+		flex-direction: column;
+	}
+}
+
 @media screen and (max-width: 680px){
 	#rightNavItems{
 		display: none !important;
@@ -229,8 +235,8 @@ nav{
 }
 
 .fotoPersona, img{
-	height:3em;
-	width: 3em;
+	height:4em;
+	width: 4em;
 	border-radius: 100%;
 	display: inline-block;
 }
@@ -284,7 +290,7 @@ nav{
 }
 
 .dedicacion{
-	font-size: .6em;
+	font-size: .9em;
 	color:#e96e00;
 }
 
@@ -316,6 +322,9 @@ nav{
 .medallas{
 	justify-self: end;
 	grid-column: span 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .cantidadOro, .cantidadPlata, .cantidadBronce{
@@ -330,9 +339,9 @@ nav{
 .divEndPublic{
 	width:70%;
 	height:1px;
+	margin-top: 1em;
 	background-color:#000000;
 	grid-column: span 3;
-	margin-top:2em;
 }
 
 .creador{
@@ -342,4 +351,11 @@ nav{
 
 .creador a:hover{
 	opacity:1;
+}
+
+h1{
+	font-family: 'Montserrat Light', sans-serif;
+	margin-bottom: 2em;
+	margin: 1em auto;
+	font-size:2em;
 }
