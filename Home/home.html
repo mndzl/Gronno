@@ -6,39 +6,207 @@
     <link rel="stylesheet" type="text/css" href="../Fonts/style.css">
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
-    <title>Pagina web</title>
 </head>
 <body>
 
 	<header>
 		<nav>
-			<div id="logo">
-				<a href=""><img src="../Images/logo.jpg" alt="logo"></a>
+			<div id="leftNavSide">
+				<div id="leftNavItems">
+					<div id="logo">
+						<a href=""><img src="../Images/logo.jpg" alt="logo"></a>
+					</div>
+
+					<div id="divLogoPhoto"></div>
+
+					<div id="userData">
+						<div id="mainPhoto"><a href="#"><img src="../Images/me.png"></a></div>
+							<span>
+								<div id="name">Luis Méndez</div>
+								<div id="username">(mendezluis)</div>
+							</span>
+					</div>
+				</div>
+
 			</div>
-
-
-			<div id="divLogoPhoto"></div>
 			
-			<div id="mainPhoto"><a href="#"><img src="../Images/me.png"></a></div>
-
-			<div id="userData">
-				<span>
-					<div id="name">Luis Méndez</div>
-					<div id="username">(mendezluis)</div>
-				</span>
+			<div id="rightNavSide">
+				<div id="rightNavItems">
+					<div id="projectReady"><a href="">¡Mi proyecto está listo!</a></div>
+					<div id="divMessageSearch"></div>
+					<div id="search">
+						<form method="POST">
+							<input id="submitButton" type="submit" name="" value=""><span class="icon-search"></span>
+							<input id="searchbar"type="text" name="Buscar" required="">
+							<label id="searchMessage">Buscar</span>
+						</form>
+					</div>
+				</div>
+			
+				<div id="phoneIcons">
+					<a href="#"><span id="addProject" class="icon-plus"></span></a>
+					<span id="searchPhone" class="icon-search"></span>
+				</div>
 			</div>
-
-			<div id="projectReady"><a href="">¡Mi proyecto está listo!</a></div>
-			<div id="search">
-				<form method="POST">
-					<input id="submitButton" type="submit" name="" value=""><span class="icon-search"></span>
-					<input id="searchbar"type="text" name="Buscar" required="">
-					<label id="searchMessage">Busca personas, proyectos o temas</span>
-				</form>
-
-			</div>
+			
+			
 		</nav>
 	</header>
+
+	<div class="container">
+		<aside class="left">
+			<h1>Presentados</h1>
+
+			<!-- Implementar con foreach y base de datos-->
+			<div class="presentadosDiv"></div>
+
+			<div class="publicado">
+				<span class="icon-price-tag IA"></span>
+				<a href="#">Zoe</a>
+			</div>
+
+			<div class="publicado">
+				<span class="icon-price-tag web"></span>
+				<a href="#">Nombre de la página</a>
+			</div>
+
+		</aside>
+	
+		<main>
+			<!-- Implementar con foreach y base de datos-->
+			<div class="publicacion">
+				<div class="categoria">
+					<span class="icon-price-tag IA"></span>
+					<a class="IA" href="#"> Inteligencia Artificial</a>
+				</div>
+
+				<div class="info">
+					<h1 class="titulo"><a href="#">Zoe <span class="descripcion">: un chatbot orientado al bullying</span></a>
+					<h2 class="creador">por <a href="#">Luis Méndez</a>, <a href="#"> Lautaro Rodríguez</a> y <a href="#">Ailín Meana</a></h2>
+
+				</div>
+
+				<div class="medallas">
+					<div class="bronce">
+						<img src="../Images/bronce.jpg" alt="Medallas de bronce">
+						<span class="cantidadBronce">345</span>
+					</div>
+
+					<div class="plata">
+						<img src="../Images/plata.jpg" alt="Medallas de plata">
+						<span class="cantidadPlata">2</span>
+					</div>
+
+					<div class="oro">
+						<img src="../Images/oro.jpg" alt="Medallas de oro">
+						<span class="cantidadOro">15.5m</span>
+					</div>
+
+				</div>
+			
+
+
+				<div class="divEndPublic"></div>
+
+			</div>
+
+
+			<div class="publicacion">
+				<div class="categoria">
+					<span class="icon-price-tag robotica"></span>
+					<a class="robotica" href="#">Robótica</a>
+				</div>
+
+				<div class="info">
+					<h1 class="titulo"><a href="#">Anteojos Inteligentes</a></h1>
+					<h2 class="creador">por <a href="#" class="integrante">Arón Soto</a></h2>	
+				</div>
+
+				<div class="medallas">
+					<div class="bronce">
+						<img src="../Images/bronce.jpg" alt="Medallas de bronce">
+						<span class="cantidadBronce">12</span>
+					</div>
+
+					<div class="plata">
+						<img src="../Images/plata.jpg" alt="Medallas de plata">
+						<span class="cantidadPlata">31</span>
+					</div>
+
+					<div class="oro">
+						<img src="../Images/oro.jpg" alt="Medallas de oro">
+						<span class="cantidadOro">222</span>
+					</div>
+
+				</div>
+
+				<div class="divEndPublic"></div>
+			</div>
+
+
+			<div class="publicacion">
+				<div class="categoria">
+					<span class="icon-price-tag robotica"></span>
+					<a class="robotica" href="#">Robótica</a>
+				</div>
+
+				<div class="info">
+					<h1 class="titulo"><a href="">Guante controlador de juegos</a></h1>
+					<h2 class="creador">por <a href="#" class="integrante">Lautaro Rodríguez</a></h2>		
+				</div>
+
+				<div class="medallas">
+					<div class="bronce">
+						<img src="../Images/bronce.jpg" alt="Medallas de bronce">
+						<span class="cantidadBronce">21</span>
+					</div>
+
+					<div class="plata">
+						<img src="../Images/plata.jpg" alt="Medallas de plata">
+						<span class="cantidadPlata">14</span>
+					</div>
+
+					<div class="oro">
+						<img src="../Images/oro.jpg" alt="Medallas de oro">
+						<span class="cantidadOro">551k</span>
+					</div>
+
+				</div>
+
+				<div class="divEndPublic"></div>
+			</div>
+
+
+		</main>
+
+
+		<aside class="right">
+			<div class="zona">
+				<h1 class="enZona">Masters en tu zona</h1>
+				<div class="zonaDiv"></div>
+
+				<div class="persona">
+					<div class="fotoPersona"><img src="../Images/persona1.jpg"></div>
+					<span class="nombrePersona">Pedro Picapiedras <span class="edad">(25)</span></span>
+					<span class="dedicacion">Programador Frontend</span>
+				</div>
+
+				<div class="persona">
+					<div class="fotoPersona"><img src="../Images/descarga.jpg"></div>
+					<span class="nombrePersona">Julian Zárate <span class="edad">(31)</span></span>
+					<span class="dedicacion">Programador de robótica</span>
+				</div>
+
+				<div class="persona">
+					<div class="fotoPersona"><img src="../Images/persona3.jpg"></div>
+					<span class="nombrePersona">Daniela Alcaráz <span class="edad">(16)</span></span>
+					<span class="dedicacion">Diseñadora</span>
+			</div>
+			</div>
+			
+		</aside>
+
+	</div>
 
 </body>
 </html>

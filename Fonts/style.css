@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?up9jap');
-  src:  url('fonts/icomoon.eot?up9jap#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?up9jap') format('truetype'),
-    url('fonts/icomoon.woff?up9jap') format('woff'),
-    url('fonts/icomoon.svg?up9jap#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?9lt4e8');
+  src:  url('fonts/icomoon.eot?9lt4e8#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?9lt4e8') format('truetype'),
+    url('fonts/icomoon.woff?9lt4e8') format('woff'),
+    url('fonts/icomoon.svg?9lt4e8#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -33,4 +33,7 @@
 }
 .icon-price-tag:before {
   content: "\e935";
+}
+.icon-plus:before {
+  content: "\ea0a";
 }
