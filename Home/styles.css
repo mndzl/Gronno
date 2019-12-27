@@ -398,6 +398,7 @@ nav{
 	margin-top: 1em;
 	background-color:#000000;
 	grid-column: span 3;
+	opacity: .2;
 }
 
 .creador{
@@ -411,7 +412,7 @@ nav{
 
 main .tituloNav{
 	font-family: 'Montserrat Light', sans-serif;
-	margin-bottom: 2em;
+	margin-bottom: .5em;
 	font-size:2em;
 	padding-top: 1em;
 	text-align: right;
@@ -432,3 +433,4 @@ main .tituloNav{
 .abrir2{
 	left:71%;
 }
+
