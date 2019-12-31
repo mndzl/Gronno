@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap');
+
 .IA{
 	color:#ff6400;
 }
@@ -7,6 +8,9 @@
 }
 .web{
 	color:#2f9a00;
+}
+li{
+    list-style: none;
 }
 *{
     padding:0;
@@ -255,6 +259,7 @@ a{
     #userTitle{
         color:#ff8800;
         padding-top:.5em;
+        font-size:1em;
         font-weight: lighter;
     }
     .tags{
@@ -265,9 +270,113 @@ a{
         padding:0em .1em;
     }
 
+/* Main Container */
+
     .mainContainer{
         display:grid;
+        grid-template-columns: 2fr 1fr;
+        max-width: 1200px;
+        justify-content: center;
+        grid-gap: 1.5em;
+        margin:auto;
     }
+
+/* Projects */
+
+    .projects>h2{
+        padding:1em 0;
+    }
+
     .publicacion{
-        background-color:#FFF;
+        display:grid;
+        grid-template-columns: 2fr 1fr;
+        margin-bottom: 1em;
     }
+    .projects .publicacion{
+        background-color: #FFF;
+        padding: 2.5em;
+        border-radius:10px;
+    }
+    .publicacion .category h3{
+        display:inline-block;
+    }
+    .publicacion .publicTitle{
+        font-size: 1.3em;
+    }
+    .publicacion .creators{
+        margin-bottom: 1em;
+        opacity: .7;
+        font-size:.8em;
+    }
+    .publicacion .creators .user{
+        opacity:.6;
+        transition: .5s;
+    }
+
+    .creators .user:hover{
+        opacity:1;
+    }
+
+    .publicacion .seeMore{
+        padding-top: 1em;
+    }
+    .medallas{
+        justify-self: end;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .category{
+        font-size:.8em;
+    }
+    .bronce, .plata, .oro{
+        position: relative;
+    }
+
+    .cantidadOro, .cantidadPlata, .cantidadBronce{
+        position: absolute;
+        left:50%;
+        top:60%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        cursor: default;
+    }
+
+/* Footer */
+
+    footer{
+        margin-top: 10em;
+    }
+    footer .container{
+        background-color: #4b1d00;
+        padding: 1em 0;
+    }
+    footer .siteData>img{
+        border-radius: 100%;
+        height: 4em;
+        width:4em;
+    }
+    footer .siteData{
+        width:50%;
+        margin:auto;
+        display:grid;
+        grid-template-columns:4em 1fr 1px 1fr;
+        align-items: center;
+    }
+    footer li{
+        color:#FFF;
+        font-size: .8em;
+        padding: .2em 1em;
+    }
+    footer .divisor{
+        height: 90%;
+        width:1px;
+        background-color: #FFF;
+        opacity:.5;
+    }
+
+    .links a{
+        padding-left: 1em;
+        color:#FFF;
+    }
+
