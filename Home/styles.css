@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap');
+
 /* Categorías */
 .IA{
 	color:#ff6400;
@@ -209,7 +210,6 @@ nav{
 	color:white;
 	font-size:0.7em;
 	justify-self:start;
-	font-family: 'Montserrat light',sans-serif;
 }
 #username{
 	opacity: .4;
@@ -251,7 +251,6 @@ nav{
 	outline: none;
 	border-bottom:1px solid gray;
 	transition: .5s;
-	font-family: 'Montserrat',sans-serif;
 	color:white;
 	padding-left:2.5em;
 	padding-bottom: .4em;
@@ -312,7 +311,6 @@ nav{
 .left h1, .right h1{
 	font-size: 1em;
 	text-align: center;
-	font-family: 'Montserrat Light', sans-serif;
 }
 
 .left .presentadosDiv,
@@ -353,9 +351,11 @@ nav{
 .publicacion{
 	display: grid;
 	margin-top:2em;
-	font-family: 'Montserrat Light', sans-serif;
 	grid-template-columns: 2.5fr 1.5fr;
+	transition:.5s;
+	position:relative;
 }
+
 .publicacion .titulo{
 	font-size: 1.3em;
 	display: block;
@@ -411,7 +411,6 @@ nav{
 }
 
 main .tituloNav{
-	font-family: 'Montserrat Light', sans-serif;
 	margin-bottom: .5em;
 	font-size:2em;
 	padding-top: 1em;
@@ -420,7 +419,6 @@ main .tituloNav{
 
 .comentarios{
 	grid-column: span 3;
-	font-family:'Montserrat', sans-serif;
 	opacity: .7;	
 }
 .comentarios .icon-bubble{
@@ -434,3 +432,14 @@ main .tituloNav{
 	left:71%;
 }
 
+.pubLink{
+	width:100%;
+	height:100%;
+}
+
+.line{
+	height:90%;
+	width:.5em;
+	position:absolute;
+	background-color:#4b1d00;
+}
