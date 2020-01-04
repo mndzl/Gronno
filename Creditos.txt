@@ -1,1 +1,6 @@
 medalla de bronce: <div>Iconos diseñados por <a href="https://www.flaticon.es/autores/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
+
+main2 - Imagen de <a href="https://pixabay.com/es/users/StockSnap-894430/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2620118">StockSnap</a> en <a href="https://pixabay.com/es/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2620118">Pixabay</a>
+
+
+main 3 - Imagen de <a href="https://pixabay.com/es/users/lmonk72-731125/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=647013">Lawrence Monk</a> en <a href="https://pixabay.com/es/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=647013">Pixabay</a>
