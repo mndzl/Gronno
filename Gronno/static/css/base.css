@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap');
+a{
+    text-decoration: none;
+}
+:root{
+    --IA:#d65600;
+    --robotica:#002594;
+    --web:#2f9a00;
+}
+.IA{
+	color:var(--IA);
+}
+.robotica{
+	color:var(--robotica);
+}
+.web{
+    color:var(--web);
+}
+
+html{
+    min-height: 120vh;
+    position: relative;
+}
+.icon-price-tag{
+    line-height: 2em;
+}
+li{
+    list-style: none;
+}
+*{
+    padding:0;
+    margin:0;
+}
+body{
+    font-family: 'Montserrat',sans-serif;
+    background-color: #DDDDDD;
+}
+@media screen and (max-width: 680px){
+    #search, #projectReady, #divMessageSearch{
+        display:none !important;
+    }
+    #searchMobile, #addProject{
+        display:inline !important;
+    }
+    #rightNavItems{
+        display:flex !important;
+        justify-content: end;
+    }
+    #addProject{
+        display: inline !important;
+    }
+    #leftNavItems{
+        grid-template-columns: 3em 5px 3em !important;
+        align-items:center;
+    }
+    #userData img, #logo, #logo img, #mainPhoto{
+        width:2.5em !important;
+        height:2.5em !important;
+    }
+    #userData span{
+        display:none !important;
+    }
+}
+@media screen and (max-width: 460px){
+    footer .container .siteData{
+        grid-template-columns: 3em 1fr 1px 1fr !important;
+        font-size: .8em;
+    }
+    footer .container .siteData{
+        grid-row: span 2;
+    }
+}
+
+/* NAVBAR */
+#addProject{
+    display:none;
+    position:relative;
+    color:#ffba00;
+    width:1em;
+}
+#searchMobile{
+    color:white;
+    display:none;
+    margin-right: 1em;
+    position:relative;
+}
+#addProject .icon-plus{
+    pointer-events: none;
+}
+#addProject a{
+    top:0;
+    left:0;
+    position:absolute;
+}
+#searchPhone{
+    position:relative;
+    width:1em;
+}
+#logo{position: relative;}
+#logo,#logo img{
+    align-self: center;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+    align-self: center;
+    justify-self:start;
+    height:3em;
+    width:3em;
+}
+#leftNavSide{
+    justify-self: start;
+    position:relative;
+}
+#leftNavItems{
+    display: grid;
+    align-items: center;
+    grid-template-columns:30% 10% 68%;
+}
+
+#rightNavSide{
+    justify-self:end;
+    display: grid;
+    justify-items:end;  
+    width: 100%;
+    position: relative;
+}
+#rightNavItems{
+    display: grid;
+    align-items: center;
+    grid-template-columns:12em 1em 12em;
+}
+
+header{
+    max-height: 4em;
+}
+
+nav{
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    align-items: center;
+    padding:0 2em;
+    height: 4em;
+    justify-items:center;
+    background-color: #4b1d00;
+    position: relative;
+    
+}
+
+#divLogoPhoto, #divMessageSearch{
+    height:1.5em;
+    width:1px;
+    opacity: .4;
+    background:#FFF;
+    justify-self: center;
+}
+#divMessageSearch{
+    height:2em;
+    justify-self: center;
+}
+#mainPhoto{
+    justify-self:center;
+    height:3em;
+    width:3em;
+}
+#mainPhoto img{
+    height:3em;
+    width:3em;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+    justify-self:center;
+}
+
+#userData{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    position:relative;
+    height:100%;
+}
+#username, #name{
+    color:white;
+    font-size:0.6em;
+    justify-self:start;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: bold;
+    pointer-events: none;
+    margin-left: .5em;
+}
+#username{
+    opacity: .6;
+}
+
+#projectReady{
+    justify-self:end; 
+    width:11em;
+    font-size:80%;
+    font-weight: bold;
+}
+#projectReady a{
+    text-decoration: none;
+    color:#ffba00;
+    font-size: 90%;
+    opacity: .8;
+    transition:.5s;
+}
+#projectReady a:hover{
+    opacity: 1;
+}
+#search form{
+    display: inline-block;
+}
+#search .icon-search{
+    color:white;
+    font-size: 1em;
+    position:absolute;
+    pointer-events: none;
+    top:0;
+    top:20%;
+}
+#search{
+    position: relative;
+    display: inline-block;
+    justify-self:end;
+    width:12em;
+}
+#searchbar{
+    background-color: transparent;
+    border:none;
+    outline: none;
+    border-bottom:1px solid gray;
+    transition: .5s;
+    font-size: .8em;
+    font-family: 'Montserrat',sans-serif;
+    color:white;
+    padding:.3em 0;
+    padding-left:1.5em;
+    width: 90%;
+}
+#search #searchMessage{
+    position:absolute;
+    opacity: .4;
+    left:0;
+    top:0;
+    top:20%;
+    left:10%;
+    font-size:80%;
+    color:white;
+    pointer-events: none;
+    transition:.5s;
+}
+#submitButton{
+    position:absolute;
+    width: 1.5em;
+    height:1.5em;
+    background: transparent;
+    border:none;
+    outline: none;
+    cursor:pointer;
+}
+
+#searchbar:focus ~ #searchMessage,
+#searchbar:valid ~ #searchMessage{
+    opacity: 0;
+}
+#searchbar:focus{
+    border-bottom:1px solid white;
+}
+/* Footer */
+footer{
+    max-height: 5em;
+    width:100%;
+    transition:.5s;
+    position: absolute;
+    bottom: 0;
+}
+footer .container{
+    background-color: #4b1d00;
+    padding: .5em 0;
+}
+footer .siteData>img{
+    border-radius: 100%;
+    max-height: 3em;
+    max-width:3em;
+}
+footer .siteData{
+    max-width: 60%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:3em 45% 1px 45%;
+    align-items: center;
+}
+footer a{
+    opacity: .8;
+    transition:.5s
+}
+footer a:hover{
+    opacity: 1;
+}
+
+footer li{
+    color:#FFF;
+    font-size: .8em;
+    padding: .2em 1em;
+}
+footer .divisor{
+    height: 70%;
+    width:1px;
+    background-color: #FFF;
+    opacity:.5;
+}
+
+.links a{
+    color:#FFF;
+    width:100%;
+}
+
+.link{
+    position:absolute;
+    top:0;
+    left:0;
+	height:100%;
+	width:100%;
+}
+.noContent a{
+	color:#ff5900;
+}
+.content .noContent{
+	margin: 4em auto;
+	width:80%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}

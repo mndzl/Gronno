@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>{% block title %}{% endblock title %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/fonts/style.css' %}">
+    <link rel="stylesheet" href="{% block link %}{% endblock %}">
+    <link rel="stylesheet" href="{% block link2 %}{% endblock %}">
+
+</head>
+<body>
+
+   <header>
+		<nav>
+			<div id="leftNavSide">
+				<div id="leftNavItems">
+					<div id="logo">
+						<a href="{% url 'homepage' %}" class="link"></a>
+						<img src="{% static 'img/logo.jpg' %}" alt="logo">
+					</div>
+
+					<div id="divLogoPhoto"></div>
+
+					<div id="userData">
+						<a href="{% url 'profile' %}" class='link'></a>
+						<div id="mainPhoto"><a href="#"><img src="{% static 'img/me.png' %}"></a></div>
+							<span>
+								<div id="name">Luis Méndez</div>
+								<div id="username">(mendezluis)</div>
+							</span>
+					</div>
+				</div>
+
+			</div>
+			
+			<div id="rightNavSide">
+				<div id="rightNavItems">
+					<div id="projectReady"><a href="">¡Mi proyecto está listo!</a></div>
+					<div id="divMessageSearch"></div>
+					<div id="search">
+						<form method="POST">
+							<input id="submitButton" type="submit" name="" value=""><span class="icon-search"></span>
+							<input id="searchbar"type="text" name="Buscar" required="">
+							<label id="searchMessage">Buscar</span>
+						</form>
+					</div>
+					<div id="searchMobile">
+						<a href="#" class="link"></a>
+						<span class="icon-search"></span>
+					</div>
+					<div id="addProject">
+						<a href="#" class="link"></a>
+						<span class="icon-plus"></a></span>
+					</div>
+				</div>
+			</div>
+			
+			
+        </nav>
+    </header>
+
+    {% block content %}{% endblock content %}
+
+    <footer>
+        <div class="container">
+            <div class="siteData">
+                <img src="{% static 'img/logo.jpg' %}" alt="logo">
+                <ul class="data">
+                    <li>Gronno, Inc</li>
+                    <li>Todos los derechos reservados</li> 
+                </ul>
+        
+                <div class="divisor"></div>
+                <ul class="links">
+                    <li><a href="#">Acerca de</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Condiciones de uso</a><li>   
+                </ul>
+
+            </div>
+        </div>
+    </footer>
+
+
+	{% block js %}
+	{% endblock js %}
+
+</body>
+</html>

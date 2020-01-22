@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+
+/* GRAL */
+*{
+	padding:0;
+	margin:0;
+}
+
+a{
+	text-decoration: none;
+	color:white;
+
+}
+
+html, body{
+  height:100%;
+  margin:0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#main{
+	background-image: url(../img/coding2.jpg);
+	background-repeat: no-repeat;
+	padding-top: 4em;
+	height:100%;
+	width:100%;
+	display: table;
+	position:relative;
+}
+
+body{
+	background-color:#22252c;
+}
+
+
+/* Form */
+
+.form{
+	width:60%;
+	min-width: 20em;
+	background-color:#603400;
+	border-radius: 20px;
+	position: relative;
+	box-sizing: border-box;
+	margin:auto;
+	opacity: .9;
+	z-index: 1;
+	padding-bottom: 1em;
+
+}
+
+	img{
+		width:5em;
+		height:5em;
+		position:absolute;
+		margin-left:auto;
+		margin-right:auto;
+		left:0;
+		right:0;
+		top:-2.5em;
+		z-index: 2;
+	}
+
+	.form h2{
+		font-family:'Montserrat Light',sans-serif;
+		text-align: center;
+		padding:2em 0;
+		color:white;
+	}
+
+	.divInput{
+		position: relative;
+	}
+
+	.divInput input{
+		display: block;
+		margin:auto;
+		width:40%;
+		background-color: transparent;
+		outline: none;
+		min-width:10em;
+		border:none;
+		border-bottom: 1px solid white;
+		margin-bottom:2.3em;
+		font-size: 1em;
+		color:white;
+		font-family:'Montserrat Light',sans-serif;
+	}
+	.divInput label{
+		position: absolute;
+		left:30%;
+		font-family:'Montserrat Light',sans-serif;
+		pointer-events: none;
+		top:-1.5em;
+		font-size: 0.7em;
+		color:white;
+		transition:.5s;
+	}
+
+	.divInput input:focus ~ label{
+		color:orange;
+	}
+
+	.check{
+		width:1.5em;
+		height:1.5em;
+		margin-left:25%;
+		display: inline-block;
+		margin-right: 1em;
+	}
+
+	.politica{
+		display: inline-block;
+		width:50%;
+		font-size: 0.9em;
+		color:white;
+		font-family:'Montserrat Light',sans-serif;
+	}
+
+	.envio{
+		display: block;
+		margin:auto;
+		margin-top:2em;
+		padding:0.7em 5em;
+		background-color: #ff8b03;
+		border:none;
+		outline: none;
+		color:black;
+		font-family:'Montserrat',sans-serif;
+		border-radius: 10px;
+		transition: .5s;
+	}
+	.envio:hover{
+		color:#FFFFFF;
+	}
+
+	.tengoCuenta{
+		text-align: center;
+		font-family:'Montserrat',sans-serif;
+		padding:1em;
+		font-size:12px;
+	}

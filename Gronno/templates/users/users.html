@@ -1,0 +1,142 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Ver Perfil{% endblock title %}
+{% block link %}{% static 'css/profile.css' %}{% endblock link %}
+
+{% block content %}   
+    <div id="perfilContainer">
+        <div id="infoPerfil">
+            <div id="userImage"><img src="{% static 'img/me.png' %}" alt="Luis Méndez" style="border:5px solid var(--{{user.category}})"></div>
+            <h1 id="subImageName">Luis Méndez <span class="icon-plus"></span></h1>
+            <h2 id="userTitle">Programador en Java</h2>
+            <div class="tags">
+                <span class="icon-price-tag IA" title="Inteligencia Artificial"></span>
+                <span class="icon-price-tag robotica" title="Robótica"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mainContainer">
+        <div class="projects">
+            <h2>Proyectos recientes</h2>
+
+            {% if projects %}
+                {% for project in projects %}
+                    <div class="publicacion">
+                        <a class="link" href="#"></a>
+                        <div class="publicInfo">
+                            <div class="category">
+                                <span class="icon-price-tag {{project.category}}"></span>
+                                <h3><a class="{{project.category}}" href="#">{{project.category}}</a></h3>        
+                            </div>
+
+                            <h2 class="title">{{ project.title }}</h2>
+                            
+                            <div class="description">{{project.description}}</div>
+                        </div> 
+
+                        <div class="medallas">
+                            <div class="medallas">
+                                <div class="bronce">
+                                    <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
+                                    <span class="cantidad">{{project.bronzemedals}}</span>
+                                </div>
+
+                                <div class="plata">
+                                    <img src="{% static 'img/plata.png' %}" alt="Medallas de plata">
+                                    <span class="cantidad">{{project.silvermedals}}</span>
+                                </div>
+
+                                <div class="oro">
+                                    <img src="{% static 'img/oro.png' %}" alt="Medallas de oro">
+                                    <span class="cantidad">{{project.goldmedals}}</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class="noContent">No se han subido proyectos aún</h3>
+                
+            {% endif %}
+        </div>
+
+        <aside>
+            <div class="info">
+                <div class="aboutMe">
+
+                        <div id="userinfo">
+                            <h2 class="title">Sobre mí</h2>
+                            <div class="rightDiv"></div>
+                                <div id="text" class="noContent">
+                                {% if user.extract %}
+                                    {{user.extract}}
+                                {% else %}
+                                    No se ha dado información
+                                {% endif %}
+
+                                </div>
+                                {% if user.extract%}
+                                    <div id="seeMore">
+                                        <span class="icon-cheveron-down" id='iconspan'></span>
+                                    </div>
+                                {% endif %}
+                        </div>
+                    
+                    <div class="redesContainer">
+                        <h2 class="title">Contacto</h2>
+                        <div class="rightDiv"></div>
+                        <div class="iconosContainer">
+                            <div class="iconos">
+                                {% for network in user.networks %}
+                                    <span class="icon-{{network.name}}"><a href="{{network.link}}" class="link"></a></span>
+                                {% endfor %}
+                                <span class="icon-mail4"><a href="mailto:{{user.email}}" class="link"></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="presentados">
+
+                    <h2 class="title">Presentados</h2>
+                    <div class="rightDiv"></div>
+                    
+                    {% if projects %}
+                        {% for project in projects %}
+                            <div class="category"> 
+                                <a class="{{project.category}}" href="#">
+                                <span class="icon-price-tag {{project.category}}"></span>
+                                <h3>{{project.category}}</h3>
+                                </a>
+                            </div>
+                            <div class="proyecto">
+                                <a href="#">
+                                <h4 class="title">{{project.title}}</h4>
+                                <div class="interactions"><span class="quantity">{{project.interactions}}</span> interacciones</div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                        {% else %}
+                        <h3 class="noContent">Sin proyectos</h3>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    
+
+    </aside>
+
+{% endblock content %}
+
+{% block js %}
+
+    <script src="{% static 'js/users.js' %}"></script>
+
+{% endblock js %}
+ 
