@@ -1,2 +1,0 @@
-Perfil: una persona obtendrá una etiqueta de categoría al haber subido un 
-	proyecto de ella.
