@@ -1,17 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap');
 
-.icon-instagram{
-    color: #e95950!important; 
-}
-.icon-linkedin{
-    color: #0e76a8 !important; 
-}
-.icon-mail4{
-    color:#cf0e00!important;
-}
-.icon-facebook2{
-    color:#3b5998 !important;
-}
+
 
 @media screen and (max-width: 680px){
     .publicacion .description{
@@ -110,6 +99,7 @@
         font-weight: 500;
         text-align: center;
         opacity:.7;
+        font-size: 1em;
     }
     .projects>h2{
         padding:1em 0;
@@ -121,7 +111,7 @@
         grid-template-columns: 2fr 1fr;
         margin-bottom: 1em;
         background-color: #FFF;
-        padding: 2.5em;
+        padding: 2em 2.5em;
         border-radius:10px;
         max-width:90%;
         transition:.5s;
@@ -133,12 +123,14 @@
     .publicacion .publicInfo, .publicacion .medallas{
         pointer-events: none;
     }
+    .publicacion .category {
+        margin-bottom: 1em;
+    }
     .category h3{
         display:inline-block;
     }
     .publicacion .title{
         font-size: 1.3em;
-        margin-bottom: .5em;
         font-weight: 500;
     }
     .publicacion .creators .user{
@@ -146,13 +138,7 @@
         color:#000;
         transition: .5s;
     }
-    .publicacion .description{
-        width:90%;
-        overflow: hidden;
-        line-height: 1.5em;
-        max-height: 3em;
-        opacity: .7;
-    }
+
     .creators .user:hover{
         opacity:1;
     }
@@ -260,7 +246,7 @@
     }
 
     .redesContainer .iconosContainer{
-        max-width:80%;
+        max-width:70%;
         margin: auto;
     }
     .iconosContainer .iconos{
@@ -279,5 +265,3 @@
         opacity:.3;
         margin:.5em auto;
     }
-
-

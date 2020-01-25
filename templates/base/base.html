@@ -29,8 +29,8 @@
 						<a href="{% url 'profile' %}" class='link'></a>
 						<div id="mainPhoto"><a href="#"><img src="{% static 'img/me.png' %}"></a></div>
 							<span>
-								<div id="name">Luis Méndez</div>
-								<div id="username">(mendezluis)</div>
+								<div id="name">{{user.full_name}}</div>
+								<div id="username">({{user.username}})</div>
 							</span>
 					</div>
 				</div>

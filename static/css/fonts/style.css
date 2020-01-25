@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?gxxvyq');
-  src:  url('fonts/icomoon.eot?gxxvyq#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?gxxvyq') format('truetype'),
-    url('fonts/icomoon.woff?gxxvyq') format('woff'),
-    url('fonts/icomoon.svg?gxxvyq#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?kcw8zt');
+  src:  url('fonts/icomoon.eot?kcw8zt#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?kcw8zt') format('truetype'),
+    url('fonts/icomoon.woff?kcw8zt') format('woff'),
+    url('fonts/icomoon.svg?kcw8zt#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,14 +25,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-log-in:before {
-  content: "\e901";
-}
 .icon-cheveron-down:before {
-  content: "\e900";
+  content: "\e901";
 }
 .icon-price-tag:before {
   content: "\e935";
+}
+.icon-calendar:before {
+  content: "\e953";
 }
 .icon-bubble:before {
   content: "\e96b";
@@ -43,10 +43,13 @@
 .icon-plus:before {
   content: "\ea0a";
 }
-.icon-mail4:before {
+.icon-enter:before {
+  content: "\ea13";
+}
+.icon-mail:before {
   content: "\ea86";
 }
-.icon-facebook2:before {
+.icon-facebook:before {
   content: "\ea91";
 }
 .icon-instagram:before {

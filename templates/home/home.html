@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load tz %}
 
 	{% block link %}{% static 'css/home.css' %}{% endblock link %}
 	{% block title %}Home{% endblock title %}
@@ -14,7 +15,7 @@
 			
 			{% if personal_projects %}
 				{% for project in personal_projects %}
-					<div class="publicado" class='title'>
+					<div class="publicado">
 						<a href="{{project.link}}" class="link"></a>
 						<span class="icon-price-tag" style="color:{{project.category.color}}"> </span>
 						<span style="color:{{project.category.color}}">{{ project.title }}</span>
@@ -35,8 +36,10 @@
 			{% if projects %}
 				{% for project, comment in projects %}
 					<div class="publicacion">
+					<div class="postedAt"><span class="icon-calendar"></span><span class="numeroComments">{{ project.date_posted|date:"j \d\e F"}}, {{project.date_posted|time:"P"}}</span></div>
+
 					<a href="#" class='link'></a>
-					
+
 						<div class="categoria">
 							<span class="icon-price-tag" style="color:{{ project.category.color }}"></span>
 							<a href="#" style="color:{{ project.category.color }}">{{ project.category.name }}</a>
@@ -44,8 +47,8 @@
 
 						<div class="info">
 							<h3 class="titulo">{{ project.title }}</a></h3>
-							<h4 class="creador">por <a href="#">{{ project.author.first_name }} {{project.author.last_name}}</a></h4>
-
+							<h4 class="creador">por <a href="#">{{ project.author.full_name }} {{project.author.last_name}}</a></h4>
+							<h3 class="description">{{ project.description }}</h3>
 						</div>
 
 						<div class="medallas">
@@ -62,10 +65,13 @@
 							<div class="oro">
 								<img src="{% static 'img/oro.png' %}" alt="Medallas de oro">
 								<span class="cantidad">55</span>
+								
 							</div>
 
 						</div>
 					
+					
+
 						<div class="comentarios">
 							<span class="icon-bubble" style="color:{{ project.category.color }}"></span>
 							<span class="numeroComments">{{ comment }}</span>	

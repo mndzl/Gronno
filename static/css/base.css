@@ -318,3 +318,21 @@ footer .divisor{
 	display: flex;
 	justify-content: center;
 }
+.postedAt{
+    opacity: .5;
+    font-size: .8em;
+}
+.icon-calendar{
+    margin-right: .5em;
+}
+.publicacion .description{
+    width:90%;
+    overflow: hidden;
+    line-height: 1.5em;
+    margin-top: .5em;
+    max-height: 3em;
+    opacity: .7;
+    font-size: .9em;
+    font-weight: 500;
+}
+

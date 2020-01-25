@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load tz %}
 
 {% block title %}Ver Perfil{% endblock title %}
 {% block link %}{% static 'css/profile.css' %}{% endblock link %}
@@ -7,60 +8,67 @@
 {% block content %}   
     <div id="perfilContainer">
         <div id="infoPerfil">
-            <div id="userImage"><img src="{% static 'img/me.png' %}" alt="Luis Méndez" style="border:5px solid var(--{{user.category}})"></div>
-            <h1 id="subImageName">Luis Méndez <span class="icon-plus"></span></h1>
-            <h2 id="userTitle">Programador en Java</h2>
+            <div id="userImage"><img src="{% static 'img/me.png' %}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
+            <h1 id="subImageName">{{user.full_name}}<span class="icon-plus"></span></h1>
+            <h2 id="userTitle">{{user.dedication}}</h2>
             <div class="tags">
-                <span class="icon-price-tag IA" title="Inteligencia Artificial"></span>
-                <span class="icon-price-tag robotica" title="Robótica"></span>
+                {% for category in categories %}
+                    <span class="icon-price-tag" style = "color:{{category.color}}" title="{{category.name}}"></span>
+                {% endfor %}
             </div>
         </div>
     </div>
 
     <div class="mainContainer">
         <div class="projects">
-            <h2>Proyectos recientes</h2>
+            <h2>Subidos este último mes</h2>
 
-            {% if projects %}
-                {% for project in projects %}
+            {% if recents %}
+                {% for project in recents %}
                     <div class="publicacion">
                         <a class="link" href="#"></a>
                         <div class="publicInfo">
+                            <div class="postedAt">
+                                <span class="icon-calendar"></span>
+							    <span class="numeroComments">{{ project.date_posted|date:"j \d\e F" }}, {{project.date_posted|time:"P"}}</span>	
+                            </div>
                             <div class="category">
-                                <span class="icon-price-tag {{project.category}}"></span>
-                                <h3><a class="{{project.category}}" href="#">{{project.category}}</a></h3>        
+                                <span class="icon-price-tag" style="color:{{project.category.color}}"></span>
+                                <h3><a href="#" style="color:{{project.category.color}}">{{project.category.name}}</a></h3>        
                             </div>
 
                             <h2 class="title">{{ project.title }}</h2>
-                            
-                            <div class="description">{{project.description}}</div>
+
+                            <h3 class="description">{{ project.description }}</h3>
+        
                         </div> 
 
                         <div class="medallas">
                             <div class="medallas">
                                 <div class="bronce">
                                     <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
-                                    <span class="cantidad">{{project.bronzemedals}}</span>
+                                    <span class="cantidad">55</span>
                                 </div>
 
                                 <div class="plata">
                                     <img src="{% static 'img/plata.png' %}" alt="Medallas de plata">
-                                    <span class="cantidad">{{project.silvermedals}}</span>
+                                    <span class="cantidad">55</span>
                                 </div>
 
                                 <div class="oro">
                                     <img src="{% static 'img/oro.png' %}" alt="Medallas de oro">
-                                    <span class="cantidad">{{project.goldmedals}}</span>
+                                    <span class="cantidad">55</span>
                                 </div>
 
                             </div>
 
                         </div>
                 
+
                     </div>
                 {% endfor %}
             {% else %}
-                <h3 class="noContent">No se han subido proyectos aún</h3>
+                <h3 class="noContent">No hay proyectos recientes</h3>
                 
             {% endif %}
         </div>
@@ -80,7 +88,7 @@
                                 {% endif %}
 
                                 </div>
-                                {% if user.extract%}
+                                {% if user.extract and extract_length > 50%}
                                     <div id="seeMore">
                                         <span class="icon-cheveron-down" id='iconspan'></span>
                                     </div>
@@ -92,10 +100,12 @@
                         <div class="rightDiv"></div>
                         <div class="iconosContainer">
                             <div class="iconos">
-                                {% for network in user.networks %}
-                                    <span class="icon-{{network.name}}"><a href="{{network.link}}" class="link"></a></span>
-                                {% endfor %}
-                                <span class="icon-mail4"><a href="mailto:{{user.email}}" class="link"></a></span>
+                                {% if socials %}
+                                    {% for social in socials %}
+                                        <span style="color:{{social.network.color}}" class="icon-{{ social.network.name }}"><a href = {{ social.link }} class="link"></a></span>
+                                    {% endfor %}
+                                {% endif %}
+                                <span class="icon-mail" style = "color:#cf0e00"><a href="mailto:{{user.email}}" class="link"></a></span>
                             </div>
                         </div>
                     </div>
@@ -109,21 +119,22 @@
                     {% if projects %}
                         {% for project in projects %}
                             <div class="category"> 
-                                <a class="{{project.category}}" href="#">
-                                <span class="icon-price-tag {{project.category}}"></span>
-                                <h3>{{project.category}}</h3>
+                                <a style="color:{{project.category.color}}" href="#">
+                                <span class="icon-price-tag" style="color:{{ project.category.color}} "></span>
+                                <h3>{{project.category.name}}</h3>
                                 </a>
                             </div>
                             <div class="proyecto">
                                 <a href="#">
                                 <h4 class="title">{{project.title}}</h4>
-                                <div class="interactions"><span class="quantity">{{project.interactions}}</span> interacciones</div>
+                                <div class="postedAt"><span class="icon-calendar"></span><span class="numeroComments">{{ project.date_posted|date:"j \d\e F"}}, {{project.date_posted|time:"P"}}</span></div>
                                 </a>
                             </div>
                         {% endfor %}
-                        {% else %}
-                        <h3 class="noContent">Sin proyectos</h3>
+                    {% else %}
+                        <h3 class="noContent">No hay proyectos</h3>
                     {% endif %}
+
                 </div>
 
             </div>
