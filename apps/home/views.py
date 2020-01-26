@@ -4,7 +4,7 @@ from apps.users.models import Gronner
 import math
 
 def homepage(request):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-date_posted')
     comments = []
     user = Gronner.objects.filter(username='luismendezg').first()
 
@@ -16,7 +16,7 @@ def homepage(request):
 
     context = {
         'projects':zip(projects,comments),
-        'personal_projects':user.project_set.all(),
+        'personal_projects':user.project_set.all().order_by('-date_posted'),
         'user':user
     }
 

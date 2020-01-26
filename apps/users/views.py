@@ -15,10 +15,10 @@ def profile(request):
     gronner = Gronner.objects.filter(username='luismendezg').first()
     
     # Obtener todos los proyectos del usuario
-    projects = gronner.project_set.all()
+    projects = gronner.project_set.all().order_by('-date_posted')
 
     # Proyectos recientes
-    recents = gronner.project_set.filter(date_posted__gte=timezone.now()-datetime.timedelta(days=30), date_posted__lte=timezone.now())
+    recents = gronner.project_set.filter(date_posted__gte=timezone.now()-datetime.timedelta(days=31), date_posted__lte=timezone.now()).order_by('-date_posted')
 
     # Obtener las categorias en las que el usuario participo
     for project in projects:
@@ -30,7 +30,7 @@ def profile(request):
 
     # Obtener la categoria con mas proyectos subidos
     for category in categories:
-        quantity = category.project_set.all().count()
+        quantity = category.project_set.filter(author=gronner).count()
         if quantity > maxprojects:
             maxprojects = quantity
             categorychosen = category
@@ -38,16 +38,23 @@ def profile(request):
     # Obtener las redes sociales del usuario
     social = gronner.social_media_set.all()
 
+    # Project per category
+    relation = [[0] for i in range(len(categories))]
+
+    for i in range(len(categories)):
+        relation[i] = gronner.project_set.filter(category=categories[i]).order_by('-date_posted')
+
+
     # Definicion del contexto
     context = {
         'categories':categories,
-        'categ'
         'fav_category':categorychosen,
         'projects':projects,
         'socials':social,
         'recents':recents,
         'user':gronner,
-        'extract_length':len(gronner.extract)
+        'extract_length':len(gronner.extract),
+        'per_category':zip(relation,categories)
     }
 
 

@@ -105,7 +105,7 @@
                                         <span style="color:{{social.network.color}}" class="icon-{{ social.network.name }}"><a href = {{ social.link }} class="link"></a></span>
                                     {% endfor %}
                                 {% endif %}
-                                <span class="icon-mail" style = "color:#cf0e00"><a href="mailto:{{user.email}}" class="link"></a></span>
+                                <span class="icon-mail" style = "color:#cf0e00"><a href="mailto:{{ user.email }}" class="link"></a></span>
                             </div>
                         </div>
                     </div>
@@ -117,20 +117,24 @@
                     <div class="rightDiv"></div>
                     
                     {% if projects %}
+
+                    {% for projects,category in per_category %}
+                         <div class="category"> 
+                            <a style="color:{{ category.color }}" href="#">
+                            <span class="icon-price-tag" style="color:{{ category.color }} "></span>
+                            <h3>{{ category.name }}</h3>
+                            </a>
+                        </div>
                         {% for project in projects %}
-                            <div class="category"> 
-                                <a style="color:{{project.category.color}}" href="#">
-                                <span class="icon-price-tag" style="color:{{ project.category.color}} "></span>
-                                <h3>{{project.category.name}}</h3>
-                                </a>
-                            </div>
                             <div class="proyecto">
                                 <a href="#">
                                 <h4 class="title">{{project.title}}</h4>
-                                <div class="postedAt"><span class="icon-calendar"></span><span class="numeroComments">{{ project.date_posted|date:"j \d\e F"}}, {{project.date_posted|time:"P"}}</span></div>
+                                <div class="postedAt"><span class="icon-calendar"></span><span>{{ project.date_posted|date:"j \d\e F"}}, {{project.date_posted|time:"P"}}</span></div>
                                 </a>
                             </div>
                         {% endfor %}
+                    {% endfor %}
+
                     {% else %}
                         <h3 class="noContent">No hay proyectos</h3>
                     {% endif %}
