@@ -9,6 +9,7 @@ class Gronner(AbstractBaseUser):
     dedication = models.CharField(max_length=20)
     email = models.EmailField()
     full_name = models.CharField(max_length=70)
+    points = models.IntegerField(default=0)
     joined_at = models.DateField(auto_now_add=True)
 
     USERNAME_FIELD = 'username'

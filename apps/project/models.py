@@ -22,11 +22,20 @@ class Project(models.Model):
         return self.title
 
 class Medal(models.Model):
-    name = models.CharField(max_length=6)
-    project = models.ManyToManyField(Project)
+    medal_type = models.CharField(max_length=6)
+    points = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.medal_type
+
+class Award(models.Model):
+    medal = models.ForeignKey(Medal, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return "%s to %s"%(self.medal.medal_type, self.project.title)
+
+
 
 class Comment(models.Model):
     text = models.TextField()

@@ -3,6 +3,7 @@ from apps.project.models import Category, Project
 from apps.users.models import Gronner
 from django.utils import timezone
 import datetime
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -44,6 +45,14 @@ def profile(request):
     for i in range(len(categories)):
         relation[i] = gronner.project_set.filter(category=categories[i]).order_by('-date_posted')
 
+    # Obtencion de medallas
+    medals = [{}] * len(projects)
+    for i in range(len(projects)):
+        medals[i] = {
+            'gold':projects[i].award_set.filter(medal__medal_type='Gold').count(),
+            'silver':projects[i].award_set.filter(medal__medal_type='Silver').count(),
+            'bronze':projects[i].award_set.filter(medal__medal_type='Bronze').count()
+        }
 
     # Definicion del contexto
     context = {
@@ -51,7 +60,7 @@ def profile(request):
         'fav_category':categorychosen,
         'projects':projects,
         'socials':social,
-        'recents':recents,
+        'recents':zip(recents,medals),
         'user':gronner,
         'extract_length':len(gronner.extract),
         'per_category':zip(relation,categories)
