@@ -23,15 +23,21 @@
 						<img src="{% static 'img/logo.jpg' %}" alt="logo">
 					</div>
 
-					<div id="divLogoPhoto"></div>
+					<div class="divLogoPhoto"></div>
 
 					<div id="userData">
-						<a href="{% url 'profile' %}" class='link'></a>
-						<div id="mainPhoto"><a href="#"><img src="{% static 'img/me.png' %}"></a></div>
-							<span>
-								<div id="name">{{user.full_name}}</div>
-								<div id="username">({{user.username}})</div>
-							</span>
+						{% if user.is_authenticated %}
+							<div id="mainPhoto"><a href="{% url 'profile' %}"><img src="{% static 'img/me.png' %}"></a></div>
+								<span class="infouser">
+									<a href="{% url 'profile' %}" class='link'></a>
+									<div id="name">{{user.first_name}} {{user.last_name}}</div>
+									<div id="username">({{user.username}})</div>
+								</span>
+							<div class="divLogoPhoto divLogout"></div>
+							<a class='logout' href="{% url 'logout'%}">Cerrar Sesión</a>
+						{% else %}
+							<a href="{% url 'login'%}">Iniciar sesión</a>
+						{% endif %}	
 					</div>
 				</div>
 
@@ -62,6 +68,7 @@
 			
         </nav>
     </header>
+	
 
     {% block content %}{% endblock content %}
 

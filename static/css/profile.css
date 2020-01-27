@@ -10,17 +10,36 @@
         grid-template-columns: 1fr !important;
 
     }
-    .medallas{
-        display: block !important;
+	.medallas{
+		display: grid !important;
+		align-items: center;
+		justify-content: center;
+		grid-template-columns: 1fr 1fr;
+	}
+	.bronce,.plata{
+		grid-column: span 1;
+	}
+	.oro{
+		grid-column: span 2;
+		justify-self:center; 
     }
+    .medallas, .medallas img{
+		height:3em !important;
+		width: 3em !important;
+	}
     aside{
         grid-row-start:1;
         justify-self:center;
+        min-width: 80%;
         max-width:90%;
     }
     .projects .publicacion{
         margin: 1em auto !important;
         max-width: 80%;
+        height:7em;
+    }
+    .publicacion .category{
+        font-size: .6em;
     }
 
 }
@@ -142,16 +161,12 @@
     .creators .user:hover{
         opacity:1;
     }
-
-    .publicacion .seeMore{
-        padding-top: 1em;
-    }
     .medallas{
         justify-self: end;
-        grid-column: span 1;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-right: 1em;
     }
     .bronce,.oro,.plata{
         display: inline-block;

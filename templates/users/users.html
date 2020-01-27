@@ -9,9 +9,9 @@
     <div id="perfilContainer">
         <div id="infoPerfil">
             <div id="userImage"><img src="{% static 'img/me.png' %}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
-            <h1 id="subImageName">{{user.full_name}}<span class="icon-plus" title="Seguir a {{user.full_name}}"></span></h1>
-            <h2 id="userTitle">{{user.dedication}}</h2>
-            <h3 class="user_points">{{ user.points }}</h3>
+            <h1 id="subImageName">{{user.first_name}} {{user.last_name}}<span class="icon-plus" title="Seguir a {{user.first_name}} {{user.last_name}}"></span></h1>
+            <h2 id="userTitle">{{user.gronner.dedication}}</h2>
+            <h3 class="user_points">{{ user.gronner.points }}</h3>
             <div class="tags">
                 {% for category in categories %}
                     <span class="icon-price-tag" style = "color:{{category.color}}" title="{{category.name}}"></span>
@@ -24,7 +24,7 @@
         <div class="projects">
             <h2>Subidos este último mes</h2>
 
-            {% if recents %}
+            {% if projects %}
                 {% for project, medal in recents %}
                     <div class="publicacion">
                         <a class="link" href="#"></a>
@@ -45,7 +45,6 @@
                         </div> 
 
                         <div class="medallas">
-                            <div class="medallas">
                                 <div class="bronce">
                                     <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
                                     <span class="cantidad">{{ medal.bronze }}</span>
@@ -61,8 +60,6 @@
                                     <span class="cantidad">{{ medal.gold }}</span>
                                 </div>
 
-                            </div>
-
                         </div>
                 
 
@@ -70,7 +67,6 @@
                 {% endfor %}
             {% else %}
                 <h3 class="noContent">No hay proyectos recientes</h3>
-                
             {% endif %}
         </div>
 
@@ -82,8 +78,8 @@
                             <h2 class="title">Sobre mí</h2>
                             <div class="rightDiv"></div>
                                 <div id="text" class="noContent">
-                                {% if user.extract %}
-                                    {{user.extract}}
+                                {% if user.gronner.extract %}
+                                    {{user.gronner.extract}}
                                 {% else %}
                                     No se ha dado información
                                 {% endif %}

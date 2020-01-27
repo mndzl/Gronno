@@ -55,6 +55,9 @@ body{
     footer .container .siteData{
         grid-row: span 2;
     }
+    .logout{
+        margin-left: 0 !important;
+    }
 }
 
 /* NAVBAR */
@@ -96,11 +99,12 @@ body{
 #leftNavSide{
     justify-self: start;
     position:relative;
+    width:100%;
 }
 #leftNavItems{
     display: grid;
     align-items: center;
-    grid-template-columns:30% 10% 68%;
+    grid-template-columns:4em 1px 1fr;
 }
 
 #rightNavSide{
@@ -132,7 +136,7 @@ nav{
     
 }
 
-#divLogoPhoto, #divMessageSearch{
+.divLogoPhoto, #divMessageSearch{
     height:1.5em;
     width:1px;
     opacity: .4;
@@ -160,7 +164,8 @@ nav{
 #userData{
     display: flex;
     align-items:center;
-    justify-content: center;
+    justify-content: start;
+    margin-left:.5em;
     position:relative;
     height:100%;
 }
@@ -169,7 +174,6 @@ nav{
     font-size:0.6em;
     justify-self:start;
     font-family: 'Montserrat',sans-serif;
-    font-weight: bold;
     pointer-events: none;
     margin-left: .5em;
 }
@@ -308,6 +312,10 @@ footer .divisor{
 	height:100%;
 	width:100%;
 }
+.infouser{
+    position: relative;
+}
+
 .noContent a{
 	color:#ff5900;
 }
@@ -337,3 +345,17 @@ footer .divisor{
     pointer-events: none;
 }
 
+.divLogout{
+    margin-left:.5em;
+}
+.logout{
+    color:#FFF;
+    font-size: .7em;
+    opacity: .8;
+    margin-left: 1em;
+    transition:.5s;
+    justify-self: start;
+}
+.logout:hover{
+    opacity:1;
+}

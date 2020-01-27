@@ -1,19 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from apps.project.models import Category, Project
 from apps.users.models import Gronner
 from django.utils import timezone
 import datetime
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .forms import GronnerRegisterForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def profile(request):
 
     # Inicializacion 
     categories = []
 
     # Busqueda de perfil
-    gronner = Gronner.objects.filter(username='luismendezg').first()
+    gronner = request.user
     
     # Obtener todos los proyectos del usuario
     projects = gronner.project_set.all().order_by('-date_posted')
@@ -62,9 +66,19 @@ def profile(request):
         'socials':social,
         'recents':zip(recents,medals),
         'user':gronner,
-        'extract_length':len(gronner.extract),
+        'extract_length':len(gronner.gronner.extract),
         'per_category':zip(relation,categories)
     }
 
 
     return render(request, 'users/users.html', context)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'users/register.html',{'form':form})

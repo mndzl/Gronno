@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from apps.project.models import Project, Comment
 from apps.users.models import Gronner
+from django.contrib.auth.models import User
 import math
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def homepage(request):
     projects = Project.objects.all().order_by('-date_posted')
     comments = []
-    user = Gronner.objects.filter(username='luismendezg').first()
+    user = request.user
 
     for project in projects:
         comm = project.comment_set.all().count()

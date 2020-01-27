@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'Gronno.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase2'
+        'NAME': 'mydatabase'
     }
 }
 
@@ -134,3 +134,7 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'homepage'
+
+LOGIN_URL = 'login'
