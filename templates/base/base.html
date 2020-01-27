@@ -27,7 +27,7 @@
 
 					<div id="userData">
 						{% if user.is_authenticated %}
-							<div id="mainPhoto"><a href="{% url 'profile' %}"><img src="{% static 'img/me.png' %}"></a></div>
+							<div id="mainPhoto"><a href="{% url 'profile' %}"><img src="{{ user.gronner.image.url }}"></a></div>
 								<span class="infouser">
 									<a href="{% url 'profile' %}" class='link'></a>
 									<div id="name">{{user.first_name}} {{user.last_name}}</div>

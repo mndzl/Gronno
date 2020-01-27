@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 
 class Gronner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    extract = models.TextField(blank=True, null=True)
+    extract = models.TextField(default='', blank=True, null=True)
     dedication = models.CharField(max_length=20)
     points = models.IntegerField(default=0)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
 class Network(models.Model):
     name = models.CharField(max_length=20)

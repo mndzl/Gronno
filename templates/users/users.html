@@ -8,7 +8,7 @@
 {% block content %}   
     <div id="perfilContainer">
         <div id="infoPerfil">
-            <div id="userImage"><img src="{% static 'img/me.png' %}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
+            <div id="userImage"><img src="{{ user.gronner.image.url }}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
             <h1 id="subImageName">{{user.first_name}} {{user.last_name}}<span class="icon-plus" title="Seguir a {{user.first_name}} {{user.last_name}}"></span></h1>
             <h2 id="userTitle">{{user.gronner.dedication}}</h2>
             <h3 class="user_points">{{ user.gronner.points }}</h3>
