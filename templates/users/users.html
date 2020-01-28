@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% load tz %}
 
 {% block title %}Ver Perfil{% endblock title %}
@@ -22,8 +23,18 @@
 
     <div class="mainContainer">
         <div class="projects">
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
             <h2>Subidos este último mes</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {{ form_u|crispy}}
+                {{ form_g|crispy}}
 
+                <button type="submit"></button>
+            </form>
             {% if projects %}
                 {% for project, medal in recents %}
                     <div class="publicacion">

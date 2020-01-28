@@ -5,9 +5,10 @@ from django.utils import timezone
 import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import GronnerRegisterForm
+from .forms import GronnerRegisterForm, UserUpdateForm, GronnerUpdateForm
 from django.contrib.auth.decorators import login_required
 from .forms import GronnerRegisterForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -59,6 +60,20 @@ def profile(request):
             'bronze':projects[i].award_set.filter(medal__medal_type='Bronze').count()
         }
 
+    # Update
+    if request.method == 'POST':
+        form_u = UserUpdateForm(request.POST, instance=request.user)
+        form_g = GronnerUpdateForm(request.POST,request.FILES, instance=request.user.gronner)
+        if form_g.is_valid() and form_u.is_valid():
+            form_u.save()
+            form_g.save()
+            messages.success(request, 'Tu perfil ha sido actualizado.')
+            return redirect('profile')
+    else:
+        form_u = GronnerUpdateForm(instance=request.user)
+        form_g = UserUpdateForm(instance=request.user)
+
+
     # Definicion del contexto
     context = {
         'categories':categories,
@@ -68,7 +83,9 @@ def profile(request):
         'recents':zip(recents,medals),
         'user':gronner,
         'extract_length':len(gronner.gronner.extract),
-        'per_category':zip(relation,categories)
+        'per_category':zip(relation,categories),
+        'form_u':form_u,
+        'form_g':form_g
     }
 
 
