@@ -10,6 +10,10 @@
     <div id="perfilContainer">
         <div id="infoPerfil">
             <div id="userImage"><img src="{{ user.gronner.image.url }}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form_g }}
+            </input>
             <h1 id="subImageName">{{user.first_name}} {{user.last_name}}<span class="icon-plus" title="Seguir a {{user.first_name}} {{user.last_name}}"></span></h1>
             <h2 id="userTitle">{{user.gronner.dedication}}</h2>
             <h3 class="user_points">{{ user.gronner.points }}</h3>
@@ -24,17 +28,9 @@
     <div class="mainContainer">
         <div class="projects">
             {% for message in messages %}
-                {{message}}
+                <div class="{{ message.tags }}">{{message}}</div>
             {% endfor %}
             <h2>Subidos este último mes</h2>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                {{ form_u|crispy}}
-                {{ form_g|crispy}}
-
-                <button type="submit"></button>
-            </form>
             {% if projects %}
                 {% for project, medal in recents %}
                     <div class="publicacion">
@@ -158,8 +154,23 @@
 {% endblock content %}
 
 {% block js %}
-
     <script src="{% static 'js/users.js' %}"></script>
+      <script>
+        $("#userImage").click(function(e) {
+            $("#id_image").click();
+        });
 
+        function fasterPreview( uploader ) {
+            if ( uploader.files && uploader.files[0] ){
+                    $('#puserImage').attr('src', 
+                        window.URL.createObjectURL(uploader.files[0]) );
+            }
+        }
+
+        $("#id_image").change(function(){
+            $(this).closest('form').submit();
+            fasterPreview( this );
+        });
+      </script>
 {% endblock js %}
  

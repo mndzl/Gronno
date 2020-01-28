@@ -64,14 +64,17 @@ def profile(request):
     if request.method == 'POST':
         form_u = UserUpdateForm(request.POST, instance=request.user)
         form_g = GronnerUpdateForm(request.POST,request.FILES, instance=request.user.gronner)
-        if form_g.is_valid() and form_u.is_valid():
-            form_u.save()
+        if form_g.is_valid():
+            form_g.save()
+            messages.success(request, 'Tu perfil ha sido actualizado.')
+            return redirect('profile')
+        if form_u.is_valid():
             form_g.save()
             messages.success(request, 'Tu perfil ha sido actualizado.')
             return redirect('profile')
     else:
-        form_u = GronnerUpdateForm(instance=request.user)
-        form_g = UserUpdateForm(instance=request.user)
+        form_u = UserUpdateForm(instance=request.user)
+        form_g = GronnerUpdateForm(instance=request.user)
 
 
     # Definicion del contexto
