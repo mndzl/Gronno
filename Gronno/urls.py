@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.users import views as user_views
+from apps.home import views as home_views
 from django.contrib.auth import views as auth_views
 from apps.users.views import Profile
 from apps.project.views import ProjectDetailView, ProjectCreateView, ProjectUpdateView, ProjectDeleteView
@@ -30,7 +31,7 @@ urlpatterns = [
     path('password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
-    path('home/', include('apps.home.urls')),
+    path('home/', home_views.homepage.as_view(template_name='home/home.html'), name='homepage'),
     path('users/<str:username>', Profile.as_view(), name='profile'),
     path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
     path('project/<int:pk>/update/', ProjectUpdateView.as_view(), name='project_update'),

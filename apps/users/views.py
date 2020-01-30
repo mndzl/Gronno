@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from apps.project.models import Category, Project
-from apps.users.models import Gronner
+from apps.users.models import Gronner, Follow
 from django.utils import timezone
 import datetime
 from django.contrib.auth.models import User
@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from .forms import GronnerRegisterForm
 from django.contrib import messages
-
+from django.core.mail import EmailMessage
 # Create your views here.
 
 class Profile(ListView):
@@ -72,6 +72,7 @@ class Profile(ListView):
         context['recents'] = zip(self.object_list,medals)
         context['extract_length'] = len(user.gronner.extract),
         context['per_category'] = zip(relation,categories)
+        context['followers'] = Follow.objects.filter(following=user).count()
 
         # Update
         if self.request.method == 'POST':
@@ -95,6 +96,13 @@ def register(request):
             dedication = form.cleaned_data.get('dedication')
             username = form.cleaned_data.get('username')
             Gronner.objects.create(user=User.objects.filter(username=username).first(), dedication=dedication)
+            newuser = User.objects.filter(username=username).first()
+            email = EmailMessage(
+                '¡Bienvenido/a a Gronno!',
+                'Que fue mi panaaaaaaaaaaaa',
+                to=[newuser.email]
+            )
+            email.send()
             return redirect('login')
     else:
         form = GronnerRegisterForm()

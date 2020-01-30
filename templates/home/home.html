@@ -96,13 +96,13 @@
 			<div class="zona">
 				<h3 class="enZona">En tendencia</h3>
 				<div class="zonaDiv"></div>
-				{% if near %}
-					{% for near in near %}
-						<div class="persona">
-							<a href="{{near.link}}" class="link"></a>
-							<div class="fotoPersona"><img src="../static/img/{{near.image}}"></div>
-							<span class="nombrePersona">{{near.name}}</span>
-							<span class="dedicacion">{{near.dedication}}</span>
+				{% if top_projects %}
+					{% for project in top_projects %}
+						<div class="top_project">
+							<a href="{% url 'project_detail' project.id %}" class="link"></a>
+							<span style = "color:{{ project.category.color }}" class = "icon-price-tag"></span>
+							<h3>{{ project.title }}</h3>
+							<h4>{{ project.author.get_full_name }}</h4>
 						</div>
 					{% endfor %}
 				{% else %}

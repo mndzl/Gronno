@@ -18,6 +18,7 @@ class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
+    points = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -72,14 +73,14 @@ class Comment(models.Model):
         time = datetime.now()
 
         if self.date_commented.hour == time.hour:
-            return "hace " + str(time.minute - self.date_commented.minute) + " minutos"
+            return "hace " + str(time.minute - self.date_commented.minute) + " minuto/s"
         else:
             if self.date_commented.day == time.day:
-                return "hace " + str(time.hour - self.date_commented.hour) + " horas"
+                return "hace " + str(time.hour - self.date_commented.hour) + " hora/s"
             else:
                 if self.date_commented.month == time.month:
-                    return "hace " + str(time.day - self.date_commented.day) + " dias"
+                    return "hace " + str(time.day - self.date_commented.day) + " dia/s"
                 else:
                     if self.date_commented.year == time.year:
-                        return "hace " + str(time.month - self.date_commented.month) + " meses"
+                        return "hace " + str(time.month - self.date_commented.month) + " mes/es"
         return self.date_commented

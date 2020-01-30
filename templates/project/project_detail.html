@@ -7,13 +7,13 @@
 {% block title %}Ver Proyecto{% endblock title %}
 
 {% block main_content %}
-    <span class = "icon-price-tag" style = "color: {{ object.category.color }}"></span>
+    <span class = "icon-price-tag" style = "color: {{ project.category.color }}"></span>
 
     <div class = "publication_heading">
         <div class='publication_info'>
-            <h2 class = "publication_category" style = "color: {{ object.category.color }}">{{ object.category.name }}</h2>
-            <h1 class = 'publication_title'>{{ object.title }}</h1>
-            <h3 class = "publication_author">Presentado por {{ object.author.first_name }} {{ object.author.last_name}}</h3>
+            <h2 class = "publication_category" style = "color: {{ project.category.color }}">{{ project.category.name }}</h2>
+            <h1 class = 'publication_title'>{{ project.title }}</h1>
+            <h3 class = "publication_author">Presentado por {{ project.author.first_name }} {{ project.author.last_name}}</h3>
         </div>
         <div class='publication_control'>
             {% if object.author  == user  %}
@@ -24,10 +24,10 @@
 
     </div>
 
-    <p class = "publication_body">{{ object.description }}</p>
+    <p class = "publication_body">{{ project.description }}</p>
 
     <div class="medallas">
-    <h3 class="medal_title">Reconoce a {{ object.author.first_name }}</h3>
+    <h3 class="medal_title">Reconoce a {{ project.author.first_name }}</h3>
         <div class="bronce">
             <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
             <span class="cantidad">{{ bronze }}</span>
