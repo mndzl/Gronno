@@ -1,22 +1,27 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load language_flags_tags %}
 {% load tz %}
 
 {% block title %}Ver Perfil{% endblock title %}
 {% block link %}{% static 'css/profile.css' %}{% endblock link %}
-
+{% block link2 %}{% static 'flags/sprite-hq.css' %}{% endblock link2 %}
 {% block content %}   
     <div id="perfilContainer">
         <div id="infoPerfil">
-            <div id="userImage"><img src="{{ user.gronner.image.url }}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
+            <div id="userImage"><img src="{{ visiting.gronner.image.url }}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form_g }}
             </input>
-            <h1 id="subImageName">{{user.first_name}} {{user.last_name}}<span class="icon-plus" title="Seguir a {{user.first_name}} {{user.last_name}}"></span></h1>
-            <h2 id="userTitle">{{user.gronner.dedication}}</h2>
-            <h3 class="user_points">{{ user.gronner.points }}</h3>
+            <h1 id="subImageName">{{visiting.first_name}} {{visiting.last_name}}<span class="icon-plus" title="Seguir a {{visiting.first_name}} {{visiting.last_name}}"></span></h1>
+            <h4 class = "user_tags">
+                <i class="{{ visiting.gronner.country.flag_css }}" title="{{ visiting.gronner.country.name }}"></i> - 
+                425 seguidores - 
+                {{ visiting.gronner.points }} puntos
+            </h4>
+            <h2 id="userTitle">{{visiting.gronner.dedication.name}}</h2>
             <div class="tags">
                 {% for category in categories %}
                     <span class="icon-price-tag" style = "color:{{category.color}}" title="{{category.name}}"></span>
@@ -34,11 +39,11 @@
             {% if projects %}
                 {% for project, medal in recents %}
                     <div class="publicacion">
-                        <a class="link" href="#"></a>
+                        <a class="link" href="{% url 'project_detail' project.id %}"></a>
                         <div class="publicInfo">
                             <div class="postedAt">
                                 <span class="icon-calendar"></span>
-							    <span class="numeroComments">{{ project.date_posted|date:"j \d\e F" }}, {{project.date_posted|time:"P"}}</span>	
+							    <span class="numeroComments">{{ project.get_date}}</span>	
                             </div>
                             <div class="category">
                                 <span class="icon-price-tag" style="color:{{project.category.color}}"></span>
@@ -85,14 +90,14 @@
                             <h2 class="title">Sobre mí</h2>
                             <div class="rightDiv"></div>
                                 <div id="text" class="noContent">
-                                {% if user.gronner.extract %}
-                                    {{user.gronner.extract}}
+                                {% if visiting.gronner.extract %}
+                                    {{visiting.gronner.extract}}
                                 {% else %}
                                     No se ha dado información
                                 {% endif %}
 
                                 </div>
-                                {% if user.extract and extract_length > 50%}
+                                {% if visiting.extract and extract_length > 50%}
                                     <div id="seeMore">
                                         <span class="icon-cheveron-down" id='iconspan'></span>
                                     </div>
@@ -109,7 +114,7 @@
                                         <span style="color:{{social.network.color}}" class="icon-{{ social.network.name }}"><a href = {{ social.link }} class="link"></a></span>
                                     {% endfor %}
                                 {% endif %}
-                                <span class="icon-mail" style = "color:#cf0e00"><a href="mailto:{{ user.email }}" class="link"></a></span>
+                                <span class="icon-mail" style = "color:#cf0e00"><a href="mailto:{{ visiting.email }}" class="link"></a></span>
                             </div>
                         </div>
                     </div>
@@ -131,10 +136,10 @@
                         </div>
                         {% for project in projects %}
                             <div class="proyecto">
-                                <a href="#">
-                                <h4 class="title">{{project.title}}</h4>
-                                <div class="postedAt"><span class="icon-calendar"></span><span>{{ project.date_posted|date:"j \d\e F"}}, {{project.date_posted|time:"P"}}</span></div>
-                                </a>
+                                <a href="{% url 'project_detail' project.id %}" class="link"></a>
+                                <h4 class="title">{{ project.title }}</h4>
+                                <div class="postedAt"><span class="icon-calendar"></span><span>{{ project.get_date }}</span></div>
+                                
                             </div>
                         {% endfor %}
                     {% endfor %}
@@ -160,17 +165,10 @@
             $("#id_image").click();
         });
 
-        function fasterPreview( uploader ) {
-            if ( uploader.files && uploader.files[0] ){
-                    $('#puserImage').attr('src', 
-                        window.URL.createObjectURL(uploader.files[0]) );
-            }
-        }
-
         $("#id_image").change(function(){
             $(this).closest('form').submit();
-            fasterPreview( this );
         });
+        
       </script>
 {% endblock js %}
  

@@ -28,16 +28,16 @@
 
 					<div id="userData">
 						{% if user.is_authenticated %}
-							<div id="mainPhoto"><a href="{% url 'profile' %}"><img src="{{ user.gronner.image.url }}"></a></div>
+							<div id="mainPhoto"><a href="{% url 'profile' user.username %}"><img src="{{ user.gronner.image.url }}"></a></div>
 								<span class="infouser">
-									<a href="{% url 'profile' %}" class='link'></a>
+									<a href="{% url 'profile' user.username%}" class='link'></a>
 									<div id="name">{{user.first_name}} {{user.last_name}}</div>
 									<div id="username">({{user.username}})</div>
 								</span>
 							<div class="divLogoPhoto divLogout"></div>
 							<a class='logout' href="{% url 'logout'%}">Cerrar Sesión</a>
 						{% else %}
-							<a href="{% url 'login'%}">Iniciar sesión</a>
+							<a class="login" href="{% url 'login'%}">Iniciar sesión</a>
 						{% endif %}	
 					</div>
 				</div>
@@ -46,7 +46,7 @@
 			
 			<div id="rightNavSide">
 				<div id="rightNavItems">
-					<div id="projectReady"><a href="">¡Mi proyecto está listo!</a></div>
+					<div id="projectReady"><a href="{% url 'project_create' %}">¡Mi proyecto está listo!</a></div>
 					<div id="divMessageSearch"></div>
 					<div id="search">
 						<form method="POST">

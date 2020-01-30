@@ -16,7 +16,7 @@
 			{% if personal_projects %}
 				{% for project in personal_projects %}
 					<div class="publicado">
-						<a href="{{project.link}}" class="link"></a>
+						<a href="{% url 'project_detail' project.id %}" class="link"></a>
 						<span class="icon-price-tag" style="color:{{project.category.color}}"> </span>
 						<span style="color:{{project.category.color}}">{{ project.title }}</span>
 					</div>
@@ -29,16 +29,18 @@
 
 		</aside>
 	
+
 		<main class="contenido">
+			{% block main_content %}
+
 			<h1 class="tituloNav">Nuevos proyectos</h1>
 			<hr>	
-
 			{% if projects %}
 				{% for project, comment, medal in projects %}
 					<div class="publicacion">
-					<div class="postedAt"><span class="icon-calendar"></span><span class="numeroComments">{{ project.date_posted|date:"j \d\e F"}}, {{project.date_posted|time:"P"}}</span></div>
+					<div class="postedAt"><span class="icon-calendar"></span><span class="numeroComments">{{ project.get_date }}</span></div>
 
-					<a href="#" class='link'></a>
+					<a href="{% url 'project_detail' project.id %}" class='link'></a>
 
 						<div class="categoria">
 							<span class="icon-price-tag" style="color:{{ project.category.color }}"></span>
@@ -47,7 +49,7 @@
 
 						<div class="info">
 							<h3 class="titulo">{{ project.title }}</a></h3>
-							<h4 class="creador">por <a href="#">{{ project.author.first_name }} {{project.author.last_name}}</a></h4>
+							<h4 class="creador">por <a href="{% url 'profile' project.author.username %}">{{ project.author.first_name }} {{project.author.last_name}}</a></h4>
 							<h3 class="description">{{ project.description }}</h3>
 						</div>
 
@@ -86,11 +88,13 @@
 				<h3><a href="#">Explorar más</a></h3>
 			</div>
 
+			{% endblock main_content %}
 		</main>
+
 
 		<aside class="right">
 			<div class="zona">
-				<h3 class="enZona">En tu zona</h3>
+				<h3 class="enZona">En tendencia</h3>
 				<div class="zonaDiv"></div>
 				{% if near %}
 					{% for near in near %}

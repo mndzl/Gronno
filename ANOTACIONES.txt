@@ -1,2 +1,78 @@
 Perfil: una persona obtendrá una etiqueta de categoría al haber subido un 
 	proyecto de ella.
+
+
+
+def profile(request, username):
+
+    # Inicializacion 
+    categories = []
+
+    # Busqueda de perfil
+    gronner = get_object_or_404(User, username=self.kwargs.get('username'))
+    
+    # Obtener todos los proyectos del usuario
+    projects = gronner.project_set.all().order_by('-date_posted')
+
+    # Proyectos recientes
+    recents = gronner.project_set.filter(date_posted__gte=timezone.now()-datetime.timedelta(days=31), date_posted__lte=timezone.now()).order_by('-date_posted')
+
+    # Obtener las categorias en las que el usuario participo
+    for project in projects:
+        if project.category not in categories:
+            categories.append(project.category)
+
+    maxprojects = 0
+    categorychosen = None
+
+    # Obtener la categoria con mas proyectos subidos
+    for category in categories:
+        quantity = category.project_set.filter(author=gronner).count()
+        if quantity > maxprojects:
+            maxprojects = quantity
+            categorychosen = category
+
+    # Obtener las redes sociales del usuario
+    social = gronner.social_media_set.all()
+
+    # Project per category
+    relation = [[0] for i in range(len(categories))]
+
+    for i in range(len(categories)):
+        relation[i] = gronner.project_set.filter(category=categories[i]).order_by('-date_posted')
+
+    # Obtencion de medallas
+    medals = [{}] * len(projects)
+    for i in range(len(projects)):
+        medals[i] = {
+            'gold':projects[i].award_set.filter(medal__medal_type='Gold').count(),
+            'silver':projects[i].award_set.filter(medal__medal_type='Silver').count(),
+            'bronze':projects[i].award_set.filter(medal__medal_type='Bronze').count()
+        }
+
+    # Update
+    if request.method == 'POST':
+        form_g = GronnerUpdateForm(request.POST,request.FILES, instance=request.user.gronner)
+        if form_g.is_valid():
+            form_g.save()
+            messages.success(request, 'Tu perfil ha sido actualizado.')
+            return redirect('profile')
+    else:
+        form_g = GronnerUpdateForm(instance=request.user)
+
+
+    # Definicion del contexto
+    context = {
+        'categories':categories,
+        'fav_category':categorychosen,
+        'projects':projects,
+        'socials':social,
+        'recents':zip(recents,medals),
+        'user':gronner,
+        'extract_length':len(gronner.gronner.extract),
+        'per_category':zip(relation,categories),
+        'form_g':form_g
+    }
+
+
+    return render(request, 'users/users.html', context)

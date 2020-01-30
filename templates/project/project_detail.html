@@ -1,0 +1,63 @@
+{% extends 'home/home.html' %}
+{% load static %}
+
+{% block link %}{% static 'css/project_detail.css' %}{% endblock link %}
+{% block link2 %}{% static 'css/home.css' %}{% endblock link2 %}
+
+{% block title %}Ver Proyecto{% endblock title %}
+
+{% block main_content %}
+    <span class = "icon-price-tag" style = "color: {{ object.category.color }}"></span>
+
+    <div class = "publication_heading">
+        <div class='publication_info'>
+            <h2 class = "publication_category" style = "color: {{ object.category.color }}">{{ object.category.name }}</h2>
+            <h1 class = 'publication_title'>{{ object.title }}</h1>
+            <h3 class = "publication_author">Presentado por {{ object.author.first_name }} {{ object.author.last_name}}</h3>
+        </div>
+        <div class='publication_control'>
+            {% if object.author  == user  %}
+                <a href="{% url 'project_update' object.id %}"><span class="icon-pencil"></span></a>
+                <a href="{% url 'project_delete' object.id %}"><span class="icon-bin"></span></a>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <p class = "publication_body">{{ object.description }}</p>
+
+    <div class="medallas">
+    <h3 class="medal_title">Reconoce a {{ object.author.first_name }}</h3>
+        <div class="bronce">
+            <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
+            <span class="cantidad">{{ bronze }}</span>
+        </div>
+
+        <div class="plata">
+            <img src="{% static 'img/plata.png' %}" alt="Medallas de plata">
+            <span class="cantidad">{{ silver }}</span>
+        </div>
+
+        <div class="oro">
+            <img src="{% static 'img/oro.png' %}" alt="Medallas de oro">
+            <span class="cantidad">{{ gold }}</span>
+            
+        </div>
+
+        <div class="comment_section">
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <img class="comment_image" src="{{ comment.user.gronner.image.url }}">
+                        <span class="comment_date">{{ comment.get_date }}</span>
+                        <div class="comment_user_name">{{ comment.user.first_name }} {{ comment.user.last_name }}</div>
+                        <div class="comment_user_dedication">{{ comment.user.gronner.dedication }}</div>
+                        <div class="comment_content">{{ comment.text }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class="noContent">No hay comentarios, se el primero!</h3>
+            {% endif %}
+        </div>
+</div>
+{% endblock main_content %}

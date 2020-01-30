@@ -4,6 +4,7 @@ from apps.users.models import Gronner
 from django.contrib.auth.models import User
 import math
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 @login_required
 def homepage(request):
@@ -36,3 +37,5 @@ def homepage(request):
 
 
     return render(request, 'home/home.html',context)
+    
+    

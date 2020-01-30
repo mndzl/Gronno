@@ -5,18 +5,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Gronno</title>
+	<title>Editar Proyecto</title>
 </head>
 <body>
 	
 	<form method="POST">
 		{% csrf_token %}
 		
+        <legend>Editar</legend>
+
 		{{ form|crispy}}
 
-		<button type="submit">Ingresar</button>
-
-		<small class="text-muted ml-2"><a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a></small>
+		<button type="submit">Editar</button>
+        <a href={% url 'project_detail' object.id %}>Cancelar</a>
 	</form>
 
 	

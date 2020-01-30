@@ -167,6 +167,7 @@ a{
 .publicacion .creador{
 	font-size: .9em;
 	font-weight: 300;
+	display: inline-block;
 }
 .categoria{
 	grid-column: span 3;
