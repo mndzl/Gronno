@@ -54,23 +54,6 @@ class Gronner(models.Model):
 
         img.save(self.image.path, file_format)
 
-
-class Network(models.Model):
-    name = models.CharField(max_length=20)
-    color = models.CharField(max_length=7)
-
-    def __str__(self):
-        return self.name
-
-class Social_media(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    network = models.ForeignKey(Network, on_delete=models.CASCADE)
-    link = models.URLField(default='default.com')
-
-    def __str__(self):
-        str = self.network.name + ' (%s)'%(self.user.username) 
-        return str
-
 class Follow(models.Model):
     follower = models.ForeignKey(User, related_name = 'user1', on_delete=models.CASCADE)
     following = models.ForeignKey(User, related_name = 'user2', on_delete=models.CASCADE)

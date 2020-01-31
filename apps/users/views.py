@@ -40,10 +40,6 @@ class Profile(ListView):
 
         context['categories'] = categories
 
-        # Obtener las redes sociales del usuario
-        social = user.social_media_set.all()
-        context['socials'] = social
-
         # Projectos por categoria
         relation = [[0] for i in range(len(categories))]
         for i in range(len(categories)):

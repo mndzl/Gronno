@@ -49,19 +49,15 @@
 					<div id="projectReady"><a href="{% url 'project_create' %}">¡Mi proyecto está listo!</a></div>
 					<div id="divMessageSearch"></div>
 					<div id="search">
-						<form method="POST">
-							<input id="submitButton" type="submit" name="" value=""><span class="icon-search"></span>
-							<input id="searchbar"type="text" name="Buscar" required="">
-							<label id="searchMessage">Buscar</span>
-						</form>
+						<a href='{% url 'explore' %}'>Explorar</span>
 					</div>
 					<div id="searchMobile">
-						<a href="#" class="link"></a>
+						<a href="{% url 'explore' %}" class="link"></a>
 						<span class="icon-search"></span>
 					</div>
 					<div id="addProject">
-						<a href="#" class="link"></a>
-						<span class="icon-plus"></a></span>
+						<a href="{% url 'project_create' %}" class="link"></a>
+						<span class="icon-plus"></span>
 					</div>
 				</div>
 			</div>

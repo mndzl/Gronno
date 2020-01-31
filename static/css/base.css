@@ -197,65 +197,7 @@ nav{
 #projectReady a:hover{
     opacity: 1;
 }
-#search form{
-    display: inline-block;
-}
-#search .icon-search{
-    color:white;
-    font-size: 1em;
-    position:absolute;
-    pointer-events: none;
-    top:0;
-    top:20%;
-}
-#search{
-    position: relative;
-    display: inline-block;
-    justify-self:end;
-    width:12em;
-}
-#searchbar{
-    background-color: transparent;
-    border:none;
-    outline: none;
-    border-bottom:1px solid gray;
-    transition: .5s;
-    font-size: .8em;
-    font-family: 'Montserrat',sans-serif;
-    color:white;
-    padding:.3em 0;
-    padding-left:1.5em;
-    width: 90%;
-}
-#search #searchMessage{
-    position:absolute;
-    opacity: .4;
-    left:0;
-    top:0;
-    top:20%;
-    left:10%;
-    font-size:80%;
-    color:white;
-    pointer-events: none;
-    transition:.5s;
-}
-#submitButton{
-    position:absolute;
-    width: 1.5em;
-    height:1.5em;
-    background: transparent;
-    border:none;
-    outline: none;
-    cursor:pointer;
-}
 
-#searchbar:focus ~ #searchMessage,
-#searchbar:valid ~ #searchMessage{
-    opacity: 0;
-}
-#searchbar:focus{
-    border-bottom:1px solid white;
-}
 /* Footer */
 footer{
     max-height: 5em;

@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Project
+from .models import Project, Comment
 from django.shortcuts import redirect
 from apps.home.views import homepage
 from .forms import CreateProject
+
+
 
 class ProjectDetailView(DetailView):
     model = Project
@@ -22,6 +24,11 @@ class ProjectDetailView(DetailView):
         context["top_projects"] = Project.objects.all().order_by('points')[:5]
         context["personal_projects"] = self.request.user.project_set.all().order_by('-date_posted')
         return context
+
+    def post(self, request, pk):
+        text = request.POST.get('comment')
+        Comment.objects.create(user=request.user, text=text, project=self.get_object())
+        return redirect(self.request.path_info)
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project

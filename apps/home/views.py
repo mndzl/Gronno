@@ -17,7 +17,7 @@ class homepage(LoginRequiredMixin, ListView):
         user = self.request.user
         following = Follow.objects.filter(follower=user).values('following')
         return Project.objects.filter(author__in=following).order_by('-date_posted') | user.project_set.all().order_by('-date_posted')
-    
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,7 +42,7 @@ class homepage(LoginRequiredMixin, ListView):
 
         # Tendencia
         context["top_projects"] = Project.objects.all().order_by('points')[:5]
- 
+
         # Otros
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)

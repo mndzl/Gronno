@@ -3,8 +3,32 @@
 {% block content %}
     <div class = 'head'>
         <h1>Explora categorías, proyectos o personas</h1>
-        <form method="POST">
-            {{ search_form }}
+        <form method="GET">
+            <input type="text" placeholder="Buscar" name='search'>
+            <button type="submit">Buscar</button>
         </form>
+    </div>
+    <div class="results">
+        {% if projects %}
+            {% for project in projects %}
+                <div>{{ project.title }}</div>
+            {% endfor %}
+        {% else %}
+            <div class='noResults'>No se han encontrado proyectos</div>
+        {% endif %}
+        {% if categories %}
+            {% for category in categories %}
+                <div>{{ category.name }}</div>
+            {% endfor %}
+        {% else %}
+            <div class='noResults'>No se han encontrado categorías</div>
+        {% endif %}
+        {% if users %}
+            {% for user in users %}
+                <div>{{ user.get_full_name }} ({{ user.username }})</div>
+            {% endfor %}
+        {% else %}
+            <div class='noResults'>No se han encontrado usuarios</div> 
+        {% endif %}
     </div>
 {% endblock content %}

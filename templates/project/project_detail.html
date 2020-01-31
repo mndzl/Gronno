@@ -27,7 +27,7 @@
     <p class = "publication_body">{{ project.description }}</p>
 
     <div class="medallas">
-    <h3 class="medal_title">Reconoce a {{ project.author.first_name }}</h3>
+        <h3 class="medal_title">Reconoce a {{ project.author.first_name }}</h3>
         <div class="bronce">
             <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
             <span class="cantidad">{{ bronze }}</span>
@@ -41,10 +41,20 @@
         <div class="oro">
             <img src="{% static 'img/oro.png' %}" alt="Medallas de oro">
             <span class="cantidad">{{ gold }}</span>
-            
+        </div>
+    </div>
+
+    <div class="comment_section">
+        <div class='new_comment'>
+            <img src={{ user.gronner.image.url }}>
+            <form method='POST'>
+                {% csrf_token %}
+                <input type="text" name='comment'>
+                <button type="submit"><span class = 'icon icon-send'></span></button>
+            </form>
         </div>
 
-        <div class="comment_section">
+        <div class='comments'>
             {% if comments %}
                 {% for comment in comments %}
                     <div class="comment">
@@ -59,5 +69,5 @@
                 <h3 class="noContent">No hay comentarios, se el primero!</h3>
             {% endif %}
         </div>
-</div>
+    </div>
 {% endblock main_content %}
