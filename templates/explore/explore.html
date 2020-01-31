@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class = 'head'>
+        <h1>Explora categorías, proyectos o personas</h1>
+        <form method="POST">
+            {{ search_form }}
+        </form>
+    </div>
+{% endblock content %}

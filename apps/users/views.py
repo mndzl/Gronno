@@ -6,9 +6,9 @@ import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import GronnerRegisterForm, UserUpdateForm, GronnerUpdateForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, UpdateView
 from .forms import GronnerRegisterForm
 from django.contrib import messages
 from django.core.mail import EmailMessage
@@ -18,6 +18,9 @@ class Profile(ListView):
     model = Project
     template_name = 'users/users.html'
     context_object_name = 'projects'
+
+    def get_success_url(self):
+        return redirect("profile")
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -68,25 +71,30 @@ class Profile(ListView):
             }
         context['medals'] = medals
 
+        # Obteniendo Redes Sociales
+        socials = [{}]
+
+        if user.gronner.facebook is not '':
+            socials.append({'name':'facebook', 'link':f'https://www.facebook.com/{user.gronner.facebook}', 'color':'#3b5998'})
+
+        if user.gronner.instagram is not '':
+            socials.append({'name':'instagram', 'link':f'https://www.instagram.com/{user.gronner.instagram}', 'color':'#8f0047'})
+
+        if user.gronner.twitter is not '':
+            socials.append({'name':'twitter', 'link':f'https://www.twitter.com/{user.gronner.twitter}', 'color':'#00acee' })
+
+        if user.gronner.linkedin is not '':
+            socials.append({'name':'linkedin', 'link':f'https://www.linkedin.com/in/{user.gronner.linkedin}', 'color':'#0e76a8'})
+        
+        context['socials'] = socials
+
         # Adicionales
         context['recents'] = zip(self.object_list,medals)
         context['extract_length'] = len(user.gronner.extract),
         context['per_category'] = zip(relation,categories)
         context['followers'] = Follow.objects.filter(following=user).count()
 
-        # Update
-        if self.request.method == 'POST':
-            form_g = GronnerUpdateForm(self.request.POST,self.request.FILES, instance=user.gronner)
-            if form_g.is_valid():
-                form_g.save()
-                messages.success(self.request, 'Tu perfil ha sido actualizado.')
-                return redirect('profile')
-        else:
-            form_g = GronnerUpdateForm(instance=user)
-
-        context['form_g'] = form_g
-
-        return context
+        return context     
     
 def register(request):
     if request.method == 'POST':
@@ -95,11 +103,12 @@ def register(request):
             form.save()
             dedication = form.cleaned_data.get('dedication')
             username = form.cleaned_data.get('username')
-            Gronner.objects.create(user=User.objects.filter(username=username).first(), dedication=dedication)
+            country = form.cleaned_data.get('country')
             newuser = User.objects.filter(username=username).first()
+            Gronner.objects.create(user=newuser, dedication=dedication, country=country)
             email = EmailMessage(
                 '¡Bienvenido/a a Gronno!',
-                'Que fue mi panaaaaaaaaaaaa',
+                'This is email content',
                 to=[newuser.email]
             )
             email.send()
@@ -107,3 +116,32 @@ def register(request):
     else:
         form = GronnerRegisterForm()
     return render(request, 'users/register.html',{'form':form})
+
+
+def is_user(user):
+    return request.user == user
+
+@login_required
+def ProfileUpdateView(request):
+    user = get_object_or_404(User, username=request.user.username)
+
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=user)
+        g_form = GronnerUpdateForm(request.POST, request.FILES, instance=user.gronner)
+        
+        if u_form.is_valid() and g_form.is_valid():
+            user_form = u_form.save(commit=False)
+            gronner_form = g_form.save(commit=False)
+            gronner_form.user = user_form
+            user_form.save()
+            gronner_form.save()
+            return redirect('profile', user_form.username)
+    
+    else:
+        u_form = UserUpdateForm(instance=user)
+        g_form = GronnerUpdateForm(instance=user.gronner)
+    
+    return render(request, 'users/configuration.html', {'u_form':u_form, 'g_form':g_form})
+
+
+    

@@ -16,10 +16,14 @@ class Dedication(models.Model):
 class Gronner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     extract = models.TextField(default='', blank=True, null=True)
-    dedication = models.ForeignKey(Dedication, default='Gronner', on_delete=models.SET_DEFAULT)
+    dedication = models.ForeignKey(Dedication, default='0', on_delete=models.SET_DEFAULT, blank=True, null=True)
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    country = CountryField(default='Argentina')
+    country = CountryField(default='Argentina', blank=True, null=True)
+    facebook = models.CharField(max_length=50,default='', blank=True)
+    instagram = models.CharField(max_length=50, default='', blank=True)
+    linkedin = models.CharField(max_length=50, default='', blank=True)
+    twitter = models.CharField(max_length=50, default='', blank=True)
 
     def save(self, *args, **kwargs):
         super().save()

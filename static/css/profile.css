@@ -65,6 +65,7 @@
         justify-content:center;
         align-content: center;
         padding:1em 0;
+        position: relative;
     }
     #infoPerfil{
         text-align: center;
@@ -103,6 +104,13 @@
     }
     .user_tags{
         font-size: .8em;
+    }
+    .config{
+        position: absolute;
+        color:#FFF;
+        top:1em;
+        right:1em;
+        font-size: 1.5em;
     }
 
 /* Main Container */

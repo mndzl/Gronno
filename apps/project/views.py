@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Project
 from django.shortcuts import redirect
 from apps.home.views import homepage
+from .forms import CreateProject
 
 class ProjectDetailView(DetailView):
     model = Project
@@ -24,7 +25,7 @@ class ProjectDetailView(DetailView):
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
-    fields = ['title', 'description', 'category']
+    form_class = CreateProject
 
     def form_valid(self, form):
         form.instance.author = self.request.user

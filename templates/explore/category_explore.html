@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1>{{ category.name }}</h1>
+
+    {% if projects %}
+    {% for project in projects %}
+        {{project.title}}
+    {% endfor %}
+    {% else %}
+        <h3>No hay proyectos</h3>
+    {% endif %}
+{% endblock content %}
