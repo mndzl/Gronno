@@ -311,3 +311,12 @@ footer .divisor{
     text-align: center;
     margin-top: 5em;
 }
+.success{
+    margin:1em 0;
+    border-radius: 10px;
+    padding:1em;
+    width:100%;
+    background-color:#128f09;
+    color:#FFF;
+    
+}

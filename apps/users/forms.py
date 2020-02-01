@@ -11,10 +11,11 @@ class GronnerRegisterForm(UserCreationForm):
     last_name = forms.CharField(max_length=50, label='Apellidos')
     dedication = forms.ModelChoiceField(Dedication.objects.all(), label='Dedicación',empty_label="Selecciona una dedicación")
     country = CountryField(blank_label='Selecciona un país').formfield(label='Nacionalidad')
+    birth = forms.DateField(label='Fecha de nacimiento', widget=forms.DateInput(attrs={'placeholder':'dd/mm/aaa'}))
 
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','email','country','dedication','password1','password2']
+        fields = ['username','first_name','last_name','email','country','birth','dedication','password1','password2']
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:

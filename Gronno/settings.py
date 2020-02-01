@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django_countries',
     'language_flags',
     'django_cleanup',
+    'widget_tweaks',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,28 +1,74 @@
 {% load crispy_forms_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="{% static 'css/fonts/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/project_update.css' %}">
 	<title>Editar Proyecto</title>
 </head>
 <body>
 	
-	<form method="POST">
+	<form method="POST" enctype = "multipart/form-data">
 		{% csrf_token %}
 		
-        <legend>Editar</legend>
+        <legend>Edita tu proyecto</legend>
 
-		{{ form|crispy}}
-
+		<div class="project_category">
+			{{ form.category.label }}
+			{{ form.category }}
+		</div>
+		<div class="project_title">
+			{{ form.title.label }}
+			{{ form.title }}
+		</div>
+		<div class="project_content">
+			{{ form.description.label }}
+			{{ form.description }}
+		</div>
+		<div class="images">
+			<div class = "image1">
+				{{ form.image1 }}
+				<span class='icon-bin' id="delete_1"></span>
+			</div>
+			<div class = "image2">
+				{{ form.image2 }}
+				<span class='icon-bin' id="delete_2"></span>
+			</div>
+			<div class = "image3">
+				{{ form.image3 }}
+				<span class='icon-bin' id="delete_3"></span>
+			</div>
+		</div>
 		<button type="submit">Editar</button>
-        <a href={% url 'project_detail' object.id %}>Cancelar</a>
+        <a href="{% url 'project_detail' object.id %}">Cancelar</a>
 	</form>
 
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script>
+		var delete1 = document.getElementById('delete_1')
+		var delete2 = document.getElementById('delete_2')
+		var delete3 = document.getElementById('delete_3')
 
+		delete1.onclick = function deleteThis(){
+			document.getElementById("id_image1").value = ""
+		}
+
+		delete2.onclick = function deleteThis(){
+			document.getElementById("id_image2").value = ""
+		}			
+
+		delete3.onclick = function deleteThis(){
+			document.getElementById("id_image3").value = ""
+		}
+
+
+
+	</script>
 </body>
 </html>

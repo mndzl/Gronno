@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_countries.fields import CountryField
 import os
+from django.utils import timezone
 
 class Dedication(models.Model):
     name = models.CharField(max_length=50)
@@ -19,6 +20,7 @@ class Gronner(models.Model):
     dedication = models.ForeignKey(Dedication, default='0', on_delete=models.SET_DEFAULT, blank=True, null=True)
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    birth = models.DateField()
     country = CountryField(default='Argentina', blank=True, null=True)
     facebook = models.CharField(max_length=50,default='', blank=True)
     instagram = models.CharField(max_length=50, default='', blank=True)

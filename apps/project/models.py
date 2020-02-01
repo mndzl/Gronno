@@ -19,6 +19,9 @@ class Project(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     points = models.IntegerField(default=0)
+    image1 = models.ImageField(upload_to='project_pics', blank=True, null=True)
+    image2 = models.ImageField(upload_to='project_pics', blank=True, null=True)
+    image3 = models.ImageField(upload_to='project_pics', blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -84,3 +87,4 @@ class Comment(models.Model):
                     if self.date_commented.year == time.year:
                         return "hace " + str(time.month - self.date_commented.month) + " mes/es"
         return self.date_commented
+

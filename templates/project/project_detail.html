@@ -4,9 +4,14 @@
 {% block link %}{% static 'css/project_detail.css' %}{% endblock link %}
 {% block link2 %}{% static 'css/home.css' %}{% endblock link2 %}
 
+
 {% block title %}Ver Proyecto{% endblock title %}
 
+
 {% block main_content %}
+    {% for message in messages %}
+        <div class="{{ message.tags }}">{{message}}</div>
+    {% endfor %}
     <span class = "icon-price-tag" style = "color: {{ project.category.color }}"></span>
 
     <div class = "publication_heading">
@@ -28,20 +33,46 @@
 
     <div class="medallas">
         <h3 class="medal_title">Reconoce a {{ project.author.first_name }}</h3>
+        <a href="{% url 'give_medal' project.id 'Bronze' %}">bronze</a>
         <div class="bronce">
             <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
             <span class="cantidad">{{ bronze }}</span>
         </div>
 
+        <a href="{% url 'give_medal' project.id 'Silver' %}">silver</a>
         <div class="plata">
+            <a class="link" href="{% url 'give_medal' project.id 'Silver' %}"></a>
             <img src="{% static 'img/plata.png' %}" alt="Medallas de plata">
             <span class="cantidad">{{ silver }}</span>
         </div>
 
+        <a href="{% url 'give_medal' project.id 'Gold' %}">gold</a>
         <div class="oro">
+            <a class="link" href="{% url 'give_medal' project.id 'Gold' %}"></a>
             <img src="{% static 'img/oro.png' %}" alt="Medallas de oro">
             <span class="cantidad">{{ gold }}</span>
         </div>
+    </div>
+
+    <div class="images">
+		{% if project.image1 %}
+			<div class = "image1">
+                image1
+                <img src="{{ project.image1.url }}">
+			</div>		
+		{% endif %}
+		{% if project.image2 %}
+			<div class = "image2">
+                image2
+                <img src="{{ project.image2.url }}">
+			</div>		
+		{% endif %}
+		{% if project.image3 %}
+			<div class = "image3">
+                image3
+                <img src="{{ project.image3.url }}">
+			</div>		
+		{% endif %}
     </div>
 
     <div class="comment_section">
@@ -70,4 +101,10 @@
             {% endif %}
         </div>
     </div>
+
+{% block js %}
+
+{% endblock js %}
+
+
 {% endblock main_content %}

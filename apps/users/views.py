@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.core.mail import EmailMessage
 # Create your views here.
 
-class Profile(ListView):
+class Profile(LoginRequiredMixin, ListView):
     model = Project
     template_name = 'users/users.html'
     context_object_name = 'projects'
@@ -91,7 +91,7 @@ class Profile(ListView):
         context['followers'] = Follow.objects.filter(following=user).count()
 
         return context     
-    
+
 def register(request):
     if request.method == 'POST':
         form = GronnerRegisterForm(request.POST)
@@ -100,8 +100,9 @@ def register(request):
             dedication = form.cleaned_data.get('dedication')
             username = form.cleaned_data.get('username')
             country = form.cleaned_data.get('country')
+            birth = form.cleaned_data.get('birth')
             newuser = User.objects.filter(username=username).first()
-            Gronner.objects.create(user=newuser, dedication=dedication, country=country)
+            Gronner.objects.create(user=newuser, dedication=dedication, country=country, birth = birth)
             email = EmailMessage(
                 '¡Bienvenido/a a Gronno!',
                 'This is email content',
@@ -127,6 +128,7 @@ def ProfileUpdateView(request):
             gronner_form.user = user_form
             user_form.save()
             gronner_form.save()
+            messages.success(request, 'Tu perfil ha sido actualizado.')
             return redirect('profile', user_form.username)
     
     else:
