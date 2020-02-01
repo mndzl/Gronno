@@ -11,7 +11,7 @@
 		<aside class="left">
 			<h3>Presentados</h3>
 
-			<div class="presentadosDiv"></div>
+			<hr class="presentadosDiv">
 			
 			{% if personal_projects %}
 				{% for project in personal_projects %}
@@ -93,23 +93,29 @@
 
 
 		<aside class="right">
-			<div class="zona">
-				<h3 class="enZona">En tendencia</h3>
-				<div class="zonaDiv"></div>
-				{% if top_projects %}
-					{% for project in top_projects %}
-						<div class="top_project">
-							<a href="{% url 'project_detail' project.id %}" class="link"></a>
-							<span style = "color:{{ project.category.color }}" class = "icon-price-tag"></span>
-							<h3>{{ project.title }}</h3>
-							<h4>{{ project.author.get_full_name }}</h4>
-						</div>
-					{% endfor %}
-				{% else %}
-					<div class="noContent">
-						<h3>¡Invita a tus amigos a unirse a la comunidad!</h3>
+			<div class="trending_container">
+				<h3 class="trending_title">En tendencia</hr>
+				<hr class="trending_div">
+				{% for project in top_projects %}
+					<div class="top_project">
+						<a href="{% url 'project_detail' project.id %}" class="link"></a>
+						<span style = "color:{{ project.category.color }}" class = "icon-price-tag"></span>
+						<h3>{{ project.title }}</h3>
+						<h4>{{ project.author.get_full_name }}</h4>
 					</div>
-				{% endif %}
+				{% endfor %}
+				<hr class="trending_div">
+				{% for user in top_users %}
+
+					<div class="top_user">
+					{{ user.username }}
+						<a class="link" href="{% url 'profile' user.username %}"></a>
+						<img class = "user_img" src="{{ user.gronner.image.url }}" alt="{{user.get_full_name}}">
+						<div class="top_user_info">
+							<div class="top_user_name">{{ user.get_full_name }} <small>({{user.username}})</small></div>
+						</div>
+					</div>
+				{% endfor %}
 			</div>
 		</aside>
 

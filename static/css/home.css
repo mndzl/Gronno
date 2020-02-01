@@ -229,35 +229,18 @@ main .tituloNav{
 	opacity:.2;
 	margin-bottom: 1em;
 }
-
-.fotoPersona, img{
-	height:4em;
-	width: 4em;
-	-webkit-border-radius:100%;
-	-moz-border-radius: 100%;
-	border-radius: 100%;
-	display: inline-block;
-}
-
 .comentarios{
 	grid-column: span 3;
 	opacity: .7;	
 	margin-top:1em;
 	pointer-events: none;
 }
-.abrir{
-	margin-left:100%;
-}
-.abrir2{
-	left:71%;
-}
-
-.line{
-	height:90%;
-	width:.5em;
-	position:absolute;
-	background-color:#4b1d00;
+.user_img, .user_img img{
+	border-radius: 100%;
 }
 .top_project{
 	position:relative;
+}
+.top_user{
+	position:relative
 }

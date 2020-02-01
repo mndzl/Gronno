@@ -23,12 +23,10 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class GronnerUpdateForm(forms.ModelForm):
+    facebook = forms.CharField(max_length=50, required=False ,widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
+    instagram = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
+    linkedin = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
+    extract = forms.CharField(required=False, widget=forms.Textarea(attrs={'placeholder': 'Cuéntanos sobre tí'}))
     class Meta:
         model = Gronner
         exclude = ['user', 'points']
-        help_texts = {
-            'extract': 'Habla sobre ti, tus intereses, e información de contacto',
-            'facebook': 'Nombre de usuario',
-            'instagram': 'Nombre de usuario',
-            'linkedin': 'Nombre de usuario',
-        }

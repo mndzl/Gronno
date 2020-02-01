@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Project, Comment
 from django.shortcuts import redirect
 from apps.home.views import homepage
+from django.contrib.auth.models import User
 from .forms import CreateProject
 
 
@@ -17,12 +18,13 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         this_object = self.get_object()
-        context["comments"] = this_object.comment_set.all()
+        context["comments"] = this_object.comment_set.all().order_by('-date_commented')
         context['project'] = this_object
         
         # Tendencia
         context["top_projects"] = Project.objects.all().order_by('points')[:5]
         context["personal_projects"] = self.request.user.project_set.all().order_by('-date_posted')
+        context["top_users"] = User.objects.all().order_by('gronner__points')[:3]
         return context
 
     def post(self, request, pk):

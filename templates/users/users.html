@@ -7,6 +7,8 @@
 {% block title %}Ver Perfil{% endblock title %}
 {% block link %}{% static 'css/profile.css' %}{% endblock link %}
 {% block link2 %}{% static 'flags/sprite-hq.css' %}{% endblock link2 %}
+
+
 {% block content %}   
     <div id="perfilContainer">
         <div id="infoPerfil">
@@ -91,19 +93,22 @@
                         <div id="userinfo">
                             <h2 class="title">Sobre mí</h2>
                             <div class="rightDiv"></div>
-                                <div id="text" class="noContent">
-                                {% if visiting.gronner.extract %}
-                                    {{visiting.gronner.extract}}
-                                {% else %}
-                                    No se ha dado información
-                                {% endif %}
+                                <div class='extract_content noContent' id="text">
+                                <pre>
+                                    {% if visiting.gronner.extract %}
+                                        {{visiting.gronner.extract}}
+                                    {% else %}
+                                        No se ha dado información
+                                    {% endif %}
+                                </pre>
 
                                 </div>
-                                {% if visiting.extract and extract_length > 50%}
+                                {% if visiting.gronner.extract %}
                                     <div id="seeMore">
                                         <span class="icon-cheveron-down" id='iconspan'></span>
                                     </div>
                                 {% endif %}
+
                         </div>
                     
                     <div class="redesContainer">
@@ -161,18 +166,8 @@
     </aside>
 
 {% endblock content %}
-
 {% block js %}
-    <script src="{% static 'js/users.js' %}"></script>
-      <script>
-        $("#userImage").click(function(e) {
-            $("#id_image").click();
-        });
-
-        $("#id_image").change(function(){
-            $(this).closest('form').submit();
-        });
-        
-      </script>
+    <script src = {% static 'js/users.js' %}></script>
 {% endblock js %}
+
  

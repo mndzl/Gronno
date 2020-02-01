@@ -123,6 +123,7 @@
         grid-gap: 1.5em;
         margin:auto;
         margin-bottom:10em;
+        position: relative;
     }
 
 /* Projects */
@@ -203,7 +204,6 @@
     }
 
 /* Aside */
-
     /* Presentados */
     .presentados{
         padding:2em;
@@ -249,19 +249,30 @@
         background-color:#FFF;
         border-radius: 10px;
         margin: 2em 0;
+        max-width: 21em;
     }
     .aboutMe .title{
         color:#ff6302;
         text-align: center;
         font-weight: 500;
     }
-    #text{
-        line-height: 1.5em;
+    #userinfo{
+        max-width: 100%;
+    }
+    .extract_content{
         max-height:3em;
         overflow: hidden;
+        word-break: break-all;
+    }
+    .extract_content pre{
+        margin:-1em 0;
+        line-height: 1.5;
         text-align: left !important;
-        margin:1em;
         opacity: 1 !important;
+        word-wrap: break-word;      /* IE 5.5-7 */
+        white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+        white-space: pre-line;      /* Modern browsers */
+        font-family: 'Montserrat', sans-serif;
     }
     #seeMore{
         text-align: right;
@@ -300,15 +311,6 @@
         background-color:#128f09;
         color:#FFF;
         
-    }
-    #id_image, #infoPerfil label
-    {
-        display: none;
-    }
-
-    #userImage
-    {
-        cursor: pointer;
     }
     .proyecto{position: relative;}
     .proyecto h4, .proyecto div{

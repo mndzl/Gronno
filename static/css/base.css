@@ -160,7 +160,9 @@ nav{
 	border-radius: 100%;
     justify-self:center;
 }
-
+.user_img, .user_img img{
+    border-radius: 100%;
+}
 #userData{
     display: flex;
     align-items:center;

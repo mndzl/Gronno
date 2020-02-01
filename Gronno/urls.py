@@ -36,8 +36,8 @@ urlpatterns = [
     
     path('home/', home_views.homepage.as_view(template_name='home/home.html'), name='homepage'),
     
-    path('users/<str:username>', Profile.as_view(), name='profile'),
-    path('users/config/', ProfileUpdateView, name='config'),
+    path('users/<str:username>/', Profile.as_view(), name='profile'),
+    path('users/config', ProfileUpdateView, name='config'),
     
     path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
     path('project/<int:pk>/update/', ProjectUpdateView.as_view(), name='project_update'),

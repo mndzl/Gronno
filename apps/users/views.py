@@ -86,7 +86,7 @@ class Profile(ListView):
 
         # Adicionales
         context['recents'] = zip(self.object_list,medals)
-        context['extract_length'] = len(user.gronner.extract),
+        context['extract_length'] = len(user.gronner.extract)
         context['per_category'] = zip(relation,categories)
         context['followers'] = Follow.objects.filter(following=user).count()
 
@@ -112,10 +112,6 @@ def register(request):
     else:
         form = GronnerRegisterForm()
     return render(request, 'users/register.html',{'form':form})
-
-
-def is_user(user):
-    return request.user == user
 
 @login_required
 def ProfileUpdateView(request):
