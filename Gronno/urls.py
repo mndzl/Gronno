@@ -20,14 +20,16 @@ from django.conf.urls.static import static
 from apps.users import views as user_views
 from apps.home import views as home_views
 from django.contrib.auth import views as auth_views
-from apps.users.views import Profile, ProfileUpdateView
+from apps.users.views import Profile, ProfileUpdateView, FollowView, FollowCategoryView
 from apps.explore.views import CategoryExplore, Explore
 from apps.project.views import (
     ProjectDetailView, 
     ProjectCreateView, 
     ProjectUpdateView, 
     ProjectDeleteView, 
-    MedalToggle
+    MedalToggle,
+    ReportProject,
+    CommentDelete
 )
 
 urlpatterns = [
@@ -43,15 +45,19 @@ urlpatterns = [
     path('home/', home_views.homepage.as_view(template_name='home/home.html'), name='homepage'),
     
     path('users/<str:username>/', Profile.as_view(), name='profile'),
+    path('users/<str:username>/follow/', FollowView.as_view(), name='follow'),
     path('users/config', ProfileUpdateView, name='config'),
     
     path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
     path('project/<int:pk>/<str:medal>', MedalToggle.as_view(), name='give_medal'),
     path('project/<int:pk>/update/', ProjectUpdateView.as_view(), name='project_update'),
     path('project/<int:pk>/delete/', ProjectDeleteView.as_view(), name='project_delete'),
+    path('project/<int:pk>/report/<int:reason>', ReportProject.as_view(), name='report'),
+    path('project/<int:pk_project>/delete_comment/<int:pk_comment>', CommentDelete.as_view(), name='comment_delete'),
     path('project/new/', ProjectCreateView.as_view(), name='project_create'),
     
     path('explore/<str:category>/', CategoryExplore.as_view(), name='category_explore'),
+    path('explore/<str:category>/follow/', FollowCategoryView.as_view(), name='follow_category'),
     path('explore/', Explore, name='explore'),
 
     path('admin/', admin.site.urls),

@@ -82,12 +82,13 @@
         font-size: 2em;
         font-weight: bold;
         font-weight: 500;
+        position: relative;
     }
-    #subImageName .icon-plus{
-        padding-left: .5em;
-        position:absolute;
-        font-size:1rem;
-        cursor: pointer;
+    #subImageName .icon-user-x, #subImageName .icon-plus{
+        top:-.5em;
+        right: -1.2em;
+        position: absolute;
+        font-size: 1.5rem;
     }
     #userTitle{
         color:#ff8800;

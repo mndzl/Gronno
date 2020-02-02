@@ -1,13 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Project, Comment, Award, Medal
+from .models import Project, Comment, Award, Medal, Report
 from django.shortcuts import redirect
 from apps.home.views import homepage
 from django.contrib.auth.models import User
 from .forms import CreateProject
 from django.contrib.messages.views import SuccessMessageMixin
 from django.forms import modelformset_factory
+from django.contrib import messages
+from django.core.mail import EmailMessage
 
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
@@ -23,14 +25,15 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
         context['project'] = this_object
         
         # Tendencia
-        context["top_projects"] = Project.objects.all().order_by('points')[:5]
-        context["personal_projects"] = self.request.user.project_set.all().order_by('-date_posted')
+        context["top_projects"] = Project.objects.filter(is_active=True).order_by('points')[:5]
+        context["personal_projects"] = self.request.user.project_set.filter(is_active=True).order_by('-date_posted')
         context["top_users"] = User.objects.all().order_by('gronner__points')[:3]
         return context
 
     def post(self, request, pk):
         text = request.POST.get('comment')
         Comment.objects.create(user=request.user, text=text, project=self.get_object())
+
         return redirect(self.request.path_info)
 
 class MedalToggle(LoginRequiredMixin, RedirectView):
@@ -41,16 +44,29 @@ class MedalToggle(LoginRequiredMixin, RedirectView):
         user = self.request.user
         medal_request = self.kwargs.get('medal')
         medal = Medal.objects.get(medal_type=medal_request)
-        get_medals = Award.objects.filter(user=user, project=obj)
+        medals_user = Award.objects.filter(user=user, project=obj)
+        calified = bool(medals_user.count())
 
-        if len(get_medals) == 0:
-            Award.objects.create(user=user, medal=medal, project=obj)
+        if not calified:
+            new_medal = Award.objects.create(user=user, medal=medal, project=obj)
+            obj.author.gronner.points += new_medal.medal.points
+            obj.author.gronner.save()
         else: 
-            if(Award.objects.get(user=user,project=obj).medal!=medal):
-                get_medals.delete() 
-                Award.objects.create(user=user, medal=medal, project=obj)
+            if(medals_user.first().medal!=medal):
+                #print('user points: ', user.gronner.points)
+                print(obj.author.gronner.points)
+                obj.author.gronner.points -=  medals_user.first().medal.points
+                print(obj.author.gronner.points)
+                #print('user points: ', user.gronner.points)
+                medals_user.first().delete()
+                new_medal = Award.objects.create(user=user, medal=medal, project=obj)
+                obj.author.gronner.points +=  new_medal.medal.points
+                obj.author.gronner.save()
+                print(obj.author.gronner.points)
             else:
-                get_medals.delete()         
+                obj.author.gronner.points -=  medals_user.first().medal.points
+                obj.author.gronner.save()
+                medals_user.first().delete()
 
         return url_
 
@@ -61,6 +77,8 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        self.request.user.gronner.points += 500
+        self.request.user.gronner.save()
         return super().form_valid(form)
     
 
@@ -90,3 +108,53 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
         if project.author == self.request.user:
             return True
         return False
+
+def suspend(project, reason):
+    project.is_active = False
+    project.author.gronner.points -= 500
+    email = EmailMessage(
+        'Proyecto eliminado',
+        f"""Lo sentimos, tu proyecto {project.title} ha sido eliminado debido a que 
+            la comunidad lo ha reportado por la siguiente razon: {reason}.""",
+        to=[project.author.email]
+    )
+    email.send()
+    project.save()
+    project.author.save()
+
+class ReportProject(LoginRequiredMixin, RedirectView):
+    reasons = ['El proyecto no es de la categoría indicada', 'Uso inapropiado del lenguaje', 'No es un proyecto']
+
+    def get_redirect_url(self, *args, **kwargs):
+        post_id = self.kwargs.get('pk')
+        reason = self.kwargs.get('reason')
+        user = self.request.user
+        obj = get_object_or_404(Project, id=post_id)
+        reports_user = len(Report.objects.filter(user=user, project=obj))
+        reports_project_reason = len(obj.report_set.filter(reason = self.reasons[reason]))
+        reported = bool(reports_user)
+
+        if not reported:
+            Report.objects.create(user=user, reason=self.reasons[reason], project=obj)
+            messages.add_message(self.request, messages.INFO, 'Tu reporte ha sido tomado, gracias por contribuir a la comunidad.')        
+            if reports_project_reason >= 10:
+                suspend(project=obj, reason=self.reasons[reason])
+
+        return reverse('homepage')
+
+class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, RedirectView):
+    def test_func(self):
+        project_id = self.kwargs.get('pk_project')
+        project = Project.objects.get(id=project_id)
+        if project.author == self.request.user:
+            return True
+        return False
+
+    def get_redirect_url(self, *args, **kwargs):
+        post_id = self.kwargs.get('pk_project')
+        post = Project.objects.get(id=post_id)
+        url_ = post.get_absolute_url()
+        comment_id = self.kwargs.get('pk_comment')
+        comment = Comment.objects.get(id=comment_id)
+        comment.delete()
+

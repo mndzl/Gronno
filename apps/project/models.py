@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.urls import reverse
 
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
     color = models.CharField(max_length=7)
@@ -12,6 +13,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name + ' (%s, %s)' %(self.color, self.diminutive)
 
+
+    def get_absolute_url(self):
+        return reverse("category_explore", kwargs={"category": self.diminutive})
+
 class Project(models.Model):
     title = models.CharField(max_length=30, unique=True)
     description = models.TextField()
@@ -19,6 +24,7 @@ class Project(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     points = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True)
     image1 = models.ImageField(upload_to='project_pics', blank=True, null=True)
     image2 = models.ImageField(upload_to='project_pics', blank=True, null=True)
     image3 = models.ImageField(upload_to='project_pics', blank=True, null=True)
@@ -44,7 +50,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse("project_detail", kwargs={"pk": self.pk})
-
 
 class Medal(models.Model):
     medal_type = models.CharField(max_length=6)
@@ -88,3 +93,7 @@ class Comment(models.Model):
                         return "hace " + str(time.month - self.date_commented.month) + " mes/es"
         return self.date_commented
 
+class Report(models.Model):
+    reason = models.CharField(max_length=50)
+    project = models.ForeignKey(Project, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)

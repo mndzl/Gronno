@@ -32,7 +32,9 @@
 
 		<main class="contenido">
 			{% block main_content %}
-
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{message}}</div>
+        {% endfor %}
 			<h1 class="tituloNav">Nuevos proyectos</h1>
 			<hr>	
 			{% if projects %}

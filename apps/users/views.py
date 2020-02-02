@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from apps.project.models import Category, Project
 from apps.users.models import Gronner, Follow
 from django.utils import timezone
@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import GronnerRegisterForm, UserUpdateForm, GronnerUpdateForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, RedirectView
 from .forms import GronnerRegisterForm
 from django.contrib import messages
 from django.core.mail import EmailMessage
@@ -24,7 +24,7 @@ class Profile(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Project.objects.filter(author=user, date_posted__gte=timezone.now()-datetime.timedelta(days=31), date_posted__lte=timezone.now()).order_by('-date_posted')
+        return Project.objects.filter(author=user, is_active=True, date_posted__gte=timezone.now()-datetime.timedelta(days=31), date_posted__lte=timezone.now()).order_by('-date_posted')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,14 +43,14 @@ class Profile(LoginRequiredMixin, ListView):
         # Projectos por categoria
         relation = [[0] for i in range(len(categories))]
         for i in range(len(categories)):
-            relation[i] = user.project_set.filter(category=categories[i]).order_by('-date_posted')
+            relation[i] = user.project_set.filter(category=categories[i], is_active=True).order_by('-date_posted')
 
         # Obtener la categoria con mas proyectos subidos
         maxprojects = 0
         categorychosen = None
 
         for category in categories:
-            quantity = category.project_set.filter(author=user).count()
+            quantity = len(category.project_set.filter(author=user, is_active=True))
             if quantity > maxprojects:
                 maxprojects = quantity
                 categorychosen = category
@@ -88,9 +88,10 @@ class Profile(LoginRequiredMixin, ListView):
         context['recents'] = zip(self.object_list,medals)
         context['extract_length'] = len(user.gronner.extract)
         context['per_category'] = zip(relation,categories)
-        context['followers'] = Follow.objects.filter(following=user).count()
+        context['followers'] = len(Follow.objects.filter(following=user))
+        context['are_friends'] = bool(len(Follow.objects.filter(following=user, follower=self.request.user)))
 
-        return context     
+        return context  
 
 def register(request):
     if request.method == 'POST':
@@ -138,4 +139,40 @@ def ProfileUpdateView(request):
     return render(request, 'users/configuration.html', {'u_form':u_form, 'g_form':g_form})
 
 
-    
+class FollowView(LoginRequiredMixin, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        follower = self.request.user
+        following_username = self.kwargs.get('username')
+        following = User.objects.get(username=following_username)
+        url_ = following.gronner.get_absolute_url()
+        query = Follow.objects.filter(follower=follower, following=following)
+        already_follows = bool(len(query))
+
+        if already_follows:
+            query.delete()
+            messages.add_message(self.request, messages.INFO, f'Ya no sigues a {following.username}')
+        else:
+            Follow.objects.create(follower=follower, following=following)
+            messages.add_message(self.request, messages.SUCCESS, f'Ahora sigues a {following.username}')
+
+        return url_
+
+
+class FollowCategoryView(LoginRequiredMixin, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        user = self.request.user
+        category_name = self.kwargs.get('category')
+        category = Category.objects.get(diminutive=category_name)
+        url_ = category.get_absolute_url()
+
+        if category in user.gronner.categories_followed.all():
+            user.gronner.categories_followed.remove(category)
+            messages.add_message(self.request, messages.INFO, f'Ya no sigues a la categoría {category.name}')
+        else:
+            user.gronner.categories_followed.add(category)
+            messages.add_message(self.request, messages.SUCCESS, f'Ahora sigues a la categoría {category.name}')
+
+        return url_
+

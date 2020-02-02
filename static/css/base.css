@@ -318,5 +318,13 @@ footer .divisor{
     width:100%;
     background-color:#128f09;
     color:#FFF;
+}
+.projects > .info{
+    margin:1em 0;
+    border-radius: 10px;
+    padding:1em;
+    width:100%;
+    background-color:#004c79;
+    color:#FFF;
     
 }

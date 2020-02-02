@@ -13,7 +13,15 @@
     <div id="perfilContainer">
         <div id="infoPerfil">
             <div id="userImage"><img src="{{ visiting.gronner.image.url }}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
-            <h1 id="subImageName">{{visiting.first_name}} {{visiting.last_name}}<span class="icon-plus" title="Seguir a {{visiting.first_name}} {{visiting.last_name}}"></span></h1>
+            <h1 id="subImageName">{{visiting.first_name}} {{visiting.last_name}}
+                <a href="{% url 'follow' visiting.username %}">
+                    {% if are_friends %}
+                        <span class="icon-user-x" title="Dejar de seguir a {{visiting.get_full_name }}"></span>
+                    {% else %}
+                        <span class="icon-plus" title="Seguir a {{visiting.get_full_name }}"></span>
+                    {% endif %}
+                </a>
+            </h1>
             <h4 class = "user_tags">
                 <i class="{{ visiting.gronner.country.flag_css }}" title="{{ visiting.gronner.country.name }}"></i> - 
                 {{ followers }} seguidor/es - 

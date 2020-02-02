@@ -16,7 +16,7 @@ class homepage(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         following = Follow.objects.filter(follower=user).values('following')
-        return Project.objects.filter(author__in=following).order_by('-date_posted') | user.project_set.all().order_by('-date_posted')
+        return Project.objects.filter(author__in=following, is_active=True).order_by('-date_posted') | user.project_set.filter(is_active=True).order_by('-date_posted')
 
 
     def get_context_data(self, **kwargs):
@@ -41,13 +41,13 @@ class homepage(LoginRequiredMixin, ListView):
             }
 
         # Tendencia
-        context["top_projects"] = Project.objects.all().order_by('points')[:3]
+        context["top_projects"] = Project.objects.filter(is_active=True).order_by('points')[:3]
         context["top_users"] = User.objects.all().order_by('gronner__points')[:3]
 
         # Otros
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
-        context["personal_projects"] = user.project_set.all().order_by('-date_posted')
+        context["personal_projects"] = user.project_set.filter(is_active=True).order_by('-date_posted')
         return context
     
     
