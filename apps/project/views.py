@@ -53,16 +53,11 @@ class MedalToggle(LoginRequiredMixin, RedirectView):
             obj.author.gronner.save()
         else: 
             if(medals_user.first().medal!=medal):
-                #print('user points: ', user.gronner.points)
-                print(obj.author.gronner.points)
                 obj.author.gronner.points -=  medals_user.first().medal.points
-                print(obj.author.gronner.points)
-                #print('user points: ', user.gronner.points)
                 medals_user.first().delete()
                 new_medal = Award.objects.create(user=user, medal=medal, project=obj)
                 obj.author.gronner.points +=  new_medal.medal.points
                 obj.author.gronner.save()
-                print(obj.author.gronner.points)
             else:
                 obj.author.gronner.points -=  medals_user.first().medal.points
                 obj.author.gronner.save()
@@ -84,7 +79,7 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
-    fields = ['title', 'description', 'category', 'image1', 'image2', 'image3']
+    form_class = CreateProject
     template_name_suffix = '_update_form'
 
     def form_valid(self, form):
@@ -157,4 +152,6 @@ class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, RedirectView):
         comment_id = self.kwargs.get('pk_comment')
         comment = Comment.objects.get(id=comment_id)
         comment.delete()
+
+        return url_
 

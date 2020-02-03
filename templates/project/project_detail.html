@@ -10,81 +10,84 @@
 
 {% block main_content %}
     {% if project.is_active == True %}
-        {{ project.is_active }}
     
         {% for message in messages %}
             <div class="{{ message.tags }}">{{message}}</div>
         {% endfor %}
-        <span class = "icon-price-tag" style = "color: {{ project.category.color }}"></span>
 
         <div class = "publication_heading">
             <div class='publication_info'>
-                <h2 class = "publication_category" style = "color: {{ project.category.color }}">{{ project.category.name }}</h2>
+                <div class="category-div">
+                    <span class = "icon-price-tag" style = "color: {{ project.category.color }}"></span>
+                    <h2 class = "publication_category" style = "color: {{ project.category.color }}">{{ project.category.name }}</h2>
+                </div>
                 <h1 class = 'publication_title'>{{ project.title }}</h1>
-                <h3 class = "publication_author">Presentado por {{ project.author.first_name }} {{ project.author.last_name}}</h3>
+                <h3 class = "publication_author">Presentado por <a href="{% url 'profile' project.author.username %}">{{ project.author.get_full_name }}</a></h3>
+                <span class="icon-calendar"></span><h5 class="pub-date">{{ project.date_posted }}<h5>
             </div>
             <div class='publication_control'>
                 {% if object.author  == user  %}
                     <a href="{% url 'project_update' object.id %}"><span class="icon-pencil"></span></a>
                     <a href="{% url 'project_delete' object.id %}"><span class="icon-bin"></span></a>
+                {% else %}
+                    <a href="{% url 'project_delete' object.id %}"><span class="icon-flag"></span></a>
                 {% endif %}
             </div>
 
         </div>
 
-        <p class = "publication_body">{{ project.description }}</p>
-
-        <div class="medallas">
-            <h3 class="medal_title">Reconoce a {{ project.author.first_name }}</h3>
-            <a href="{% url 'give_medal' project.id 'Bronze' %}">bronze</a>
-            <div class="bronce">
-                <img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce">
-                <span class="cantidad">{{ bronze }}</span>
-            </div>
-
-            <a href="{% url 'give_medal' project.id 'Silver' %}">silver</a>
-            <div class="plata">
-                <a class="link" href="{% url 'give_medal' project.id 'Silver' %}"></a>
-                <img src="{% static 'img/plata.png' %}" alt="Medallas de plata">
-                <span class="cantidad">{{ silver }}</span>
-            </div>
-
-            <a href="{% url 'give_medal' project.id 'Gold' %}">gold</a>
-            <div class="oro">
-                <a class="link" href="{% url 'give_medal' project.id 'Gold' %}"></a>
-                <img src="{% static 'img/oro.png' %}" alt="Medallas de oro">
-                <span class="cantidad">{{ gold }}</span>
-            </div>
-        </div>
-
-        <div class="images">
+        <div class="pub-content">
+            <p class="pub-text">{{ project.description }}</p>
+                    <div class="images">
             {% if project.image1 %}
                 <div class = "image1">
-                    image1
-                    <img src="{{ project.image1.url }}">
+                    <a target="_blank" href="{{ project.image1.url }}"><img src="{{ project.image1.url }}"></a>
                 </div>		
             {% endif %}
             {% if project.image2 %}
                 <div class = "image2">
-                    image2
-                    <img src="{{ project.image2.url }}">
+                    <a target="_blank" href="{{ project.image2.url }}"><img src="{{ project.image2.url }}"></a>
                 </div>		
             {% endif %}
             {% if project.image3 %}
                 <div class = "image3">
-                    image3
-                    <img src="{{ project.image3.url }}">
+                    <a target="_blank" href="{{ project.image3.url }}"><img src="{{ project.image3.url }}"></a>
                 </div>		
             {% endif %}
         </div>
+        </div>
+
+        <div class="medallas">
+            <div class="medal-container">
+                <div class="bronce">
+                    <a href="{% url 'give_medal' project.id 'Bronze'  %}"><img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce"></a>
+                </div>
+
+                <div class="plata">
+                    <a href="{% url 'give_medal' project.id 'Silver'  %}"><img src="{% static 'img/plata.png' %}" alt="Medallas de plata"></a>
+                </div>
+
+                <div class="oro">
+                    <a href="{% url 'give_medal' project.id 'Gold'  %}"><img src="{% static 'img/oro.png' %}" alt="Medallas de oro"></a>
+                </div>
+            </div>
+
+            <div class="medal-text-container">
+                <h5 class="medal-text">¡Otorga una medalla!</h5>
+            </div>
+
+        </div>
+
 
         <div class="comment_section">
             <div class='new_comment'>
                 <img class="user_img" src={{ user.gronner.image.url }}>
                 <form method='POST'>
                     {% csrf_token %}
-                    <input type="text" name='comment' placeholder="Comentar">
-                    <button type="submit"><span class = 'icon icon-send'></span></button>
+                    <textarea name='comment' placeholder="Comentar" required></textarea>
+                    <div class="send">
+                        <button type="submit" value=""><span class = 'icon-send'></span></button>
+                    </div>
                 </form>
             </div>
 
@@ -92,10 +95,17 @@
                 {% if comments %}
                     {% for comment in comments %}
                         <div class="comment">
-                            <img class="user_img" src="{{ comment.user.gronner.image.url }}">
-                            <span class="comment_date">{{ comment.get_date }}</span>
-                            <div class="comment_user_name">{{ comment.user.first_name }} {{ comment.user.last_name }}</div>
-                            <div class="comment_user_dedication">{{ comment.user.gronner.dedication }}</div>
+                            <div class="head">
+                                <a href="{% url 'profile' comment.user.username %}" class="link"></a>
+                                <div class="comment_user_image">
+                                    <img class="user_img" src="{{ comment.user.gronner.image.url }}">
+                                </div>
+                                <div class="info_com">
+                                    <span class="comment_date">{{ comment.get_date }}</span>
+                                    <div class="comment_user_name">{{ comment.user.first_name }} {{ comment.user.last_name }}</div>
+                                    <div class="comment_user_dedication">{{ comment.user.gronner.dedication }}</div>
+                                </div>
+                            </div>
                             <div class="comment_content">{{ comment.text }}</div>
                             {% if project.author == user or comment.user == user %}
                                 <a href="{% url 'comment_delete' project.id comment.id %}"><span class="icon-bin"></span></a>
@@ -103,7 +113,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <h3 class="noContent">No hay comentarios, se el primero!</h3>
+                    <h3 class="noContent">No hay comentarios, ¡sé el primero!</h3>
                 {% endif %}
             </div>
         </div>
@@ -113,6 +123,5 @@
 {% block js %}
 
 {% endblock js %}
-
 
 {% endblock main_content %}

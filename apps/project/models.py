@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.urls import reverse
-
+from PIL import Image, ExifTags
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -50,6 +50,44 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse("project_detail", kwargs={"pk": self.pk})
+
+    def save(self, *args, **kwargs):
+        super().save()
+        img = [Image.open(self.image1.path), Image.open(self.image2.path), Image.open(self.image3.path)]
+        file_format = [img[0].format, img[1].format, img[2].format]
+
+        for i in range(0,3):
+            print(f'processing image {i}...')
+            if file_format[i] == 'JPEG':
+                exif = img[i]._getexif()
+                # if image has exif data about orientation, let's rotate it
+                orientation_key = 274 # cf ExifTags
+                if exif and orientation_key in exif:
+                    orientation = exif[orientation_key]
+
+                    rotate_values = {
+                        3: Image.ROTATE_180,
+                        6: Image.ROTATE_270,
+                        8: Image.ROTATE_90
+                    }
+                    print(f'image {i} rotated...')
+                    if orientation in rotate_values:
+                        img[i] = img[i].transpose(rotate_values[orientation])
+                    print(f'image {i} transposed...')
+
+        for i in range(0,3):
+            if img[i].height>1024 or img[i].width>768:
+                output_size = (1024,768)
+                img[i].thumbnail(output_size)
+                print(f'image {i} resized...')
+
+        img[0].save(self.image1.path, file_format[0])
+        print(f'image1 saved...')
+        img[1].save(self.image2.path, file_format[1])
+        print(f'image2 saved...')
+        img[2].save(self.image3.path, file_format[2])
+        print (img[0].size)
+        print(f'image3 saved...')
 
 class Medal(models.Model):
     medal_type = models.CharField(max_length=6)

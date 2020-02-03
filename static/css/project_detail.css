@@ -1,0 +1,229 @@
+@media screen and (max-width: 680px){
+    .medal_container img .medal_container div{
+        height:6em !important;
+        width:6em !important;
+    }
+}
+
+/* Header */
+    .publication_heading{
+        display:flex;
+        border-bottom: solid 1px gray;
+        width:100%;
+        justify-content: space-between;
+        padding-top: 1em;
+    }
+    .publication_heading .category-div{
+        margin-top:1em;
+        margin-bottom: .5em;
+    }
+    .category-div .icon-price-tag{
+        float:left;
+        margin-right: .5em;
+    }
+    .category-div .publication_category{
+        font-size:1em;
+    }
+    .publication_info .publication_title{
+        font-weight: 500;
+    }
+    .publication_info .publication_author{
+        opacity: .7;
+        font-weight: 300;
+    }
+    .publication_info .pub-date, .publication_info .icon-calendar{
+        opacity: .7;
+        font-weight: 300;
+        margin: 1em 0;
+        display: inline-block;
+    }
+    .publication_info .icon-calendar{
+        margin-right: .5em;
+        font-size: .8em;
+    }
+
+    /* Control */
+
+        .publication_control{
+            margin:1em 0;
+        }
+        .publication_control .icon-pencil{
+            display:block;
+            margin-bottom:.5em;
+            opacity: .6;
+        }
+        .publication_control .icon-pencil:hover{
+            opacity:1;
+        }
+        .publication_control .icon-bin, .publication_control .icon-flag{
+            opacity: .6;
+        }
+        .publication_control .icon-bin:hover{
+            opacity:1;
+        }
+        .publication_control .icon-flag:hover{
+            opacity:1;
+        }
+/* Content */
+
+    .pub-content{
+        width:100%;
+        text-align: justify;
+        white-space: pre-line;
+        position: relative;
+    }
+
+    /* Images */
+        .images{
+            margin-top:1em;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1em;
+            position: relative;
+        }
+        .image1, .image2{
+            width:100%;
+            position: relative;
+        }
+        .image1 img, .image2 img, .image3 img{
+            width:100%;
+            height: 100%;
+        }
+        .image3{
+            width:70%;
+            margin:auto;
+            grid-column: span 2;
+        }
+
+    /* Medallas */
+
+        .medallas{
+            width:100%;
+            display: flex !important;
+            flex-direction: column;
+            padding:1em 0;
+            margin:2em 0;
+            border-bottom: 1px solid #d1d1d1;
+            border-top: 1px solid #d1d1d1;
+        }
+        .medal-text{
+            margin-top: 1em;
+            font-weight: 300;
+        }
+        .oro, .plata, .bronce{
+            opacity: .5;
+            pointer-events: auto !important;
+            transition: .2s;
+        }
+        .oro:hover{
+            opacity: 1;
+        }
+        .plata:hover{
+            opacity: 1;
+        }
+        .bronce:hover{
+            opacity: 1;
+        }
+
+/* Comment */
+    .comment_section{
+        width: 100%;
+    }
+    .new_comment{
+        width:100%;
+        height: 5em;
+        display: flex;
+        align-items: center;
+        background-color: rgb(241, 241, 241);
+        border-radius: 40px;
+    }
+    .new_comment .user_img{
+        width:4em;
+        height:4em;
+        margin-left:.5em;
+        float: left;
+    }
+    .new_comment form{
+        width: 90%;
+        position: relative;
+        display: flex;
+    }
+    .new_comment .send{
+        display: inline;
+        position: relative;
+        align-self: center;
+    }
+    .new_comment textarea{
+        padding: .5em;
+        width:85%;
+        border-radius: 20px;
+        margin-left: 1em;
+        border:1px solid #d1d1d1;
+        font-family: 'Montserrat', sans-serif;
+        font-size: .8em;
+        min-height:4em;
+        resize: none;
+        outline: none;
+    }
+
+    .new_comment button{
+        width:2em;
+        height:2em;
+        outline: none;
+        border: none;
+        background: transparent;
+    }
+    .comments .noContent{
+        opacity: .7;
+        font-weight: 500;
+    }
+    .comments .comment_user_image, .comment_user_image img{
+        width:3em;
+        height:3em;
+        grid-row: span 2;
+    }
+    .comments .head{
+        display: grid;
+        grid-gap: .5em;
+        grid-template-columns: 3em 1fr;
+        align-items: center;
+        position: relative;
+    }
+    .comment{
+        margin-top: 1em;
+        background-color: #e9e9e9;
+        border-radius: 20px;
+        padding:1em;
+        z-index: 1;
+        position: relative;
+    }
+    .comment .comment_date{
+        opacity: .6;
+        font-size: .7em;
+    }
+    .comment .info_com{
+        position: relative;
+        pointer-events: none;
+    }
+    .comment .comment_user_name{
+        font-size: .9em;
+    }
+    .comment .comment_user_dedication{
+        font-size: .7em;
+        opacity: .8;
+    }
+    .comment .comment_content{
+        white-space: pre-line;
+    }
+    .comment .icon-bin{
+        position: absolute;
+        top:1em;
+        right:1em;
+        opacity: .6;
+    }
+    .comment .icon-bin:hover{
+        opacity: 1;
+    }
+    .comments{
+        margin-bottom: 10em;
+    }
