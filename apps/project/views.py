@@ -9,6 +9,7 @@ from .forms import CreateProject
 from django.contrib.messages.views import SuccessMessageMixin
 from django.forms import modelformset_factory
 from django.contrib import messages
+from PIL import ImageFile
 from django.core.mail import EmailMessage
 
 
@@ -69,6 +70,7 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Project
     form_class = CreateProject
     success_message = "Tu proyecto se ha subido correctamente"
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -102,6 +104,8 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
         project = self.get_object()
         if project.author == self.request.user:
             return True
+        project.author.gronner.points -= 500
+        project.author.gronner.save()
         return False
 
 def suspend(project, reason):

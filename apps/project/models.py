@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from datetime import datetime
+import datetime
 from django.urls import reverse
 from PIL import Image, ExifTags
+
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -11,7 +12,7 @@ class Category(models.Model):
     diminutive = models.CharField(max_length=10, default='Put here a diminutive name')
 
     def __str__(self):
-        return self.name + ' (%s, %s)' %(self.color, self.diminutive)
+        return self.name 
 
 
     def get_absolute_url(self):
@@ -25,39 +26,62 @@ class Project(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     points = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
-    image1 = models.ImageField(upload_to='project_pics', blank=True, null=True)
-    image2 = models.ImageField(upload_to='project_pics', blank=True, null=True)
-    image3 = models.ImageField(upload_to='project_pics', blank=True, null=True)
+    image1 = models.ImageField(upload_to='project_pics')
+    image2 = models.ImageField(upload_to='project_pics')
+    image3 = models.ImageField(upload_to='project_pics')
 
     def __str__(self):
         return self.title
 
     def get_date(self):
-        time = datetime.now()
+        time = timezone.now()
 
-        if self.date_posted.hour == time.hour:
-            return "hace " + str(time.minute - self.date_posted.minute) + " minuto/s"
-        else:
-            if self.date_posted.day == time.day:
-                return "hace " + str(time.hour - self.date_posted.hour) + " hora/s"
-            else:
-                if self.date_posted.month == time.month:
-                    return "hace " + str(time.day - self.date_posted.day) + " dia/s"
+        segundos = int((time - self.date_posted).total_seconds())
+        
+        if segundos<60:
+            return f'hace {segundos} segundos'
+
+        minutos = 0
+        while segundos-60>=0:
+            minutos += 1
+            segundos -= 60
+        if minutos>=60:
+            horas = 0
+            while minutos-60>=0:
+                horas += 1
+                minutos -= 60
+            if horas>=24:
+                dias = 0
+                while horas-24>=0:
+                    dias += 1
+                    horas -= 24
+                if dias>=31:
+                    meses = 0
+                    while dias-31>=0:
+                        meses += 1
+                        dias -= 31
+                    if meses>=12:
+                        return self.date_posted
+                    else:
+                        return f'hace {meses} meses'
                 else:
-                    if self.date_posted.year == time.year:
-                        return "hace " + str(time.month - self.date_posted.month) + " mes/es"
-        return self.date_posted
+                    return f'hace {dias} dias'
+            else:
+                return f'hace {horas} horas'
+        else:
+            return f'hace {minutos} minutos'
+
 
     def get_absolute_url(self):
         return reverse("project_detail", kwargs={"pk": self.pk})
 
     def save(self, *args, **kwargs):
-        super().save()
+        super().save()      
+
         img = [Image.open(self.image1.path), Image.open(self.image2.path), Image.open(self.image3.path)]
         file_format = [img[0].format, img[1].format, img[2].format]
-
+        
         for i in range(0,3):
-            print(f'processing image {i}...')
             if file_format[i] == 'JPEG':
                 exif = img[i]._getexif()
                 # if image has exif data about orientation, let's rotate it
@@ -70,24 +94,17 @@ class Project(models.Model):
                         6: Image.ROTATE_270,
                         8: Image.ROTATE_90
                     }
-                    print(f'image {i} rotated...')
                     if orientation in rotate_values:
                         img[i] = img[i].transpose(rotate_values[orientation])
-                    print(f'image {i} transposed...')
 
         for i in range(0,3):
             if img[i].height>1024 or img[i].width>768:
                 output_size = (1024,768)
                 img[i].thumbnail(output_size)
-                print(f'image {i} resized...')
 
         img[0].save(self.image1.path, file_format[0])
-        print(f'image1 saved...')
         img[1].save(self.image2.path, file_format[1])
-        print(f'image2 saved...')
         img[2].save(self.image3.path, file_format[2])
-        print (img[0].size)
-        print(f'image3 saved...')
 
 class Medal(models.Model):
     medal_type = models.CharField(max_length=6)
@@ -110,26 +127,48 @@ class Comment(models.Model):
     text = models.TextField()
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
-    date_commented = models.DateTimeField(default=timezone.now)
+    date_commented = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
         return self.user.username + ' comments ' + self.project.title
 
     def get_date(self):
-        time = datetime.now()
+        time = timezone.now()
 
-        if self.date_commented.hour == time.hour:
-            return "hace " + str(time.minute - self.date_commented.minute) + " minuto/s"
-        else:
-            if self.date_commented.day == time.day:
-                return "hace " + str(time.hour - self.date_commented.hour) + " hora/s"
-            else:
-                if self.date_commented.month == time.month:
-                    return "hace " + str(time.day - self.date_commented.day) + " dia/s"
+        segundos = int((time - self.date_commented).total_seconds())
+        
+        if segundos<60:
+            return f'hace {segundos} segundos'
+
+        minutos = 0
+        while segundos-60>=0:
+            minutos += 1
+            segundos -= 60
+        if minutos>=60:
+            horas = 0
+            while minutos-60>=0:
+                horas += 1
+                minutos -= 60
+            if horas>=24:
+                dias = 0
+                while horas-24>=0:
+                    dias += 1
+                    horas -= 24
+                if dias>=31:
+                    meses = 0
+                    while dias-31>=0:
+                        meses += 1
+                        dias -= 31
+                    if meses>=12:
+                        return self.date_commented
+                    else:
+                        return f'hace {meses} meses'
                 else:
-                    if self.date_commented.year == time.year:
-                        return "hace " + str(time.month - self.date_commented.month) + " mes/es"
-        return self.date_commented
+                    return f'hace {dias} dias'
+            else:
+                return f'hace {horas} horas'
+        else:
+            return f'hace {minutos} minutos'
 
 class Report(models.Model):
     reason = models.CharField(max_length=50)
