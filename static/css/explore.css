@@ -1,0 +1,131 @@
+body{
+    background-color: rgb(224, 224, 224);
+    
+}
+.head{
+    background: rgb(214,73,0);
+    background: linear-gradient(90deg, rgba(214,73,0,1) 0%, rgba(158,54,0,1) 11%, rgba(152,52,0,1) 24%, rgba(82,28,0,1) 100%);    padding:2em;
+    text-align: center;
+}
+.head h1{
+    color:#FFF;
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+.head input{
+    background-color: transparent;
+    border:none;
+    padding:1em;
+    border-bottom: 1px solid #FFF;
+    color:#FFF;
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search{
+    position: relative;
+}
+.search .icon-search{
+    position: absolute;
+    top:1em;
+    pointer-events: none;
+    right: 0;
+    color:#FFF;
+}
+.search button{
+    width:1.5em;
+    height:1.5em;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    top:1em;
+    right:0;
+    background-color: transparent;
+}
+.user, .project, .category{
+    position: relative;
+}
+.results{
+    margin:0 10em;
+    margin-top: 1em;
+}
+.icon-price-tag{
+    float: left;
+    margin-right: .5em;
+}
+.category, .user{
+    padding:1em 0;
+}
+.user{
+    display: flex;
+    align-items: center;
+}
+.user img{
+    width: 3em;
+    height: 3em;
+    border-radius: 100%;
+    margin-right: 1em;
+}
+.projects, .categories{
+    margin-bottom: 2em;
+}
+.noResults{
+    padding:1em;
+    opacity: .7;
+}
+.projects-title, .categories-title, .users-title{
+    font-weight: 500;
+    margin-top:1em;
+    margin-bottom:.5em;
+}
+.project .category-project{
+    display: flex;
+    align-items: center;
+    padding-top:1em;
+}
+.category{
+    display: flex;
+    align-items: center;
+}
+.category-name{
+    font-size: 1.2em;
+    margin:none!important;
+}
+.project-name{
+    font-size: 1.5em;
+    margin:0 !important;
+}
+.project-author{
+    opacity: .7;
+    font-size: .9em;
+}
+.project, .category{
+    margin:1em 0;
+}
+.explore{
+    display: flex;
+    justify-content: space-between;
+}
+.explore .project-followed{
+    margin-right:10em;
+    margin-top:1em;
+    text-align: right;
+}
+.category-project{
+    justify-content: end !important;
+}
+.explore .project-followed-title, .explore .all-categories-title{
+    font-size: 1.5em;
+    font-weight: 500;
+}
+.explore .no-categories{
+    opacity: .7;
+    font-size: 1em;
+    margin:2em;
+}
+.explore .all-categories{
+    margin-left: 10em;
+    margin-top: 1em;
+}

@@ -104,13 +104,13 @@
                             <h2 class="title">Sobre mí</h2>
                             <div class="rightDiv"></div>
                                 <div class='extract_content noContent' id="text">
-                                <pre>
+                                <p>
                                     {% if visiting.gronner.extract %}
                                         {{visiting.gronner.extract}}
                                     {% else %}
                                         No se ha dado información
                                     {% endif %}
-                                </pre>
+                                </p>
 
                                 </div>
                                 {% if visiting.gronner.extract %}
@@ -133,7 +133,9 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
-                                <span class="icon-mail" style = "color:#cf0e00"><a href="mailto:{{ visiting.email }}" class="link"></a></span>
+                                {% if visiting.gronner.shows_email %}
+                                    <span class="icon-mail" style = "color:#cf0e00"><a href="mailto:{{ visiting.email }}" class="link"></a></span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

@@ -123,7 +123,6 @@
         justify-content: center;
         grid-gap: 1.5em;
         margin:auto;
-        margin-bottom:10em;
         position: relative;
     }
 
@@ -172,7 +171,9 @@
         color:#000;
         transition: .5s;
     }
-
+    .publicInfo{
+        max-width: 20em;
+    }
     .creators .user:hover{
         opacity:1;
     }
@@ -257,6 +258,9 @@
         text-align: center;
         font-weight: 500;
     }
+    .aboutMe>h2{
+        margin-top:1em;
+    }
     #userinfo{
         max-width: 100%;
     }
@@ -264,16 +268,15 @@
         max-height:3em;
         overflow: hidden;
         word-break: break-all;
+        white-space: pre-line;
     }
-    .extract_content pre{
-        margin:-1em 0;
+    .extract_content p{
         line-height: 1.5;
+        margin-top: -4em;
+        margin-bottom: -4em;
         text-align: left !important;
         opacity: 1 !important;
-        word-wrap: break-word;      /* IE 5.5-7 */
-        white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
-        white-space: pre-line;      /* Modern browsers */
-        font-family: 'Montserrat', sans-serif;
+        height: auto;
     }
     #seeMore{
         text-align: right;
@@ -297,6 +300,9 @@
     }
     .iconos span{
         position: relative;
+    }
+    .info{
+        min-width: 30%;
     }
     .rightDiv{
         height:1px;

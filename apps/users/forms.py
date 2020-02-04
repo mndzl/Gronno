@@ -27,7 +27,8 @@ class GronnerUpdateForm(forms.ModelForm):
     facebook = forms.CharField(max_length=50, required=False ,widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
     instagram = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
     linkedin = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
+    twitter = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
     extract = forms.CharField(required=False, widget=forms.Textarea(attrs={'placeholder': 'Cuéntanos sobre tí'}))
     class Meta:
         model = Gronner
-        exclude = ['user', 'points']
+        fields = ['extract', 'dedication', 'image', 'birth', 'country', 'facebook', 'instagram', 'linkedin', 'twitter', 'shows_email']

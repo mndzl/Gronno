@@ -19,7 +19,7 @@
             <div class='publication_info'>
                 <div class="category-div">
                     <span class = "icon-price-tag" style = "color: {{ project.category.color }}"></span>
-                    <h2 class = "publication_category" style = "color: {{ project.category.color }}">{{ project.category.name }}</h2>
+                    <h2 class = "publication_category"><a style = "color: {{ project.category.color }}" href="{% url 'category_explore' project.category.diminutive %}">{{ project.category.name }}</a></h2>
                 </div>
                 <h1 class = 'publication_title'>{{ project.title }}</h1>
                 <h3 class = "publication_author">Presentado por <a href="{% url 'profile' project.author.username %}">{{ project.author.get_full_name }}</a></h3>

@@ -9,7 +9,7 @@ from .models import (
 )
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'author', 'category', 'is_active')
+    list_display = ('title', 'description', 'author', 'category', 'points', 'is_active')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'color', 'diminutive')

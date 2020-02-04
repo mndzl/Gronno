@@ -30,6 +30,7 @@ a{
 	.divEndPublic{
 		margin-top: 2em !important;
 	}
+
 }
 @media screen and (max-width: 800px){
 	.publicacion .medallas, .publicacion .medallas img{
@@ -41,6 +42,9 @@ a{
 	}
 	.icon-book{
 		display: inline;
+	}
+	.top_project .icon-price-tag, .top_project .top_project_category{
+		margin:0 !important;
 	}
 }
 @media screen and (max-width: 680px){
@@ -69,7 +73,6 @@ a{
 	grid-template-columns: 20% 60% 20%;
 	position: relative;
 	min-height: 100vh;
-	margin-bottom: 10em;
 }
 
 .left, .right{
@@ -87,7 +90,18 @@ a{
 	text-align: center;
 	font-weight: normal;
 }
-
+.trending_title{
+	padding-bottom:1em;
+	border-bottom: 1px solid #acacac;
+	margin: auto;
+	width:70%;
+}
+.left h3{
+	padding-bottom:1em;
+	border-bottom: 1px solid #acacac;
+	margin: auto;
+	width:70%;
+}
 .left .presentadosDiv,
 .right .zonaDiv{
 	height:1px;
@@ -100,13 +114,14 @@ a{
 .publicado{
 	margin:auto;
 	font-size:.8em;
-	max-width: 90%;
+	max-width: 85%;
 	transition:.5s;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	padding:.5em;
 	position: relative;
+	margin-top: 1em;
 	margin-left: 1em;
 }
 .publicado:hover{
@@ -219,19 +234,15 @@ a{
 main .tituloNav{
 	margin-bottom: .5em;
 	font-size:1.5em;
-	padding-top: 1em;
+	padding: 1em 0;
 	text-align: right;
 	font-weight: 300;
+	border-bottom:1px solid #acacac;
 }
 .contenido{
 	width: 80%;
 	height:100%;
 	margin:0 auto;
-}
-.contenido hr{
-	height: 1px;
-	opacity:.2;
-	margin-bottom: 1em;
 }
 .comentarios{
 	grid-column: span 3;
@@ -242,9 +253,78 @@ main .tituloNav{
 .user_img, .user_img img{
 	border-radius: 100%;
 }
+.top_projects{
+	margin: 1em 0;
+}
 .top_project{
 	position:relative;
+	text-align: left;
+	padding: .5em 0;
+	margin-left: 1em;
+	border-radius: 10px;
+	transition: .5s;
+	width:90%;
+}
+.trending_div{
+	width:70%;
+	margin: auto;
+	opacity: .5;
+	font-weight: 300;
+	
 }
 .top_user{
-	position:relative
+	position:relative;
+	border-radius: 10px;
+	margin: auto;
+	padding: .5em 0;
+	width: 90%;
+	transition:.5s;
+}
+.top_user:hover{
+	background-color: rgb(216, 213, 213);
+}
+.top_project .icon-price-tag{
+	float: left;
+	margin:.5em;
+}
+.top_project:hover{
+	background-color: rgb(216, 213, 213);
+}
+.top_project .top_project_category{
+	text-align: left;
+	margin-top: .4em;
+	pointer-events: none;
+	font-size: .9em;
+}
+.top_project h3{
+	text-align: left;
+	pointer-events: none;
+}
+.top_project h4{
+	margin-left:2.5em;
+	font-weight: 500;
+	opacity: .7;
+	font-size: .8em;
+	pointer-events: none;
+}
+.top_project .points{
+	opacity: .7;
+	font-size: .8em;
+	pointer-events: none;
+}
+.user_img_container{
+	width: 100%;
+	display: flex;
+}
+.top_user .user_img{
+	width:3em;
+	height: 3em;
+	margin: auto;
+}
+.top_users{
+	text-align: center;
+	margin-top: 1em;
+}
+.top_user_points{
+	font-size: .8em;
 }

@@ -26,9 +26,9 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
         context['project'] = this_object
         
         # Tendencia
-        context["top_projects"] = Project.objects.filter(is_active=True).order_by('points')[:5]
+        context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
         context["personal_projects"] = self.request.user.project_set.filter(is_active=True).order_by('-date_posted')
-        context["top_users"] = User.objects.all().order_by('gronner__points')[:3]
+        context["top_users"] = User.objects.all().order_by('-gronner__points')[:3]
         return context
 
     def post(self, request, pk):
@@ -51,17 +51,25 @@ class MedalToggle(LoginRequiredMixin, RedirectView):
         if not calified:
             new_medal = Award.objects.create(user=user, medal=medal, project=obj)
             obj.author.gronner.points += new_medal.medal.points
+            obj.points += new_medal.medal.points
+            obj.save()
             obj.author.gronner.save()
         else: 
             if(medals_user.first().medal!=medal):
                 obj.author.gronner.points -=  medals_user.first().medal.points
+                obj.points -= medals_user.first().medal.points
                 medals_user.first().delete()
                 new_medal = Award.objects.create(user=user, medal=medal, project=obj)
                 obj.author.gronner.points +=  new_medal.medal.points
+                obj.points += new_medal.medal.points
+                obj.save()
                 obj.author.gronner.save()
             else:
                 obj.author.gronner.points -=  medals_user.first().medal.points
                 obj.author.gronner.save()
+                obj.points -=  medals_user.first().medal.points
+                obj.save()         
+
                 medals_user.first().delete()
 
         return url_

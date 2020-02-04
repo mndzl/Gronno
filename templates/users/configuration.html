@@ -4,16 +4,47 @@
 {% block link %}{% static 'css/config.css' %}{% endblock link %}
 
 {% block content %}
-	<div class='content'>
+
+	<div class='heading'>
+		<a href='{% url 'profile' user.username %}' class='config-back'>&lt Volver al perfil</a>
+		<h1 class='config-title'>Configuración</h1>
+	</div>
 		<form method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
-		
-		{{ u_form|crispy}}
-		{{ g_form|crispy}}
+			<div class='personal'>
+				<h2 class='personal-title'>Datos personales</h2>
+				{{ u_form|crispy }}
+				<label for='id_birth'>Fecha de nacimiento</label>
+				{{ g_form.birth }}
+				<label for='id_image'>Foto de perfil</label>
+				{{ g_form.image }}
+				<label for='id_extract'>Biografía:</label>
+				{{ g_form.extract }}
+				<label for='id_dedication'>Dedicacion:</label>
+				{{ g_form.dedication }}
+				<label for='id_country'>Nacionalidad</label>
+				{{ g_form.country }}
+			</div>
+			<div class='social'>
+				<h2 class='personal-title'>Redes Sociales</h2>
+				<label for='id_facebook'><span class='icon-social icon-facebook'></span>Facebook</label>
+				{{ g_form.facebook }}
+				<label for='id_instagram'><span class='icon-social icon-instagram'></span>Instagram</label>
+				{{ g_form.instagram }}
+				<label for='id_linkedin'><span class='icon-social icon-linkedin'></span>Linkedin</label>
+				{{ g_form.linkedin }}
+				<label for='id_twitter'><span class='icon-social icon-twitter'></span>Twitter</label>
+				{{ g_form.twitter }}
+				<div class=email>
+					<label for='shows_email'>Mostrar email en perfil</label>
+					{{ g_form.shows_email }}				
+				</div>
 
-		<button type="submit">Actualizar datos</button>
-	</form>
-	</div>
+			</div>
+
+			<button type="submit">Actualizar</button>
+		</form>
+
 
 {% endblock content %}
 

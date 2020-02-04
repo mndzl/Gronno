@@ -10,8 +10,6 @@
 
 		<aside class="left">
 			<h3>Presentados</h3>
-
-			<hr class="presentadosDiv">
 			
 			{% if personal_projects %}
 				{% for project in personal_projects %}
@@ -36,7 +34,6 @@
             <div class="{{ message.tags }}">{{message}}</div>
         {% endfor %}
 			<h1 class="tituloNav">Nuevos proyectos</h1>
-			<hr>	
 			{% if projects %}
 				{% for project, comment, medal in projects %}
 					<div class="publicacion">
@@ -87,7 +84,7 @@
 			{% endif %}
 
 			<div class="noContent">
-				<h3><a href="#">Explorar más</a></h3>
+				<h3><a href="{% url 'explore' %}">Explorar más</a></h3>
 			</div>
 
 			{% endblock main_content %}
@@ -96,28 +93,35 @@
 
 		<aside class="right">
 			<div class="trending_container">
-				<h3 class="trending_title">En tendencia</hr>
-				<hr class="trending_div">
-				{% for project in top_projects %}
-					<div class="top_project">
-						<a href="{% url 'project_detail' project.id %}" class="link"></a>
-						<span style = "color:{{ project.category.color }}" class = "icon-price-tag"></span>
-						<h3>{{ project.title }}</h3>
-						<h4>{{ project.author.get_full_name }}</h4>
-					</div>
-				{% endfor %}
-				<hr class="trending_div">
-				{% for user in top_users %}
-
-					<div class="top_user">
-					{{ user.username }}
-						<a class="link" href="{% url 'profile' user.username %}"></a>
-						<img class = "user_img" src="{{ user.gronner.image.url }}" alt="{{user.get_full_name}}">
-						<div class="top_user_info">
-							<div class="top_user_name">{{ user.get_full_name }} <small>({{user.username}})</small></div>
+				<h3 class="trending_title">En tendencia</h3>
+				<div class="top_projects">
+					{% for project in top_projects %}
+						<div class="top_project">
+							<a href="{% url 'project_detail' project.id %}" class="link"></a>
+							<span style = "color:{{ project.category.color }}" class = "icon-price-tag"></span>
+							<h3 style = "color:{{ project.category.color }}" class="top_project_category">{{ project.category }}</h3>
+							<h3>{{ project.title }}</h3>
+							<h4>{{ project.points }} puntos</h4>
 						</div>
-					</div>
-				{% endfor %}
+					{% endfor %}
+				</div>
+				<hr class="trending_div">
+				<div class="top_users">
+					{% for user in top_users %}
+						<div class="top_user">
+							<a class="link" href="{% url 'profile' user.username %}"></a>
+							<div class="user_img_container">
+								<img class = "user_img" src="{{ user.gronner.image.url }}" alt="{{user.get_full_name}}">
+							</div>
+							
+							<div class="top_user_info">
+								<div class="top_user_name">{{ user.get_full_name }}</div>
+								<span class='top_user_points'>{{ user.gronner.points }} puntos</span>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+
 			</div>
 		</aside>
 

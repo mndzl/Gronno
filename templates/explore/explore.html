@@ -1,34 +1,107 @@
 {% extends 'base/base.html' %}
+{% load static %}
+{% block link3 %}{% static 'css/explore.css' %}{% endblock link3 %}
 
 {% block content %}
     <div class = 'head'>
         <h1>Explora categorías, proyectos o personas</h1>
         <form method="GET">
-            <input type="text" placeholder="Buscar" name='search'>
-            <button type="submit">Buscar</button>
+            <div class='search'>
+                <input type="text" placeholder="Buscar" name='search'>
+                <button type="submit"></button>
+                <span class="icon-search"></span>
+            </div>
         </form>
     </div>
-    <div class="results">
-        {% if projects %}
-            {% for project in projects %}
-                <div>{{ project.title }}</div>
-            {% endfor %}
-        {% else %}
-            <div class='noResults'>No se han encontrado proyectos</div>
-        {% endif %}
-        {% if categories %}
-            {% for category in categories %}
-                <div>{{ category.name }}</div>
-            {% endfor %}
-        {% else %}
-            <div class='noResults'>No se han encontrado categorías</div>
-        {% endif %}
-        {% if users %}
-            {% for user in users %}
-                <div>{{ user.get_full_name }} ({{ user.username }})</div>
-            {% endfor %}
-        {% else %}
-            <div class='noResults'>No se han encontrado usuarios</div> 
-        {% endif %}
-    </div>
+
+    {% if not trending %}
+        <div class="results">
+
+            <div class="projects">
+                <h2 class='projects-title'>Proyectos</h2>
+                <hr>
+                {% if projects %}
+                    {% for project in projects %}
+                        <div class="project">
+                            <div class="category-project" style="color:{{project.category.color}}">
+                                <span class="icon-price-tag"></span>
+                                <div class="category-name">{{ project.category.name }}</div>
+                            </div>
+                            <a class="link" href="{% url 'project_detail' project.id %}"></a>
+                            <div class="project-name">{{ project.title }}</div>
+                            <div class='project-author'>por {{ project.author.get_full_name }}</div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class='noResults'>No se han encontrado proyectos</div>
+                {% endif %}
+            </div>
+
+            <div class="categories">
+                <h2 class='categories-title'>Categorias</h2>
+                <hr>
+                {% if categories %}
+                    {% for category in categories %}
+                        <div class="category" style="color:{{category.color}}">
+                            <a class="link" href="{% url 'category_explore' category.diminutive %}"></a>
+                            <span class="icon-price-tag"></span>
+                            <div class="category-name">{{ category.name }}</div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class='noResults'>No se han encontrado categorías</div>
+                {% endif %}
+            </div>
+
+            <div class="users">
+                <h2 class='users-title'>Usuarios</h2>
+                <hr>
+                {% if users %}
+                    {% for user in users %}
+                        <div class="user">
+                            <img src="{{ user.gronner.image.url }}">
+                            <a class="link" href='{% url 'profile' user.username %}'></a>
+                            <span class='username'>{{ user.get_full_name }} ({{ user.username }})</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class='noResults'>No se han encontrado usuarios</div> 
+                {% endif %}
+            </div>
+        </div>
+
+    {% else %}
+        <div class="explore">
+            <div class='all-categories'>
+                <h3 class="all-categories-title">Todas las categorias</h3>
+                {% for category in trending.categories %}
+                    <div class="category trending-categories" style="color:{{category.color}}">
+                        <a class="link" href="{% url 'category_explore' category.diminutive %}"></a>
+                        <span class="icon-price-tag"></span>
+                        <div class="category-name">{{ category.name }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="project-followed">
+                <div class='project-followed-title'>Proyectos de las categorias que sigues</div>
+                {% if trending.projects %}
+                    {% for project in trending.projects %}
+                        <div class="project">
+                            <div class="category-project" style="color:{{project.category.color}}">
+                                <span class="icon-price-tag"></span>
+                                <div class="category-name">{{ project.category.name }}</div>
+                            </div>
+                            <a class="link" href="{% url 'project_detail' project.id %}"></a>
+                            <div class="project-name">{{ project.title }}</div>
+                            <div class='project-author'>por {{ project.author.get_full_name }}</div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-categories">No sigues a ninguna categoria</div>
+                {% endif %}
+            </div>
+
+        </div>
+    {% endif %}
 {% endblock content %}

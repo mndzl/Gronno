@@ -9,7 +9,13 @@ def Explore(request):
     projects = None
     users = None
     categories = None
+    trending = {
+        'projects':Project.objects.filter(is_active = True, category__in = request.user.gronner.categories_followed.all())[:20],
+        'categories':Category.objects.all()
+    }
+
     if query:
+        trending = None
         projects = Project.objects.filter(
             Q(title__icontains = query) |
             Q(description__icontains = query)
@@ -26,10 +32,12 @@ def Explore(request):
             Q(diminutive__icontains = query)
         ).distinct()
 
+
     context = {
         'projects': projects,
         'users': users,
-        'categories': categories
+        'categories': categories,
+        'trending':trending
     }
     return render(request, 'explore/explore.html', context)
 

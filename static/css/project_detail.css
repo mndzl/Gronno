@@ -68,8 +68,8 @@
 
     .pub-content{
         width:100%;
-        text-align: justify;
         white-space: pre-line;
+        word-break: break-all;
         position: relative;
     }
 
@@ -224,7 +224,4 @@
     }
     .comment .icon-bin:hover{
         opacity: 1;
-    }
-    .comments{
-        margin-bottom: 10em;
     }
