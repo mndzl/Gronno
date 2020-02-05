@@ -63,6 +63,7 @@
         background: rgb(56,22,0);
         background: linear-gradient(180deg, rgba(56,22,0,1) 0%, rgba(89,35,0,1) 61%, rgba(106,42,0,1) 100%);        display:flex;
         justify-content:center;
+        box-shadow: 1px 1px 5px #000;
         align-content: center;
         padding:1em 0;
         position: relative;
@@ -82,13 +83,20 @@
         font-size: 2em;
         font-weight: bold;
         font-weight: 500;
-        position: relative;
     }
     #subImageName .icon-user-x, #subImageName .icon-plus{
         top:-.5em;
         right: -1.2em;
         position: absolute;
         font-size: 1.5rem;
+        color:#FFF;
+    }
+    .icon-user-x{
+        color:#FFF;
+    }
+    .follow{
+        display: inline;
+        position: relative;
     }
     #userTitle{
         color:#ff8800;
@@ -149,6 +157,7 @@
         max-width:90%;
         transition:.5s;
         position: relative;
+        border:1px solid #acacac;
     }
     .publicacion:hover{
         box-shadow:1px 1px 10px #000;
@@ -156,6 +165,7 @@
     .publicacion .publicInfo, .publicacion .medallas{
         pointer-events: none;
     }
+
     .publicacion .category {
         margin-bottom: 1em;
     }
@@ -172,7 +182,8 @@
         transition: .5s;
     }
     .publicInfo{
-        max-width: 20em;
+        max-height: 100%;
+        overflow: hidden;
     }
     .creators .user:hover{
         opacity:1;
@@ -212,6 +223,7 @@
         background-color:#FFF;
         margin:1em 0;
         border-radius: 10px;
+        border:1px solid #acacac
     }
 
     .presentados>h2{
@@ -252,6 +264,7 @@
         border-radius: 10px;
         margin: 2em 0;
         max-width: 21em;
+        border:1px solid #acacac
     }
     .aboutMe .title{
         color:#ff6302;
@@ -301,9 +314,7 @@
     .iconos span{
         position: relative;
     }
-    .info{
-        min-width: 30%;
-    }
+
     .rightDiv{
         height:1px;
         width:70%;

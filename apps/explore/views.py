@@ -18,7 +18,8 @@ def Explore(request):
         trending = None
         projects = Project.objects.filter(
             Q(title__icontains = query) |
-            Q(description__icontains = query)
+            Q(description__icontains = query),
+            is_active = True
         ).order_by('-points')
 
         users = User.objects.filter(
@@ -53,6 +54,29 @@ class CategoryExplore(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["category"] = Category.objects.get(diminutive=self.kwargs.get('category'))
+        user = self.request.user
+
+        # Comments
+        comments = []   
+        for project in self.object_list:
+            comm = project.comment_set.all().count()
+            if comm>999:
+                comm=str(round(10722/1000,1)) + 'k'
+            comments.append(comm)
+        context["comments"] = comments
+
+        # Obtencion de medallas
+        medals = [{}] * len(self.object_list)
+        for i in range(len(self.object_list)):
+            medals[i] = {
+                'gold':len(self.object_list[i].award_set.filter(medal__medal_type='Gold')),
+                'silver':len(self.object_list[i].award_set.filter(medal__medal_type='Silver')),
+                'bronze':len(self.object_list[i].award_set.filter(medal__medal_type='Bronze'))
+            }
+
+        context["medals"] = medals
+        context["projects"] = zip(self.object_list,comments, medals)
+        
         return context
     
     

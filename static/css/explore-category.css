@@ -1,0 +1,104 @@
+h1{
+    text-align: center;
+    font-weight: 500;
+    padding:2em 0;
+    color:#FFF;
+    margin-bottom: 1em;
+    box-shadow: 1px 1px 5px #000;
+}
+h2{
+    text-align: right;
+    font-weight: 500;
+    margin-bottom: 1em;
+    
+}
+.publicaciones{
+    width:70%;
+    margin: auto;
+}
+.publicacion{
+	display: grid;
+	grid-template-columns: 65% 35%;
+	transition:.5s;
+	position:relative;
+	padding:1em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 100%;
+	margin: 0 auto;
+}
+.publicacion:hover{
+	background-color: #cdcecd;
+}
+
+
+.publicacion .titulo{
+	font-size: 1.3em;
+	display: block;
+	pointer-events: none;
+	font-weight: 500;
+}
+.bronce,.oro,.plata{
+	display: inline-block;
+	position: relative;
+	pointer-events: none;
+}
+.publicacion .creador{
+	font-size: .9em;
+	font-weight: 300;
+	display: inline-block;
+}
+.categoria{
+	grid-column: span 3;
+	margin-top:.5em;
+}
+.info-project{
+	grid-column:span 1;
+}
+
+.medallas{
+	justify-self: end;
+	grid-column: span 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cantidad{
+	position: absolute;
+	left:50%;
+	top:60%;
+	transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+	pointer-events: none;
+}
+
+.divEndPublic{
+	width:100%;
+	height:1px;
+	margin-top: 1em;
+	background-color:#000000;
+	grid-column: span 3;
+	opacity: .4;
+}
+
+.creador{
+	opacity:.7; 
+	transition: .5s;
+}
+
+.creador a:hover{
+	opacity:1;
+}
+.contenido{
+	width: 80%;
+	height:100%;
+	margin:0 auto;
+}
+.comentarios{
+	grid-column: span 3;
+	opacity: .7;	
+	margin-top:1em;
+	pointer-events: none;
+}

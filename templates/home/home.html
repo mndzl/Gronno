@@ -30,9 +30,13 @@
 
 		<main class="contenido">
 			{% block main_content %}
-        {% for message in messages %}
-            <div class="{{ message.tags }}">{{message}}</div>
-        {% endfor %}
+
+			{% for message in messages %}
+				{% if forloop.first %}
+					<div class="{{ message.tags }}">{{message}}</div>
+				{% endif %}
+			{% endfor %}
+
 			<h1 class="tituloNav">Nuevos proyectos</h1>
 			{% if projects %}
 				{% for project, comment, medal in projects %}
@@ -46,7 +50,7 @@
 							<a href="#" style="color:{{ project.category.color }}">{{ project.category.name }}</a>
 						</div>
 
-						<div class="info">
+						<div class="info-project">
 							<h3 class="titulo">{{ project.title }}</a></h3>
 							<h4 class="creador">por <a href="{% url 'profile' project.author.username %}">{{ project.author.first_name }} {{project.author.last_name}}</a></h4>
 							<h3 class="description">{{ project.description }}</h3>

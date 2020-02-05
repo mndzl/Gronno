@@ -19,7 +19,7 @@ li{
 }
 body{
     font-family: 'Montserrat',sans-serif;
-    background-color: #DDDDDD;
+    background-color: #FFF;
     padding-bottom:10em;
 }
 @media screen and (max-width: 680px){
@@ -39,27 +39,21 @@ body{
     #leftNavItems{
         grid-template-columns: 3em 5px 3em !important;
         align-items:center;
-    }
-    #userData img, #logo, #logo img, #mainPhoto{
-        width:2.5em !important;
-        height:2.5em !important;
-    }
-    #userData span{
-        display:none !important;
-    }
-}
-@media screen and (max-width: 460px){
-    footer .container .siteData{
-        grid-template-columns: 3em 1fr 1px 1fr !important;
         font-size: .8em;
     }
-    footer .container .siteData{
-        grid-row: span 2;
+    nav{
+        padding:0 1em !important;
     }
+
+}
+@media screen and (max-width: 460px){
     .logout{
         margin-left: 0 !important;
     }
-}
+    .siteData{
+        font-size: .8em;
+    }
+}  
 
 /* NAVBAR */
 #addProject{
@@ -91,7 +85,6 @@ body{
     align-self: center;
     justify-self:start;
     height:3em;
-    width:3em;
 }
 #leftNavSide{
     justify-self: start;
@@ -112,9 +105,9 @@ body{
     position: relative;
 }
 #rightNavItems{
-    display: grid;
+    display: flex;
+    justify-content: end;
     align-items: center;
-    grid-template-columns:12em 1em 12em;
 }
 
 header{
@@ -142,7 +135,7 @@ nav{
 }
 #divMessageSearch{
     height:2em;
-    justify-self: center;
+    margin:0 1em;
 }
 #mainPhoto{
     justify-self:center;
@@ -196,6 +189,16 @@ nav{
 #projectReady a:hover{
     opacity: 1;
 }
+#search a{
+    color:#FFF;
+    font-size: .8em;
+    font-weight: 700;
+    opacity:.7;
+    transition: .5s;
+}
+#search a:hover{
+    opacity: 1;
+}
 
 /* Footer */
 footer{
@@ -218,7 +221,7 @@ footer .siteData>img{
 }
 footer .siteData{
     display:grid;
-    grid-template-columns:4em 1px 1fr;
+    grid-template-columns:8em 1px 10em;
     align-items: center;
     justify-content: center;
 }
@@ -233,9 +236,6 @@ footer li{
     color:#FFF;
     font-size: .8em;
     margin:.5em;
-}
-footer ul{
-    margin-left: 1em;
 }
 footer .divisor{
     height: 70%;
@@ -316,15 +316,16 @@ footer .divisor{
     border-radius: 10px;
     padding:1em;
     width:100%;
+    box-sizing: border-box;
     background-color:#128f09;
     color:#FFF;
 }
-.projects > .info{
+.info{
     margin:1em 0;
     border-radius: 10px;
     padding:1em;
     width:100%;
+    box-sizing: border-box;
     background-color:#004c79;
     color:#FFF;
-    
 }

@@ -13,7 +13,7 @@ from PIL import ImageFile
 from django.core.mail import EmailMessage
 
 
-class ProjectDetailView(LoginRequiredMixin, DetailView):
+class ProjectDetailView( LoginRequiredMixin, DetailView):
     model = Project
     object_list = None
     object = None
@@ -87,13 +87,14 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
     
 
-class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class ProjectUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
     form_class = CreateProject
     template_name_suffix = '_update_form'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        messages.add_message(self.request, messages.SUCCESS, 'Se ha actualizado tu proyecto')
         return super().form_valid(form)
 
     def test_func(self):
@@ -106,15 +107,21 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
     model = Project
     success_url = '/'
-    success_message = "Tu proyecto se ha eliminado."
 
     def test_func(self):
         project = self.get_object()
         if project.author == self.request.user:
             return True
+        return False
+
+    def post(self, request, *args, **kwargs):
+        project = self.get_object()
+        print(project.author.gronner.points)
         project.author.gronner.points -= 500
         project.author.gronner.save()
-        return False
+        print(project.author.gronner.points)
+        messages.add_message(self.request, messages.INFO, 'Se ha eliminado tu proyecto')
+        return super().post(self, request, *args, **kwargs)
 
 def suspend(project, reason):
     project.is_active = False
@@ -122,7 +129,11 @@ def suspend(project, reason):
     email = EmailMessage(
         'Proyecto eliminado',
         f"""Lo sentimos, tu proyecto {project.title} ha sido eliminado debido a que 
-            la comunidad lo ha reportado por la siguiente razon: {reason}.""",
+            la comunidad lo ha reportado por la siguiente razon: {reason}.
+            
+            Cualquier inconveniente puede responder este correo y lo ayudaremos a la brevedad.
+            
+            Gronno Developers""",
         to=[project.author.email]
     )
     email.send()

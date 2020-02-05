@@ -12,16 +12,16 @@ label{
 }
 form{
     margin-bottom: 10em;
+    margin-left: 10em;
 }
-br{
-    display: none;
-}
+
 .heading{
     display: flex;
     justify-content: space-between;
     padding:1em 2em;
     background: #752d01;
     align-items: center;
+    box-shadow: 1px 1px 5px #000;
     color:#FFF;
     margin-bottom: 2em;
 }

@@ -35,9 +35,9 @@ class homepage(LoginRequiredMixin, ListView):
         medals = [{}] * len(self.object_list)
         for i in range(len(self.object_list)):
             medals[i] = {
-                'gold':self.object_list[i].award_set.filter(medal__medal_type='Gold').count(),
-                'silver':self.object_list[i].award_set.filter(medal__medal_type='Silver').count(),
-                'bronze':self.object_list[i].award_set.filter(medal__medal_type='Bronze').count()
+                'gold':len(self.object_list[i].award_set.filter(medal__medal_type='Gold')),
+                'silver':len(self.object_list[i].award_set.filter(medal__medal_type='Silver')),
+                'bronze':len(self.object_list[i].award_set.filter(medal__medal_type='Bronze'))
             }
 
         # Tendencia

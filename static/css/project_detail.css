@@ -215,6 +215,8 @@
     }
     .comment .comment_content{
         white-space: pre-line;
+        padding-left:1em;
+        padding-top: 1em;
     }
     .comment .icon-bin{
         position: absolute;

@@ -22,7 +22,7 @@
                 <hr>
                 {% if projects %}
                     {% for project in projects %}
-                        <div class="project">
+                        <div class="project" id="project2">
                             <div class="category-project" style="color:{{project.category.color}}">
                                 <span class="icon-price-tag"></span>
                                 <div class="category-name">{{ project.category.name }}</div>
@@ -82,13 +82,12 @@
                     </div>
                 {% endfor %}
             </div>
-
             <div class="project-followed">
                 <div class='project-followed-title'>Proyectos de las categorias que sigues</div>
                 {% if trending.projects %}
                     {% for project in trending.projects %}
-                        <div class="project">
-                            <div class="category-project" style="color:{{project.category.color}}">
+                        <div class="project" id="project2">
+                            <div class="category-project" id="category-project" style="color:{{project.category.color}}">
                                 <span class="icon-price-tag"></span>
                                 <div class="category-name">{{ project.category.name }}</div>
                             </div>
