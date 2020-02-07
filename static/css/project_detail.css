@@ -111,7 +111,6 @@
             font-weight: 300;
         }
         .oro, .plata, .bronce{
-            opacity: .5;
             pointer-events: auto !important;
             transition: .2s;
         }
@@ -122,7 +121,7 @@
             opacity: 1;
         }
         .bronce:hover{
-            opacity: 1;
+            opacity: 1 !important;
         }
 
 /* Comment */

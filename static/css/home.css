@@ -90,6 +90,16 @@ a{
 	text-align: center;
 	font-weight: normal;
 }
+.right h4{
+	text-align: left !important;
+	opacity: 1 !important;
+	font-weight: 500 !important;
+}
+.right small{
+	text-align: center !important;
+	display: block;
+	opacity: .7;
+}
 .trending_title{
 	padding-bottom:1em;
 	border-bottom: 1px solid #acacac;
@@ -246,6 +256,9 @@ main .tituloNav{
 	width: 80%;
 	height:100%;
 	margin:0 auto;
+}
+.description{
+	white-space: pre-line;
 }
 .comentarios{
 	grid-column: span 3;

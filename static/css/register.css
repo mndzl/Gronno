@@ -1,0 +1,39 @@
+.main-container{
+    height:100%;
+    padding-bottom: 5em;
+}
+.help-block{
+    font-size: .8em;
+    opacity: .7;
+}
+.help-block strong{
+    color:#ff8800;
+}
+#id_password1, #id_password2{
+    margin-bottom: 0 !important;
+}
+.title{
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+.conditions-checkbox{
+    display: inline !important;
+    width:1em;
+    margin:0 !important;
+    margin-right: .5em !important;
+}
+.conditions-label a{
+    display: inline;
+}
+.conditions-label{
+    margin:0;
+}
+.conditions-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:2em 0;
+}
+small{
+    text-align: center;
+}

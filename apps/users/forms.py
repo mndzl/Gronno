@@ -7,15 +7,16 @@ from django_countries.fields import CountryField
 class GronnerRegisterForm(UserCreationForm):
     email = forms.EmailField(error_messages={'unique': 'Este correo ya está asociado a una cuenta.'})
     username = forms.CharField(label='Nombre de usuario', error_messages={'unique': 'Ya existe un usuario con este nombre.'})
-    first_name = forms.CharField(max_length=50, label='Nombres')
-    last_name = forms.CharField(max_length=50, label='Apellidos')
-    dedication = forms.ModelChoiceField(Dedication.objects.all(), label='Dedicación',empty_label="Selecciona una dedicación")
+    first_name = forms.CharField(max_length=50, label='Nombre')
+    last_name = forms.CharField(max_length=50, label='Apellido')
+    dedication = forms.ModelChoiceField(Dedication.objects.all(), label='¿A qué te dedicas?',empty_label="Selecciona una dedicación")
     country = CountryField(blank_label='Selecciona un país').formfield(label='Nacionalidad')
-    birth = forms.DateField(label='Fecha de nacimiento', widget=forms.DateInput(attrs={'placeholder':'dd/mm/aaa'}))
+    birth = forms.DateField(label='Fecha de nacimiento', widget=forms.DateInput(attrs={'placeholder':'dd/mm/aaaa'}))
+
 
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','email','country','birth','dedication','password1','password2']
+        fields = ['first_name','last_name','username','password1','password2','email','country','birth','dedication']
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:

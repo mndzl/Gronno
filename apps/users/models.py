@@ -29,7 +29,7 @@ class Gronner(models.Model):
     instagram = models.CharField(max_length=50, default='', blank=True)
     linkedin = models.CharField(max_length=50, default='', blank=True)
     twitter = models.CharField(max_length=50, default='', blank=True)
-    shows_email = models.BooleanField(default=True)
+    shows_email = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         super().save()

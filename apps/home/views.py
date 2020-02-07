@@ -2,6 +2,7 @@ from django.shortcuts import render
 from apps.project.models import Project, Comment
 from apps.users.models import Gronner, Follow
 from django.contrib.auth.models import User
+from datetime import timedelta, datetime
 import math
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
@@ -16,7 +17,7 @@ class homepage(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         following = Follow.objects.filter(follower=user).values('following')
-        return Project.objects.filter(author__in=following, is_active=True).order_by('-date_posted') | user.project_set.filter(is_active=True).order_by('-date_posted')
+        return Project.objects.filter(author__in=following, is_active=True).order_by('-points') | Project.objects.filter(category__in = user.gronner.categories_followed.all()).order_by('-points') | user.project_set.filter(is_active=True).order_by('-date_posted')
 
 
     def get_context_data(self, **kwargs):

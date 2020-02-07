@@ -29,6 +29,10 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
         context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
         context["personal_projects"] = self.request.user.project_set.filter(is_active=True).order_by('-date_posted')
         context["top_users"] = User.objects.all().order_by('-gronner__points')[:3]
+        context['golded'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Gold")))
+        context['silvered'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Silver")))
+        context['bronzed'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Bronze")))
+        
         return context
 
     def post(self, request, pk):
@@ -78,14 +82,13 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Project
     form_class = CreateProject
     success_message = "Tu proyecto se ha subido correctamente"
-    ImageFile.LOAD_TRUNCATED_IMAGES = True
-
+    success_url = "/home/"
+    
     def form_valid(self, form):
         form.instance.author = self.request.user
         self.request.user.gronner.points += 500
         self.request.user.gronner.save()
         return super().form_valid(form)
-    
 
 class ProjectUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project

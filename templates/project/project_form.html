@@ -17,7 +17,6 @@
 
 	<form method="POST" enctype = "multipart/form-data">
 		{% csrf_token %}
-
 		<div class='heading_pub'>
 			<div class="project_category">
 				<span class="icon-price-tag"></span>
@@ -25,6 +24,7 @@
 			</div>
 			<div class="project_title">
 				{{ form.title }}
+				{{ form.title.errors }}
 			</div>
 			<div class="project_creator">
 				<p>Por {{ user.get_full_name }}</p>
@@ -33,6 +33,7 @@
 
 		<div class="project_content">
 			{{ form.description }}
+			{{ form.description.errors }}
 		</div>
 		<div class="images">
 			<h3>Imágenes sobre el proyecto</h3>

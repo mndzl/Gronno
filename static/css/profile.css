@@ -159,6 +159,10 @@
         position: relative;
         border:1px solid #acacac;
     }
+    .description{
+        white-space: pre-line;
+        word-break: break-all;
+    }
     .publicacion:hover{
         box-shadow:1px 1px 10px #000;
     }

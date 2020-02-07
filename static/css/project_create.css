@@ -89,3 +89,7 @@ button{
     color: #FFF;
     background-color: #703c00;
 }
+.errorlist li {
+    color:red;
+    margin-bottom: 1em;
+}

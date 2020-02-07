@@ -19,7 +19,7 @@ class Category(models.Model):
         return reverse("category_explore", kwargs={"category": self.diminutive})
 
 class Project(models.Model):
-    title = models.CharField(max_length=30, unique=True)
+    title = models.CharField(max_length=40, unique=True)
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

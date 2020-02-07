@@ -1,23 +1,64 @@
 {% load crispy_forms_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+	<link rel="stylesheet" href="{% block css %}{% endblock %}">
+	
 	<title>Gronno</title>
 </head>
 <body>
-	
-	<form method="POST">
-		{% csrf_token %}
-		
-		{{ form|crispy}}
+	<div class="heading">
+        <div class="top-head">
+            <a href='/'><img src="{% static 'img/GLogo2.png' %}"></a>
+        </div>
+	</div>
 
-		<button type="submit">Ingresar</button>
-	</form>
-	<small class="text-muted ml-2"><a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a></small>
-	<a href="{% url 'register' %}">Registrarse</a>
+	<main>
+		<div class="main-container">
+			<div class="background"></div>
+			<h1 class='title'>{% block title %}Iniciar sesión{% endblock title %}</h1>
+			<div class="form-container">
+				{% if form.errors %}
+					<small class='help-text'>Revisa los errores en el formulario.</small>
+				{% endif %}
+				<form method="POST">
+				{% block form %}
+					{% csrf_token %}
+					
+					{{ form.username.label }}
+					{{ form.username }}
+					{{ form.password.label }}
+					{{ form.password }}
+					<small class="text-muted"><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></small>
+
+					<button type="submit">Ingresar</button>
+				{% endblock form %}
+				</form>
+				
+				<small class='text-muted'>{% block have_account %}<a class="register" href="{% url 'register' %}">Crear una cuenta</a>{% endblock have_account%}<small>
+			</div>
+		</div>
+	</main>
+    <footer>
+        <div class="container">
+            <div class="siteData">
+                <img src="{% static 'img/GRONNOLOGO2.png' %}" alt="logo">
+        
+                <div class="divisor"></div>
+                <ul class="links">
+                    <li><a href="#">Acerca de</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Condiciones de uso</a><li>   
+                </ul>
+
+            </div>
+        </div>
+    </footer>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

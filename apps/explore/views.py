@@ -25,7 +25,8 @@ def Explore(request):
         users = User.objects.filter(
             Q(username__icontains = query) |
             Q(first_name__icontains = query) |
-            Q(last_name__icontains = query)
+            Q(last_name__icontains = query) |
+            Q(dedication__icontains = query)
         ).order_by('-gronner__points').distinct()
 
         categories = Category.objects.filter(

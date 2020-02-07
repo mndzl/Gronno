@@ -103,9 +103,9 @@
 						<div class="top_project">
 							<a href="{% url 'project_detail' project.id %}" class="link"></a>
 							<span style = "color:{{ project.category.color }}" class = "icon-price-tag"></span>
-							<h3 style = "color:{{ project.category.color }}" class="top_project_category">{{ project.category }}</h3>
-							<h3>{{ project.title }}</h3>
-							<h4>{{ project.points }} puntos</h4>
+							<h5 style = "color:{{ project.category.color }}" class="top_project_category">{{ project.category }}</h4>
+							<h4>{{ project.title }}</h4>
+							<small>{{ project.points }} puntos</small>
 						</div>
 					{% endfor %}
 				</div>

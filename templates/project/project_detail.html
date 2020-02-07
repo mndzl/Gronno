@@ -59,15 +59,15 @@
 
         <div class="medallas">
             <div class="medal-container">
-                <div class="bronce">
+                <div class="bronce" style='opacity:{{ bronzed|yesno:"1,.5" }}'>
                     <a href="{% url 'give_medal' project.id 'Bronze'  %}"><img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce"></a>
                 </div>
 
-                <div class="plata">
+                <div class="plata" style='opacity:{{ silvered|yesno:"1,.5" }}'>
                     <a href="{% url 'give_medal' project.id 'Silver'  %}"><img src="{% static 'img/plata.png' %}" alt="Medallas de plata"></a>
                 </div>
 
-                <div class="oro">
+                <div class="oro" style='opacity:{{ golded|yesno:"1,.5" }}'>
                     <a href="{% url 'give_medal' project.id 'Gold'  %}"><img src="{% static 'img/oro.png' %}" alt="Medallas de oro"></a>
                 </div>
             </div>
