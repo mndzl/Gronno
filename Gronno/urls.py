@@ -22,6 +22,7 @@ from apps.home import views as home_views
 from django.contrib.auth import views as auth_views
 from apps.users.views import Profile, ProfileUpdateView, FollowView, FollowCategoryView
 from apps.explore.views import CategoryExplore, Explore
+from apps.about.views import privacy, about, conditions
 from apps.project.views import (
     ProjectDetailView, 
     ProjectCreateView, 
@@ -61,6 +62,9 @@ urlpatterns = [
     path('explore/', Explore, name='explore'),
 
     path('admin/', admin.site.urls),
+
+    path('privacidad/', privacy, name='privacy'),
+    path('acerca/', about, name='about'),
 
     path('', include('apps.index.urls'))
 ]

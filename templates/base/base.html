@@ -52,7 +52,7 @@
 			
 			<div id="rightNavSide">
 				<div id="rightNavItems">
-					<div id="projectReady"><a href="{% url 'project_create' %}">¡Mi proyecto está listo!</a></div>
+					<div id="projectReady"><a href="{% url 'project_create' %}">Subir nuevo proyecto</a></div>
 					<div id="divMessageSearch"></div>
 					<div id="search">
 						<a href='{% url 'explore' %}'>Explorar</span>
@@ -83,8 +83,7 @@
                 <div class="divisor"></div>
                 <ul class="links">
                     <li><a href="#">Acerca de</a></li>
-                    <li><a href="#">Política de privacidad</a></li>
-                    <li><a href="#">Condiciones de uso</a><li>   
+                    <li><a href="{% url 'privacy' %}">Términos y condiciones</a></li>
                 </ul>
 
             </div>

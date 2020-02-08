@@ -10,7 +10,7 @@ def Explore(request):
     users = None
     categories = None
     trending = {
-        'projects':Project.objects.filter(is_active = True, category__in = request.user.gronner.categories_followed.all())[:20],
+        'projects':Project.objects.filter(is_active = True, category__in = request.user.gronner.categories_followed.all()).order_by('-points')[:20],
         'categories':Category.objects.all()
     }
 
@@ -25,8 +25,7 @@ def Explore(request):
         users = User.objects.filter(
             Q(username__icontains = query) |
             Q(first_name__icontains = query) |
-            Q(last_name__icontains = query) |
-            Q(dedication__icontains = query)
+            Q(last_name__icontains = query)
         ).order_by('-gronner__points').distinct()
 
         categories = Category.objects.filter(
@@ -77,6 +76,7 @@ class CategoryExplore(ListView):
 
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
+        context["followed"] = context["category"] in user.gronner.categories_followed.all()
         
         return context
     

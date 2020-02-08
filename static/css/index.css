@@ -134,7 +134,7 @@ a{
 }
 .subhead-message{
     color:white;
-    font-weight: 300;
+    font-weight: 700;
     font-size: 1.2em;
 }
 .subhead-register{
@@ -191,7 +191,7 @@ a{
     padding-left: 2em;
 }
 .section img{
-    height:20rem;
+    height:16rem;
     border-radius: 10px;
 }
 .section p{
@@ -262,6 +262,7 @@ footer li{
     color:#FFF;
     font-size: .8em;
     margin:.5em;
+    width:100%;
 }
 footer .divisor{
     height: 70%;

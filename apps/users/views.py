@@ -11,7 +11,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, UpdateView, RedirectView
 from .forms import GronnerRegisterForm
 from django.contrib import messages
-from django.core.mail import EmailMessage
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 # Create your views here.
 
 class Profile(LoginRequiredMixin, ListView):
@@ -104,12 +106,15 @@ def register(request):
             birth = form.cleaned_data.get('birth')
             newuser = User.objects.filter(username=username).first()
             Gronner.objects.create(user=newuser, dedication=dedication, country=country, birth = birth)
-            email = EmailMessage(
-                '¡Bienvenido/a a Gronno!',
-                'This is email content',
-                to=[newuser.email]
-            )
-            email.send()
+
+            subject = '¡Bienvenido/a a Gronno!'
+            html_message = render_to_string('users/emailtemplate.html', {'name': newuser.first_name})
+            plain_message = strip_tags(html_message)
+            from_email = 'gronnodevs@gmail.com'
+            to = newuser.email
+
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
             return redirect('login')
     else:
         form = GronnerRegisterForm()
@@ -169,10 +174,10 @@ class FollowCategoryView(LoginRequiredMixin, RedirectView):
 
         if category in user.gronner.categories_followed.all():
             user.gronner.categories_followed.remove(category)
-            messages.add_message(self.request, messages.INFO, f'Ya no sigues a la categoría {category.name}')
+            messages.add_message(self.request, messages.INFO, f'Ya no sigues a esta categoría')
         else:
             user.gronner.categories_followed.add(category)
-            messages.add_message(self.request, messages.SUCCESS, f'Ahora sigues a la categoría {category.name}')
+            messages.add_message(self.request, messages.SUCCESS, f'Ahora sigues a esta categoría')
 
         return url_
 

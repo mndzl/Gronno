@@ -1,3 +1,10 @@
 from django.shortcuts import render
 
-# Create your views here.
+def privacy(request):
+    return render(request, 'about/privacy.html')
+
+def conditions(request):
+    return render(request, 'about/conditions.html')
+
+def about(request):
+    return render(request, 'about/about.html')

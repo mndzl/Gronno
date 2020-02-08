@@ -11,10 +11,10 @@
 	{{ form|crispy }}
 	<div class="conditions-container">
 		<input name='conditions' type="checkbox" class='conditions-checkbox' required>
-		<label for="conditions" class='conditions-label'>He leído y acepto las <a href='#'>condiciones de uso</a> y la <a href='#'>política de privacidad</a></label>
+		<label for="conditions" class='conditions-label'>He leído y acepto los <a href='{% url 'privacy' %}'>términos y condiciones</a></label>
 	</div>
 
 	<button type="submit">Registrarme</button>
 	
 {% endblock form %}
-{% block have_account %}<a href="{% url 'login' %}">Ya tengo una cuenta</a>{% endblock have_account %}
+{% block have_account %}<a href="{% url 'login' %}" class="login">Ya tengo una cuenta</a>{% endblock have_account %}

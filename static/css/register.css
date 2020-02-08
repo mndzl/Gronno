@@ -14,16 +14,19 @@
 }
 .title{
     margin-top: 2em;
+    z-index: 0;
     margin-bottom: 1em;
 }
 .conditions-checkbox{
     display: inline !important;
-    width:1em;
+    width:1em !important;
     margin:0 !important;
     margin-right: .5em !important;
 }
 .conditions-label a{
     display: inline;
+    color:#ff8800;
+    text-decoration: underline !important;
 }
 .conditions-label{
     margin:0;
@@ -36,4 +39,8 @@
 }
 small{
     text-align: center;
+    color:#ff8800 !important;
+}
+.login{
+    color:#ff8800;
 }

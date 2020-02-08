@@ -175,7 +175,6 @@ nav{
 
 #projectReady{
     justify-self:end; 
-    width:11em;
     font-size:80%;
     font-weight: bold;
 }
@@ -236,6 +235,7 @@ footer li{
     color:#FFF;
     font-size: .8em;
     margin:.5em;
+    width:100%;
 }
 footer .divisor{
     height: 70%;

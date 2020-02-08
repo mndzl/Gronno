@@ -12,6 +12,7 @@
         width:100%;
         justify-content: space-between;
         padding-top: 1em;
+        position: relative;
     }
     .publication_heading .category-div{
         margin-top:1em;
@@ -64,13 +65,37 @@
         .publication_control .icon-flag:hover{
             opacity:1;
         }
+        #report-select{
+            position: absolute;
+            display: none;
+            background-color: #FFF;
+            z-index: 1;
+            right:0;
+            overflow: hidden;
+            box-shadow: 1px 1px 5px #000;
+        }
+        .report-list li{
+            padding:.5em;
+            width: 100%;
+        }
+        .report-element{
+            position: relative;
+        }
+        .report-list li:hover{
+            background-color: rgb(201, 201, 201);
+        }
+        #report-select .icon{
+            margin-right:.5em;  
+        }
+        .open{
+            display: block !important;
+        }
 /* Content */
 
     .pub-content{
         width:100%;
         white-space: pre-line;
         word-break: break-all;
-        position: relative;
     }
 
     /* Images */

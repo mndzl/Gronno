@@ -119,10 +119,8 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
 
     def post(self, request, *args, **kwargs):
         project = self.get_object()
-        print(project.author.gronner.points)
         project.author.gronner.points -= 500
         project.author.gronner.save()
-        print(project.author.gronner.points)
         messages.add_message(self.request, messages.INFO, 'Se ha eliminado tu proyecto')
         return super().post(self, request, *args, **kwargs)
 
@@ -151,7 +149,7 @@ class ReportProject(LoginRequiredMixin, RedirectView):
         reason = self.kwargs.get('reason')
         user = self.request.user
         obj = get_object_or_404(Project, id=post_id)
-        reports_user = len(Report.objects.filter(user=user, project=obj))
+        reports_user = len(Report.objects.filter(user=user, project=obj, reason = self.reasons[reason]))
         reports_project_reason = len(obj.report_set.filter(reason = self.reasons[reason]))
         reported = bool(reports_user)
 
@@ -160,8 +158,11 @@ class ReportProject(LoginRequiredMixin, RedirectView):
             messages.add_message(self.request, messages.INFO, 'Tu reporte ha sido tomado, gracias por contribuir a la comunidad.')        
             if reports_project_reason >= 10:
                 suspend(project=obj, reason=self.reasons[reason])
+        else:
+            messages.add_message(self.request, messages.INFO, 'Ya has reportado a este proyecto anteriormente por la misma razón.')        
 
-        return reverse('homepage')
+
+        return obj.get_absolute_url()
 
 class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, RedirectView):
     def test_func(self):

@@ -30,7 +30,16 @@
                     <a href="{% url 'project_update' object.id %}"><span class="icon-pencil"></span></a>
                     <a href="{% url 'project_delete' object.id %}"><span class="icon-bin"></span></a>
                 {% else %}
-                    <a href="{% url 'project_delete' object.id %}"><span class="icon-flag"></span></a>
+                    <div class='report'>
+                        <a href="#" id='report'><span class="icon-flag"></span></a>
+                        <div id='report-select'>
+                            <ul class='report-list'>
+                                <li class="report-element"><span class='icon icon-tag-cancel'></span><a class="link" href="{% url 'report' project.id 0 %}"></a>El proyecto no es de la categoría indicada</li>
+                                <li class="report-element"><span class='icon icon-wondering2'></span><a class="link" href="{% url 'report' project.id 1 %}"></a>Uso inapropiado del lenguaje</li>
+                                <li class="report-element"><span class='icon icon-question'></span><a class="link" href="{% url 'report' project.id 2 %}"></a>  No es un proyecto</li>
+                            </ul>
+                        </div>
+                    </div>        
                 {% endif %}
             </div>
 
@@ -120,7 +129,16 @@
     {% else %}
         <h1>Proyecto Eliminado<h1>
     {% endif %}
+
 {% block js %}
+    <script type="text/javascript">
+        flag = document.getElementById('report')
+        reportSelections = document.getElementById('report-select')
+        flag.onclick = function report(){
+            reportSelections.classList.toggle('open');
+        }
+
+    </script>
 
 {% endblock js %}
 

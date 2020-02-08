@@ -38,6 +38,7 @@ a{
     background-size: cover;
     height:100vh;
     flex-direction: column;
+    padding-top: 2em !important;
 }
 .background{
     background-image: url('../img/coding1mod.jpg');
@@ -55,6 +56,9 @@ a{
 .title{
     z-index: 1;
     margin:1em;
+    font-weight: 500;
+    color:#FFF;
+    text-shadow: 1px 1px rgb(131, 131, 131);
 }
 .form-container{
     padding:3em;
@@ -69,7 +73,9 @@ a{
 .form-container a, .form-container small, label, input{
     display: block;
 }
-
+.form-container input, select{
+    width:100%;
+}
 button{
     margin: auto;
     width: 100%;
@@ -92,9 +98,11 @@ label{
 .links li{
     text-align: left !important;
 }
+
 small a{
-    color:#fff !important;
+    color:#fff;
     margin-bottom: 1em;
+    font-size: .9em;
 }
 .register{
     color:#ff8800 !important;
@@ -103,50 +111,4 @@ small a{
 .form-container>small{
     color:#ff8000;
     font-weight: 700;
-}
-footer{
-    max-height: 5em;
-    width: 100%;
-    transition: .5s;
-    position: absolute;
-    bottom: 0;
-}
-footer .container{
-    background-color:#4b1d00;
-    padding: .5em 0;
-    display: flex;
-    max-width: 100%;
-    justify-content: center;
-    align-items:center;
-}
-footer .siteData>img{
-    width:8em;
-    justify-self: end;
-    margin-right: .5em;
-}
-footer .siteData{
-    display:grid;
-    grid-template-columns:8em 1px 10em;
-    align-items: center;
-    justify-content: center;
-}
-footer a{
-    opacity: .8;
-    color: #FFF !important;
-    transition:.5s;
-    width:100%;
-}
-footer a:hover{
-    opacity: 1;
-    color:#FFF;
-}
-footer li{
-    color:#FFF;
-    margin:.5em;
-}
-footer .divisor{
-    height: 70%;
-    width:1px;
-    background-color: #FFF;
-    opacity:.5;
 }

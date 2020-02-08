@@ -8,17 +8,25 @@
         <h1>
             <span class="icon-price-tag"></span>
             {{ category.name }}
+            {% if not followed %}
+                <a title='Seguir categoría' href="{% url 'follow_category' category.diminutive %}"><span class='icon-plus'></span></a>
+            {% else %}
+                <a title='Dejar de seguir categoría' href="{% url 'follow_category' category.diminutive %}"><span class='icon-tag-cancel'></span></a>
+            {% endif %}
         </h1>    
     </div>
 
     <div class='publicaciones'>
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{message}}</div>
+        {% endfor %}
 
         <h2>Proyectos destacados</h2>
+
         {% if projects %}
             {% for project, comment, medal in projects %}
                 <div class="publicacion">
                 <div class="postedAt"><span class="icon-calendar"></span><span class="numeroComments">{{ project.get_date }}</span></div>
-
                 <a href="{% url 'project_detail' project.id %}" class='link'></a>
 
                     <div class="categoria">
@@ -60,6 +68,9 @@
                     <div class="divEndPublic"></div>
                 </div>
             {% endfor %}
+        {% else %}
+
+            <div class="noContent">Por ahora no hay proyectos de esta categoría</div>
 
         {% endif %}
 
