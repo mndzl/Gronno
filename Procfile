@@ -1,1 +1,1 @@
-web: gunicorn gronno.wsgi --log-file -
+web: gunicorn gronno.wsgi
