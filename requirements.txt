@@ -1,3 +1,4 @@
+alembic==1.4.0
 apturl==0.5.2
 asgiref==3.2.3
 asn1crypto==0.24.0
@@ -86,6 +87,7 @@ pyRFC3339==1.1
 python-apt===1.8.5-ubuntu0.3
 python-dateutil==2.7.3
 python-debian==0.1.34
+python-editor==1.0.4
 pytz==2018.9
 pyxdg==0.25
 PyYAML==3.13
