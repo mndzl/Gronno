@@ -1,5 +1,4 @@
 alembic==1.4.0
-apturl==0.5.2
 asgiref==3.2.3
 asn1crypto==0.24.0
 astroid==2.3.3
