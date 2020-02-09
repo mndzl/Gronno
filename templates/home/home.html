@@ -26,7 +26,6 @@
 			{% endif %}
 
 		</aside>
-	
 
 		<main class="contenido">
 			{% block main_content %}
@@ -83,13 +82,12 @@
 
 						<div class="divEndPublic"></div>
 					</div>
+				{% empty %}
+					<div class="noContent">
+						<h3 style='font-weight:500'>Al parecer no sigues a categorías o Gronners, <br><a href="{% url 'explore' %}">explora ahora</a></h3>
+					</div>
 				{% endfor %}
-
 			{% endif %}
-
-			<div class="noContent">
-				<h3><a href="{% url 'explore' %}">Explorar más</a></h3>
-			</div>
 
 			{% endblock main_content %}
 		</main>

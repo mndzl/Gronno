@@ -3,6 +3,22 @@
         display: block !important;
         margin: 0 2em !important;
     }
+    .project-followed-title{
+        margin-top: 2em;
+        font-size: 1.2em !important;
+    }
+    .project-name{
+        font-weight: 300;
+        font-size: 1em !important;
+    }
+    .results{
+        margin: 0 1em !important;
+    }
+    .head h1{
+        font-size: 1.2em;
+        max-width: 90%;
+        margin: auto;
+    }
 }
 
 body{
@@ -102,7 +118,7 @@ form{
     font-size: 1.2em;
 }
 .project-name{
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin:0 !important;
 }
 .project-author{

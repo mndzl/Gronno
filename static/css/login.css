@@ -55,10 +55,10 @@ a{
 }
 .title{
     z-index: 1;
-    margin:1em;
+    margin:1em 0;
     font-weight: 500;
-    color:#FFF;
-    text-shadow: 1px 1px rgb(131, 131, 131);
+    color:#ff8800;
+    text-shadow: 1px 1px rgb(112, 112, 112);
 }
 .form-container{
     padding:3em;

@@ -26,7 +26,12 @@
 			<div id="leftNavSide">
 				<div id="leftNavItems">
 					<div id="logo">
-						<a href="{% url 'homepage' %}" class="link"></a>
+						{% if user.is_authenticated %}
+							<a href="{% url 'homepage' %}" class="link"></a>
+						{% else %}
+							<a href="{% url 'index' %}" class="link"></a>
+						{% endif %}
+
 						<img src="{% static 'img/GLogo2.png' %}" alt="logo">
 					</div>
 
@@ -50,24 +55,25 @@
 
 			</div>
 			
-			<div id="rightNavSide">
-				<div id="rightNavItems">
-					<div id="projectReady"><a href="{% url 'project_create' %}">Subir nuevo proyecto</a></div>
-					<div id="divMessageSearch"></div>
-					<div id="search">
-						<a href='{% url 'explore' %}'>Explorar</span>
-					</div>
-					<div id="searchMobile">
-						<a href="{% url 'explore' %}" class="link"></a>
-						<span class="icon-search"></span>
-					</div>
-					<div id="addProject">
-						<a href="{% url 'project_create' %}" class="link"></a>
-						<span class="icon-plus"></span>
+			{% if user.is_authenticated %}
+				<div id="rightNavSide">
+					<div id="rightNavItems">
+						<div id="projectReady"><a href="{% url 'project_create' %}">Subir nuevo proyecto</a></div>
+						<div id="divMessageSearch"></div>
+						<div id="search">
+							<a href='{% url 'explore' %}'>Explorar</span>
+						</div>
+						<div id="searchMobile">
+							<a href="{% url 'explore' %}" class="link"></a>
+							<span class="icon-search"></span>
+						</div>
+						<div id="addProject">
+							<a href="{% url 'project_create' %}" class="link"></a>
+							<span class="icon-plus"></span>
+						</div>
 					</div>
 				</div>
-			</div>
-			
+			{% endif %}
 			
         </nav>
     </header>
@@ -82,7 +88,7 @@
         
                 <div class="divisor"></div>
                 <ul class="links">
-                    <li><a href="#">Acerca de</a></li>
+                    <li><a href="{% url 'about' %}">Acerca de</a></li>
                     <li><a href="{% url 'privacy' %}">Términos y condiciones</a></li>
                 </ul>
 

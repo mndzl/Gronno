@@ -1,3 +1,16 @@
+@media screen and (max-width:1000px){
+    form{
+        margin-left: 1em !important;
+    }
+}
+@media screen and (max-width:540px){
+    .config-title{
+        font-size: 1.2em;
+    }
+    .config-back{
+        font-size: .8em !important;
+    }
+}
 body{
     background-color:#FFF;
 }
@@ -13,6 +26,8 @@ label{
 form{
     margin-bottom: 10em;
     margin-left: 10em;
+    max-width: 70%;
+    word-break: break-all;
 }
 
 .heading{
@@ -54,6 +69,7 @@ input{
     padding:1em;
     border: 1px solid #acacac;
     font-family: 'Montserrat', sans-serif;
+    max-width: 100%;
 }
 #id_dedication{
     margin-left: 1em;
@@ -112,7 +128,7 @@ label[for="id_image"]{
 button[type='submit']{
     margin-top: 2em;
     padding: 1em;
-    width: 30%;
+    width: 50%;
     color:white;
     border: none;
     border-radius: 10px;

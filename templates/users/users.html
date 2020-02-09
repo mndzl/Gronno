@@ -45,12 +45,11 @@
             </div>
         {% endif %}
     </div>
-
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{message}}</div>
+        {% endfor %}
     <div class="mainContainer">
         <div class="projects">
-            {% for message in messages %}
-                <div class="{{ message.tags }}">{{message}}</div>
-            {% endfor %}
             <h2>Subidos este último mes</h2>
             {% if projects %}
                 {% for project, medal in recents %}

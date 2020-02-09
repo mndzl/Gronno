@@ -1,6 +1,5 @@
 from django import forms
 from .models import Project, Category
-from django.forms import modelformset_factory
 
 class CreateProject(forms.ModelForm):
     category = forms.ModelChoiceField(Category.objects.all(), required=True, label='Categoría', empty_label="Selecciona una categoría")

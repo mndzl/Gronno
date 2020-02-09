@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap');
 
-@media screen and (max-width: 480){
+@media screen and (max-width: 480px){
     .heading_title{
-        font-size: 1em !important;
+        margin-top: 1em;
+        font-size: 1.2em !important;
     }
 }
 

@@ -76,7 +76,7 @@ class Project(models.Model):
         return reverse("project_detail", kwargs={"pk": self.pk})
 
     def save(self, *args, **kwargs):
-        super().save()      
+        super().save(*args, **kwargs)      
 
         img = [Image.open(self.image1.path), Image.open(self.image2.path), Image.open(self.image3.path)]
         file_format = [img[0].format, img[1].format, img[2].format]

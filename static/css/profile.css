@@ -79,6 +79,9 @@
         margin:auto;
         margin-bottom: 1em;
     }
+    #userImage{
+        background-color: #4b1d00;
+    }
     #subImageName{
         font-size: 2em;
         font-weight: bold;
