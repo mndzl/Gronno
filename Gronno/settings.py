@@ -169,6 +169,13 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY') 
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 S3_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+import boto3
+from botocore.client import Config
+
+# Get the service client with sigv4 configured
+s3 = boto3.client('s3', config=Config(signature_version='s3v4'))
+
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = 'us-east-2'
 
