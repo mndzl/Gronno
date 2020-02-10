@@ -75,7 +75,7 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse("project_detail", kwargs={"pk": self.pk})
 
-    def save(self, *args, **kwargs):
+ """    def save(self, *args, **kwargs):
         super().save(*args, **kwargs)      
 
         img = [Image.open(self.image1.path), Image.open(self.image2.path), Image.open(self.image3.path)]
@@ -104,7 +104,7 @@ class Project(models.Model):
 
         img[0].save(self.image1.path, file_format[0])
         img[1].save(self.image2.path, file_format[1])
-        img[2].save(self.image3.path, file_format[2])
+        img[2].save(self.image3.path, file_format[2]) """
 
 class Medal(models.Model):
     medal_type = models.CharField(max_length=6)

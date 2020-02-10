@@ -19,7 +19,7 @@ class Dedication(models.Model):
 class Gronner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     extract = models.TextField(default='', blank=True, null=True)
-    dedication = models.ForeignKey(Dedication, on_delete=models.CASCADE)
+    dedication = models.ForeignKey(Dedication, default='Estudiante', on_delete=models.SET_DEFAULT)
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     birth = models.DateField()
@@ -32,7 +32,7 @@ class Gronner(models.Model):
     shows_email = models.BooleanField(default=False)
     first_categories = models.BooleanField(default=0)
 
-    def save(self, *args, **kwargs):
+"""     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.image.path)
 
@@ -59,7 +59,7 @@ class Gronner(models.Model):
             output_size = (300,300)
             img.thumbnail(output_size)
 
-        img.save(self.image.path, file_format)
+        img.save(self.image.path, file_format) """
 
     def get_absolute_url(self):
         return reverse("profile", kwargs={"username": self.user.username})
