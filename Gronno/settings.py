@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django_cleanup',
     'widget_tweaks',
     'rest_framework',
-    'storages'
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
