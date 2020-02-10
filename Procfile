@@ -1,1 +1,1 @@
-web: gunicorn gronno.wsgi
+web: gunicorn Gronno.wsgi
