@@ -157,17 +157,20 @@ LOGIN_URL = 'login'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+from boto.s3.connection import S3Connection
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+s3 = S3Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER') 
 EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD') 
 
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID') 
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY') 
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
