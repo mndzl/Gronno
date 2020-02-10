@@ -17,8 +17,8 @@ class homepage(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         following = Follow.objects.filter(follower=user).values('following')
-        return Project.objects.filter(author__in=following, is_active=True).order_by('-points') | Project.objects.filter(category__in = user.gronner.categories_followed.all()).order_by('-points') | user.project_set.filter(is_active=True).order_by('-date_posted')
-
+        #return Project.objects.filter(author__in=following, is_active=True).order_by('-points') | Project.objects.filter(category__in = user.gronner.categories_followed.all()).order_by('-points') | user.project_set.filter(is_active=True).order_by('-date_posted')
+        return Project.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
