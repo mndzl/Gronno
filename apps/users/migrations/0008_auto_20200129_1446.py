@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AlterField(
-            model_name='gronner',
+            model_name='Gronner',
             name='dedication',
             field=models.ForeignKey(default='Gronner', on_delete=django.db.models.deletion.SET_DEFAULT, to='users.Dedication'),
         ),
