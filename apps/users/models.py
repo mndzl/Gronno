@@ -19,7 +19,7 @@ class Dedication(models.Model):
 class Gronner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     extract = models.TextField(default='', blank=True, null=True)
-    dedication = models.ForeignKey(Dedication, on_delete=models.CASCADE, blank=True, null=True)
+    dedication = models.ForeignKey(Dedication, on_delete=models.CASCADE)
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     birth = models.DateField()
