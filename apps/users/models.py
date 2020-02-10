@@ -32,7 +32,7 @@ class Gronner(models.Model):
     shows_email = models.BooleanField(default=False)
     first_categories = models.BooleanField(default=0)
 
-"""     def save(self, *args, **kwargs):
+    """ def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.image.path)
 

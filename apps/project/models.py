@@ -75,7 +75,7 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse("project_detail", kwargs={"pk": self.pk})
 
- """    def save(self, *args, **kwargs):
+    """    def save(self, *args, **kwargs):
         super().save(*args, **kwargs)      
 
         img = [Image.open(self.image1.path), Image.open(self.image2.path), Image.open(self.image3.path)]
