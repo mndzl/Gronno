@@ -20,7 +20,7 @@ class Gronner(models.Model):
     extract = models.TextField(default='', blank=True, null=True)
     dedication = models.CharField(default='Gronner', max_length=40)
     points = models.IntegerField(default=0)
-    image = models.ImageField(default='https://gronno-aws-files.s3.us-east-2.amazonaws.com/default.jpg', storage=storage)
+    image = models.ImageField(default='https://gronno-media.s3.amazonaws.com/default.jpg', storage=storage)
     birth = models.DateField()
     categories_followed = models.ManyToManyField(Category)
     country = CountryField(default='Argentina', blank=True, null=True)
