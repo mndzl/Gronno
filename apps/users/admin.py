@@ -11,7 +11,7 @@ class GronnerInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = (GronnerInline,)
 
-admin.site.register(Dedication)
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Follow)

@@ -15,16 +15,10 @@ from django_s3_storage.storage import S3Storage
 
 storage = S3Storage(aws_s3_bucket_name=os.environ.get('AWS_STORAGE_BUCKET_NAME'))
 
-class Dedication(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
 class Gronner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     extract = models.TextField(default='', blank=True, null=True)
-    dedication = models.ForeignKey(Dedication, default='Estudiante', on_delete=models.SET_DEFAULT)
+    dedication = models.CharField(defualt='Gronner', max_length=40)
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', storage=storage)
     birth = models.DateField()
