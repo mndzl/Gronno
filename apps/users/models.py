@@ -18,7 +18,7 @@ storage = S3Storage(aws_s3_bucket_name=os.environ.get('AWS_STORAGE_BUCKET_NAME')
 class Gronner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     extract = models.TextField(default='', blank=True, null=True)
-    dedication = models.CharField(defualt='Gronner', max_length=40)
+    dedication = models.CharField(default='Gronner', max_length=40)
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', storage=storage)
     birth = models.DateField()
