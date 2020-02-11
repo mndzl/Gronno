@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from apps.users.models import Gronner, Dedication
+from apps.users.models import Gronner
 from django_countries.fields import CountryField
 
 class GronnerRegisterForm(UserCreationForm):
