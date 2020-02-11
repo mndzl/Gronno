@@ -12,7 +12,7 @@
 {% block content %}   
     <div id="perfilContainer">
         <div id="infoPerfil">
-            <div id="userImage"><img src="{{ visiting.gronner.image.url }}" alt="Luis Méndez" style="border:5px solid {{ fav_category.color }}"></div>
+            <div id="userImage"><img src="{{ visiting.gronner.image.url }}" style="border:5px solid {{ fav_category.color }}"></div>
             <h1 id="subImageName">{{visiting.first_name}} {{visiting.last_name}}
                 <div class='follow'>
                     <a href="{% url 'follow' visiting.username %}">
