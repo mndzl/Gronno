@@ -29,7 +29,6 @@ class Gronner(models.Model):
     linkedin = models.CharField(max_length=50, default='', blank=True)
     twitter = models.CharField(max_length=50, default='', blank=True)
     shows_email = models.BooleanField(default=False)
-    first_categories = models.BooleanField(default=0)
 
     """ def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
