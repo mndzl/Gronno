@@ -191,5 +191,6 @@ AWS_S3_BUCKET_AUTH = False
 AWS_S3_MAX_AGE_SECONDS = 60 * 60 * 24 * 365  # 1 year.
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
