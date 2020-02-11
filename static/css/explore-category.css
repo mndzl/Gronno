@@ -1,3 +1,15 @@
+@media screen and (max-width:600px){
+    .medallas{
+        flex-direction: column !important;
+    }
+    .publicaciones{
+        width:80% !important;
+	}
+	h1{
+		font-size: 1.5em !important;
+	}
+}
+
 a{
 	color:#000;
 }

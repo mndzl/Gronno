@@ -10,7 +10,7 @@ class GronnerRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=50, label='Nombre')
     last_name = forms.CharField(max_length=50, label='Apellido')
     dedication = forms.CharField(max_length=50, label='Ocupación')
-    country = CountryField(blank_label='Selecciona un país').formfield(label='Nacionalidad')
+    country = CountryField(blank_label='Selecciona un país').formfield(label='País')
     birth = forms.DateField(label='Fecha de nacimiento', widget=forms.DateInput(attrs={'placeholder':'dd/mm/aaaa'}))
 
 

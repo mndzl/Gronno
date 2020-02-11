@@ -138,6 +138,7 @@
         .oro, .plata, .bronce{
             pointer-events: auto !important;
             transition: .2s;
+            z-index:1;
         }
         .oro:hover{
             opacity: 1;
