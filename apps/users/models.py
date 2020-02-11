@@ -10,11 +10,6 @@ from django_countries.fields import CountryField
 import os
 from django.utils import timezone
 
-
-from django_s3_storage.storage import S3Storage
-
-storage = S3Storage(aws_s3_bucket_name=os.environ.get('AWS_STORAGE_BUCKET_NAME'))
-
 class Dedication(models.Model):
     name = models.CharField(max_length=50)
 
@@ -26,7 +21,7 @@ class Gronner(models.Model):
     extract = models.TextField(default='', blank=True, null=True)
     dedication = models.ForeignKey(Dedication, default='Estudiante', on_delete=models.SET_DEFAULT)
     points = models.IntegerField(default=0)
-    image = models.ImageField(default='default.jpg', storage=storage)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     birth = models.DateField()
     categories_followed = models.ManyToManyField(Category)
     country = CountryField(default='Argentina', blank=True, null=True)
