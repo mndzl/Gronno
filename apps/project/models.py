@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 import datetime
 from django.urls import reverse
 from PIL import Image, ExifTags
+import os
 
 from django_s3_storage.storage import S3Storage
 
