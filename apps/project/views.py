@@ -28,7 +28,7 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
         # Tendencia
         context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
         context["personal_projects"] = self.request.user.project_set.filter(is_active=True).order_by('-date_posted')
-        context["top_users"] = User.objects.all().order_by('-gronner__points')[:3]
+        context["top_users"] = Gronner.objects.all().order_by('-points')[:3]
         context['golded'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Gold")))
         context['silvered'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Silver")))
         context['bronzed'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Bronze")))
