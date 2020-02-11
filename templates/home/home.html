@@ -109,7 +109,21 @@
 				</div>
 				<hr class="trending_div">
 				<div class="top_users">
-
+					{{ if top_users|length_is:"3" }}
+						{% for user in top_users %}
+							<div class="top_user">
+								<a class="link" href="{% url 'profile' user.username %}"></a>
+								<div class="user_img_container">
+									<img class = "user_img" src="{{ user.gronner.image.url }}" alt="{{user.get_full_name}}">
+								</div>
+								
+								<div class="top_user_info">
+									<div class="top_user_name">{{ user.get_full_name }}</div>
+									<span class='top_user_points'>{{ user.gronner.points }} puntos</span>
+								</div>
+							</div>
+						{% endfor %}
+					{% endif %}
 				</div>
 
 			</div>
