@@ -73,7 +73,7 @@ class Profile(LoginRequiredMixin, ListView):
         socials = [{}]
 
         if user.gronner.facebook is not '':
-            socials.append({'name':'facebook', 'link':f'https://www.facebook.com/{user.gronner.facebook}', 'color':'#3b5998'})
+            socials.append({'name':'facebook2', 'link':f'https://www.facebook.com/{user.gronner.facebook}', 'color':'#3b5998'})
 
         if user.gronner.instagram is not '':
             socials.append({'name':'instagram', 'link':f'https://www.instagram.com/{user.gronner.instagram}', 'color':'#8f0047'})

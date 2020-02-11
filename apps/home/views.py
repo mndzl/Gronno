@@ -41,7 +41,7 @@ class homepage(LoginRequiredMixin, ListView):
 
         # Tendencia
         context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
-        context["top_users"] = User.objects.all().order_by('-gronner__points')[:3]
+        context["top_users"] = User.objects.filter(username!='gronnoadmin').order_by('-gronner__points')[:3]
 
         # Otros
         context["medals"] = medals
