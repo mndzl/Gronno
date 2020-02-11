@@ -17,20 +17,20 @@ def Explore(request):
     if query:
         trending = None
         projects = Project.objects.filter(
-            Q(title__icontains = query) |
-            Q(description__icontains = query),
+            Q(title__unaccent__icontains = query) |
+            Q(description__unaccent__icontains = query),
             is_active = True
         ).order_by('-points')
 
         users = User.objects.filter(
-            Q(username__icontains = query) |
-            Q(first_name__icontains = query) |
-            Q(last_name__icontains = query)
+            Q(username__unaccent__icontains = query) |
+            Q(first_name__unaccent__icontains = query) |
+            Q(last_name__unaccent__icontains = query)
         ).order_by('-gronner__points').distinct()
 
         categories = Category.objects.filter(
-            Q(name__icontains = query) |
-            Q(diminutive__icontains = query)
+            Q(name__unaccent__icontains = query) |
+            Q(diminutive__unaccent__icontains = query)
         ).distinct()
 
 
