@@ -30,6 +30,7 @@ class GronnerUpdateForm(forms.ModelForm):
     linkedin = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
     twitter = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
     extract = forms.CharField(required=False, widget=forms.Textarea(attrs={'placeholder': 'Cuéntanos sobre tí'}))
+    dedication = forms.CharField(max_length=50, required=False, label='Ocupación')
     class Meta:
         model = Gronner
         fields = ['extract', 'dedication', 'image', 'birth', 'country', 'facebook', 'instagram', 'linkedin', 'twitter', 'shows_email']

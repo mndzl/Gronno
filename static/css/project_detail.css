@@ -95,7 +95,8 @@
     .pub-content{
         width:100%;
         white-space: pre-line;
-        word-break: break-all;
+        /*word-break: break-all;*/
+        word-wrap: break-word;
     }
 
     /* Images */

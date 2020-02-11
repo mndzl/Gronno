@@ -27,7 +27,8 @@ form{
     margin-bottom: 10em;
     margin-left: 10em;
     max-width: 70%;
-    word-break: break-all;
+    /*word-break: break-all;*/
+    word-wrap: break-word;
 }
 
 .heading{
