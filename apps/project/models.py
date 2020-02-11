@@ -5,6 +5,9 @@ import datetime
 from django.urls import reverse
 from PIL import Image, ExifTags
 
+from django_s3_storage.storage import S3Storage
+
+storage = S3Storage(aws_s3_bucket_name=os.environ.get('AWS_STORAGE_BUCKET_NAME'))
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -26,9 +29,9 @@ class Project(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     points = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
-    image1 = models.ImageField(upload_to='project_pics')
-    image2 = models.ImageField(upload_to='project_pics')
-    image3 = models.ImageField(upload_to='project_pics')
+    image1 = models.ImageField(storage=storage)
+    image2 = models.ImageField(storage=storage)
+    image3 = models.ImageField(storage=storage)
 
     def __str__(self):
         return self.title
