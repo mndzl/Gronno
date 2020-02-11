@@ -42,10 +42,10 @@ class homepage(LoginRequiredMixin, ListView):
         # Tendencia
         context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
         context["top_users"] = Gronner.objects.all().order_by('-points')[:3]
-        if len(context["top_users"] == 3):
-            context["show_tops"] = True
-        else:
-            context["show_tops"] = False
+        """         if len(context["top_users"] == 3):
+                    context["show_tops"] = True
+                else:
+                    context["show_tops"] = False """
 
         # Otros
         context["medals"] = medals
