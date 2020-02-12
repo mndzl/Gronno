@@ -8,7 +8,7 @@ from django.db.models import Q
 def Explore(request):
     query = request.GET.get('search')
     projects = None
-    users = None
+    users_search = None
     categories = None
     trending = {
         'projects':Project.objects.filter(is_active = True, category__in = request.user.gronner.categories_followed.all()).order_by('-points')[:20],
