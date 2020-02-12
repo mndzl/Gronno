@@ -37,6 +37,7 @@
 			{% endfor %}
 
 			<h1 class="tituloNav">Nuevos proyectos</h1>
+			<!--
 			{% if projects %}
 				{% for project, comment, medal in projects %}
 					<div class="publicacion">
@@ -88,7 +89,7 @@
 					</div>
 				{% endfor %}
 			{% endif %}
-
+-->
 			{% endblock main_content %}
 		</main>
 
@@ -109,7 +110,7 @@
 				</div>
 				<hr class="trending_div">
 				<div class="top_users">
-				
+
 					{% if top_users|length_is:"3" %}
 						{% for user in top_users %}
 							<div class="top_user">
