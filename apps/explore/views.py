@@ -23,7 +23,7 @@ def Explore(request):
             is_active = True
         ).order_by('-points').distinct()
 
-        users = Gronner.objects.filter(
+        users_search = Gronner.objects.filter(
             Q(user__username__icontains = query) |
             Q(user__first_name__icontains = query) |
             Q(user__last_name__icontains = query)
@@ -37,7 +37,7 @@ def Explore(request):
 
     context = {
         'projects': projects,
-        'users': users,
+        'users_search': users_search,
         'categories': categories,
         'trending':trending
     }

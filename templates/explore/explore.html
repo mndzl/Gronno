@@ -57,11 +57,11 @@
                 <h2 class='users-title'>Usuarios</h2>
                 <hr>
                 {% if users %}
-                    {% for user in users %}
+                    {% for user_search in users-search %}
                         <div class="user">
-                            <img src="{{ user.gronner.image.url }}">
-                            <a class="link" href="{% url 'profile' user.username %}"></a>
-                            <span class='username'>{{ user.get_full_name }} ({{ user.username }})</span>
+                            <img src="{{ user_search.gronner.image.url }}">
+                            <a class="link" href="{% url 'profile' user_search.username %}"></a>
+                            <span class='username'>{{ user_search.get_full_name }} ({{ user_search.username }})</span>
                         </div>
                     {% endfor %}
                 {% else %}
