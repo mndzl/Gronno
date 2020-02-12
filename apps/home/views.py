@@ -2,6 +2,7 @@ from django.shortcuts import render
 from apps.project.models import Project, Comment
 from apps.users.models import Gronner, Follow
 from django.contrib.auth.models import User
+from apps.users.models import Gronner
 from datetime import timedelta, datetime
 import math
 from django.contrib.auth.decorators import login_required

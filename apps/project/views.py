@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Project, Comment, Award, Medal, Report
 from django.shortcuts import redirect
 from apps.home.views import homepage
+from apps.users.models import Gronner
 from django.contrib.auth.models import User
 from .forms import CreateProject
 from django.contrib.messages.views import SuccessMessageMixin

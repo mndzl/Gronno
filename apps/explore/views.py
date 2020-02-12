@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from apps.project.models import Project, Category
 from django.views.generic import ListView
+from apps.users.models import Gronner
 from django.contrib.auth.models import User
 from django.db.models import Q
 
