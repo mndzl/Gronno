@@ -57,7 +57,7 @@
                 <h2 class='users-title'>Usuarios</h2>
                 <hr>
                 {% if users %}
-                    {% for user_search in users-search %}
+                    {% for user_search in users_search %}
                         <div class="user">
                             <img src="{{ user_search.gronner.image.url }}">
                             <a class="link" href="{% url 'profile' user_search.username %}"></a>
