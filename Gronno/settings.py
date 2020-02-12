@@ -107,25 +107,6 @@ DATABASES = {
     }
 }"""
 
-"""
-Gronno es una plataforma donde tendrás la oportunidad de demostrar tus habilidades con la tecnología presentando los proyectos personales que hayas hecho.
-
-En Gronno puedes subir los proyectos que quieras compartir con la comunidad, seguir usuarios y categorías, comentar y otorgar medallas a proyectos, obtener puntos, y subir en el ranking de los mejores Gronners.
-
-
-¿Cuál es el objetivo de Gronno?
-
-Esta plataforma fue creada con el objetivo de que todas las personas, sin importar su edad, sexo o país de origen puedan tener la oportunidad de darse a conocer tanto a ellos mismos como a sus capacidades de pensar, construir y aplicar soluciones a los problemas.
-
-Gronno además tiene un gran objetivo, que es crear una comunidad donde las personas transmitan experiencias y aprendan de los demás para mejorar cada vez más en cada proyecto realizado.
-
-
-¿A quiénes está destinado?
-
-Si eres una persona que te entusiasma la tecnología, estas en contínuo aprendizaje, te esfuerzas en ampliar tus habilidades realizando proyectos personales y quieres mostrar tus experiencias a los demás, entonces estás preparado para ser un Gronner y mostrarle al mundo lo que eres capaz de hacer.
-"""
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
