@@ -60,7 +60,7 @@
                     {% for user in users %}
                         <div class="user">
                             <img src="{{ user.gronner.image.url }}">
-                            <a class="link" href='{% url 'profile' user.username %}'></a>
+                            <a class="link" href="{% url 'profile' user.username %}"></a>
                             <span class='username'>{{ user.get_full_name }} ({{ user.username }})</span>
                         </div>
                     {% endfor %}
