@@ -41,7 +41,7 @@
 						{% if user.is_authenticated %}
 							<div id="mainPhoto"><a href="/users/{{user.username}}/"><img src="{{ user.gronner.image.url }}"></a></div>
 								<span class="infouser">
-									<a href="{% url 'profile' user.username %}" class='link'></a>
+									<a href="/users/{{user.username}}/" class='link'></a>
 									<div id="name">{{user.first_name}} {{user.last_name}}</div>
 									<div id="username">({{user.username}})</div>
 								</span>
