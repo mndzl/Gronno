@@ -7,7 +7,7 @@
 
 {% block content %}
 	<div class="content">
-
+<!--
 		<aside class="left">
 			<h3>Presentados</h3>
 			
@@ -51,7 +51,7 @@
 
 						<div class="info-project">
 							<h3 class="titulo">{{ project.title }}</a></h3>
-							<h4 class="creador">por <a href="#">{{ project.author.first_name }} {{project.author.last_name}}</a></h4>
+							<h4 class="creador">por <a href="{% url 'profile' project.author.username %}">{{ project.author.first_name }} {{project.author.last_name}}</a></h4>
 							<h3 class="description">{{ project.description }}</h3>
 						</div>
 
@@ -107,7 +107,6 @@
 					{% endfor %}
 				</div>
 				<hr class="trending_div">
-				<!--
 				<div class="top_users">
 					{% if top_users|length_is:"3" %}
 						{% for user in top_users %}
@@ -125,10 +124,9 @@
 						{% endfor %}
 					{% endif %}
 				</div>
-				-->
 			</div>
 		</aside>
-
+-->
 	</div>
 {% endblock content%}
 
