@@ -12,6 +12,8 @@ from django.forms import modelformset_factory
 from django.contrib import messages
 from PIL import ImageFile
 from django.core.mail import EmailMessage
+import tzlocal
+import pytz
 
 
 class ProjectDetailView( LoginRequiredMixin, DetailView):
@@ -34,6 +36,11 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
         context['silvered'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Silver")))
         context['bronzed'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Bronze")))
         
+        
+        # Post Time
+        local_timezone = tzlocal.get_localzone()
+        context['date_posted'] = this_object.date_posted.replace(tzinfo=pytz.utc).astimezone(local_timezone)
+
         return context
 
     def post(self, request, pk):
