@@ -38,11 +38,7 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
         
         
         # Post Time
-        local_timezone = tzlocal.get_localzone()
-        print('localzone: ', tzlocal.get_localzone())
-        print('date_posted_utc: ', this_object.date_posted)
-        context['date_posted'] = this_object.date_posted.replace(tzinfo=pytz.utc).astimezone(local_timezone)
-        print('date_posted_local: ', context['date_posted'])
+        context['date_posted'] = this_object.get_date()
 
         return context
 
