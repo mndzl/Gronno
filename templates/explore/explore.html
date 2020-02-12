@@ -61,7 +61,7 @@
                         <div class="user">
                             <img src="{{ user_search.image.url }}">
                             <a class="link" href="{% url 'profile' user_search.user.username %}"></a>
-                            <span class='username'>{{ user_search.get_full_name }} ({{ user_search.username }})</span>
+                            <span class='username'>{{ user_search.user.get_full_name }} ({{ user_search.user.username }})</span>
                         </div>
                     {% endfor %}
                 {% else %}
