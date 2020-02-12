@@ -91,12 +91,12 @@ WSGI_APPLICATION = 'Gronno.wsgi.application'
 import dj_database_url
 from decouple import config
 
-""" DATABASES = {
+DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
-} """
-DATABASES = {
+}
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'gronnolocal',
@@ -105,7 +105,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}
+}"""
 
 
 # Password validation
