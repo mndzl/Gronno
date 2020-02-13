@@ -129,12 +129,12 @@
                                 {% if socials %}
                                     {% for social in socials %}
                                         {% if not forloop.first %}
-                                            <span style="color:{{ social.color }}" class="icon-{{ social.name }}"><a href = {{ social.link }} class="link"></a></span>
+                                            <span style="color:{{ social.color }}" class="icon-{{ social.name }}"><a href = {{ social.link }} target="_blank" class="link"></a></span>
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
                                 {% if visiting.gronner.shows_email %}
-                                    <span class="icon-mail4" style = "color:#cf0e00"><a href="mailto:{{ visiting.email }}" class="link"></a></span>
+                                    <span class="icon-mail4" style = "color:#cf0e00"><a href="mailto:{{ visiting.email }}" target="_blank" class="link"></a></span>
                                 {% endif %}
                             </div>
                         </div>

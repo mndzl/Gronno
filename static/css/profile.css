@@ -317,7 +317,7 @@
     .iconosContainer .iconos{
         display:flex;
         font-size: 2em;
-        justify-content: space-between;
+        justify-content: space-evenly;
         margin-top:.5em;
     }
     .iconos span{
