@@ -114,6 +114,8 @@ def register(request):
             to = newuser.email
 
             mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+            mail.send_mail(f'{newuser.get_full_name()} se ha registrado a Gronno', plain_message, from_email, ['mendezgla.56@gmail.com'], html_message=html_message)
+            
 
             return redirect('login')
     else:
