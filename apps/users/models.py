@@ -22,7 +22,7 @@ class Gronner(models.Model):
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', storage=storage)
     birth = models.DateField()
-    categories_followed = models.ManyToManyField(Category)
+    categories_followed = models.ManyToManyField(Category, blank=True, null=True)
     country = CountryField(default='Argentina', blank=True, null=True)
     facebook = models.CharField(max_length=50,default='', blank=True)
     instagram = models.CharField(max_length=50, default='', blank=True)
