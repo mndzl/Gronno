@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'x1z1vwez_egn7f(w3#_rv@fucakv8+4*)ssyou(^d5p5xays!8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -89,23 +89,13 @@ WSGI_APPLICATION = 'Gronno.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 import dj_database_url
-from decouple import config
 
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
 }
-"""DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gronnolocal',
-        'USER': 'gronnolocaladmin',
-        'PASSWORD': 'Gronno5432',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}"""
+
 
 
 # Password validation
@@ -188,5 +178,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 import boto3
 from botocore.client import Config
+
+import django_heroku
 
 django_heroku.settings(locals())
