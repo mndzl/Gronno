@@ -50,7 +50,7 @@ class homepage(LoginRequiredMixin, ListView):
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
         context["personal_projects"] = user.project_set.filter(is_active=True).order_by('-date_posted')
-        context["notifications"] = Notification.objects.filter(user=user)
+        context["notifications"] = Notification.objects.filter(user=user).order_by('-date_created')
 
         return context
 
