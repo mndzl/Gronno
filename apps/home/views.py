@@ -50,7 +50,6 @@ class homepage(LoginRequiredMixin, ListView):
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
         context["personal_projects"] = user.project_set.filter(is_active=True).order_by('-date_posted')
-        context["notifications"] = Notification.objects.filter(user=user).order_by('-date_created')
 
         return context
 
@@ -60,7 +59,7 @@ class NotificationsView(ListView):
     template_name = 'home/notifications.html'
 
     def get_queryset(self):
-        return Notification.objects.filter(user=self.request.user)
+        return Notification.objects.filter(user=self.request.user).order_by('-date_created')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
