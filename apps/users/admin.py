@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Gronner, Follow
+from .models import Gronner, Follow, Notification
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
@@ -11,7 +11,11 @@ class GronnerInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = (GronnerInline,)
 
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'message')
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Follow)
+admin.site.register(Notification, NotificationAdmin)

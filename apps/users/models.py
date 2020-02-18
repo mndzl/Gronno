@@ -9,7 +9,9 @@ from django.dispatch import receiver
 from django_countries.fields import CountryField
 import os
 from django.utils import timezone
-
+from apps.project.models import Project
+from django.core.signals import request_finished
+from django.db.models.signals import post_save
 
 from django_s3_storage.storage import S3Storage
 
@@ -62,6 +64,67 @@ class Gronner(models.Model):
     def get_absolute_url(self):
         return reverse("profile", kwargs={"username": self.user.username})
 
+
+    def notificate(self, other_user, reason, project, category):
+        references = {
+            'new_follow': {
+                'icon': 'icon-user-check',
+                'message': f'{other_user.get_full_name()} comenzó a seguirte'
+            },
+            'new_following_project': {
+                'icon': 'icon-plus',
+                'message': f'{other_user.get_full_name()} subió un nuevo proyecto'
+            }
+        }
+
+        if category is not None:
+            references.update({
+                'new_category_project': {
+                    'icon': f'icon-price-tag style="color: {category.color}"',
+                    'message': f'Se ha subido un nuevo proyecto de {category.name}'
+                }
+            })
+
+        if project is not None:
+            references.update({
+                'new_Gold':{
+                    'icon':'icon-medal" style="color:#919191"',
+                    'message': f'{other_user.get_full_name()} dió una medalla de oro a {project.title}'
+                }
+            })
+
+            references.update({
+                'new_Silver': {
+                    'icon':'icon-medal" style="color:#ffe100"',
+                    'message': f'{other_user.get_full_name()} dió una medalla de plata a {project.title}'
+                }
+            })
+            references.update({
+                'new_Bronze': {
+                    'icon': 'icon-medal" style="color:#a6540d',
+                    'message': f'{other_user.get_full_name()} dió una medalla de bronce a {project.title}'
+                }
+            })
+            references.update({
+                'new_comment': {
+                    'icon':'icon-bubble',
+                    'message': f'{other_user.get_full_name()} comentó tu proyecto {project.title}'
+                }
+            })
+
+        if reason == 'new_follow':
+            link = other_user.gronner.get_absolute_url()
+        else:
+            link = project.get_absolute_url()
+
+        Notification.objects.create(
+            user = self.user,
+            message = references[reason]['message'],
+            other_user = other_user,
+            icon = references[reason]['icon'],
+            link = link
+        )
+
 class Follow(models.Model):
     follower = models.ForeignKey(User, related_name = 'followers', on_delete=models.CASCADE)
     following = models.ForeignKey(User, related_name = 'followings', on_delete=models.CASCADE)
@@ -75,3 +138,17 @@ class Notification(models.Model):
     other_user = models.ForeignKey(User, related_name='user2', on_delete=models.CASCADE, blank=True, null=True)
     icon = models.CharField(max_length=50)
     date_created = models.DateTimeField(default=timezone.now)
+    link = models.CharField(max_length=100, default='/')
+
+    def notificate_followers(sender, **kwargs):
+        print('sender recieved')
+        Notification.objects.create(user=User.objects.get(username='mendezluis'), other_user=kwargs['instance'].author, icon='whereas', link='none', message='hola')
+        if kwargs['created']:
+            for follow in Follow.objects.filter(following=kwargs['instance'].author):
+                follow.follower.gronner.notificate(other_user=kwargs['instance'].author, reason='new_following_project', project=kwargs['instance'], category=None)
+
+            for category_follower in Gronner.objects.filter(categories_followed__in = [kwargs['instance'].category]):
+                if category_follower.user not in Follow.objects.filter(following=kwargs['instance'].author):
+                    category_follower.notificate(other_user=kwargs['instance'].author, reason='new_category_project', project=kwargs['instance'], category=kwargs['instance'].category)
+
+    post_save.connect(notificate_followers, sender=Project)

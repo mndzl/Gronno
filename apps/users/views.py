@@ -161,6 +161,7 @@ class FollowView(LoginRequiredMixin, RedirectView):
             messages.add_message(self.request, messages.INFO, f'Ya no sigues a {following.username}')
         else:
             Follow.objects.create(follower=follower, following=following)
+            following.gronner.notificate(other_user=follower, reason='new_follow', project=None, category=None)
             messages.add_message(self.request, messages.SUCCESS, f'Ahora sigues a {following.username}')
 
         return url_

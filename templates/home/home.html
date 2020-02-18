@@ -7,7 +7,6 @@
 
 {% block content %}
 	<div class="content">
-
 		<aside class="left">
 			<h3>Presentados</h3>
 			
@@ -34,6 +33,18 @@
 				{% if forloop.first %}
 					<div class="{{ message.tags }}">{{message}}</div>
 				{% endif %}
+			{% endfor %}
+
+			{% for notification in notifications %}
+				<div>
+					<span class="{{notification.icon}}"></span>
+					<p>{{notification.message}}</p>
+					<a href="{{ notification.link }}">Ver</a>
+				</div>
+			{% empty %}
+				<div>
+					No hay notificaciones recientes
+				</div>
 			{% endfor %}
 
 			<h1 class="tituloNav">Nuevos proyectos</h1>

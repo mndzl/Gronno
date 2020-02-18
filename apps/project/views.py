@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Project, Comment, Award, Medal, Report
 from django.shortcuts import redirect
 from apps.home.views import homepage
-from apps.users.models import Gronner
+from apps.users.models import Gronner, Notification, Follow
 from django.contrib.auth.models import User
 from .forms import CreateProject
 from django.contrib.messages.views import SuccessMessageMixin
@@ -14,7 +14,7 @@ from PIL import ImageFile
 from django.core.mail import EmailMessage
 import tzlocal
 import pytz
-
+import django.dispatch
 
 class ProjectDetailView( LoginRequiredMixin, DetailView):
     model = Project
@@ -45,8 +45,7 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
     def post(self, request, pk):
         text = request.POST.get('comment')
         Comment.objects.create(user=request.user, text=text, project=self.get_object())
-        
-        # Call to a function to create a notification as new comment
+        self.get_object().author.gronner.notificate(other_user=self.request.user, reason='new_comment', project=self.get_object(), category=None)
         
         return redirect(self.request.path_info)
 
@@ -67,14 +66,20 @@ class MedalToggle(LoginRequiredMixin, RedirectView):
             obj.points += new_medal.medal.points
             obj.save()
             obj.author.gronner.save()
-            # Call to a function to create a notification as new medal
+            obj.author.gronner.notificate(other_user=user, reason=f'new_{medal}', project=obj, category=None)
         else: 
             if(medals_user.first().medal!=medal):
+                # Remove older medal and notification
                 obj.author.gronner.points -=  medals_user.first().medal.points
                 obj.points -= medals_user.first().medal.points
                 medals_user.first().delete()
+
+                # Create new ones
                 new_medal = Award.objects.create(user=user, medal=medal, project=obj)
-                # Call to a function to create a notification as user changes medal
+                obj.author.gronner.save()
+
+                obj.author.gronner.notificate(other_user=user, reason=f'new_{new_medal.medal}', project=obj, category=None)
+                                
                 obj.author.gronner.points +=  new_medal.medal.points
                 obj.points += new_medal.medal.points
                 obj.save()
@@ -99,7 +104,7 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.author = self.request.user
         self.request.user.gronner.points += 500
         self.request.user.gronner.save()
-        # Call to a function to create a notification as user has uploaded a new project
+
         return super().form_valid(form)
 
 class ProjectUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):

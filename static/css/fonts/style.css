@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?taeolg');
-  src:  url('fonts/icomoon.eot?taeolg#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?taeolg') format('truetype'),
-    url('fonts/icomoon.woff?taeolg') format('woff'),
-    url('fonts/icomoon.svg?taeolg#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?qt12xk');
+  src:  url('fonts/icomoon.eot?qt12xk#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?qt12xk') format('truetype'),
+    url('fonts/icomoon.woff?qt12xk') format('woff'),
+    url('fonts/icomoon.svg?qt12xk#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,23 +25,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-user-x:before {
+.icon-flag:before {
   content: "\e900";
 }
-.icon-send:before {
+.icon-notifications-outline:before {
+  content: "\e908";
+}
+.icon-cheveron-down:before {
   content: "\e901";
+}
+.icon-medal:before {
+  content: "\e907";
 }
 .icon-tag-cancel:before {
   content: "\e902";
 }
-.icon-cheveron-down:before {
+.icon-send:before {
   content: "\e903";
 }
-.icon-flag:before {
+.icon-user-x:before {
   content: "\e904";
 }
-.icon-pencil:before {
+.icon-user-check:before {
   content: "\e905";
+}
+.icon-pencil:before {
+  content: "\e906";
 }
 .icon-image:before {
   content: "\e90d";
@@ -76,10 +85,10 @@
 .icon-enter:before {
   content: "\ea13";
 }
-.icon-mail4:before {
+.icon-mail:before {
   content: "\ea86";
 }
-.icon-facebook2:before {
+.icon-facebook:before {
   content: "\ea91";
 }
 .icon-instagram:before {

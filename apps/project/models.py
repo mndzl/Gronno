@@ -6,7 +6,7 @@ from django.urls import reverse
 from PIL import Image, ExifTags
 import os
 from django.core.mail import EmailMessage
-
+from django.db.models.signals import post_save
 from django_s3_storage.storage import S3Storage
 
 storage = S3Storage(aws_s3_bucket_name=os.environ.get('AWS_STORAGE_BUCKET_NAME'))

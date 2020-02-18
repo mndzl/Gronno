@@ -7,7 +7,6 @@ from .models import (
     Award,
     Report,
 )
-
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'author', 'category', 'points', 'is_active')
 
@@ -21,13 +20,13 @@ class ReportAdmin(admin.ModelAdmin):
     list_display = ('project', 'reason', 'user')
 
 
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Medal)
 admin.site.register(Award)
-
 
 
 

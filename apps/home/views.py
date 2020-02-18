@@ -18,7 +18,9 @@ class homepage(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         following = Follow.objects.filter(follower=user).values('following')
-        return Project.objects.filter(author__in=following, is_active=True).order_by('-points') | Project.objects.filter(category__in = user.gronner.categories_followed.all()).order_by('-points') | user.project_set.filter(is_active=True).order_by('-date_posted')
+        return (Project.objects.filter(author__in=following, is_active=True).order_by('-points') | 
+                Project.objects.filter(category__in = user.gronner.categories_followed.all()).order_by('-points') | 
+                user.project_set.filter(is_active=True).order_by('-date_posted') )
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
@@ -43,10 +45,6 @@ class homepage(LoginRequiredMixin, ListView):
         # Tendencia
         context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
         context["top_users"] = Gronner.objects.all().order_by('-points')[:3]
-        """         if len(context["top_users"] == 3):
-                    context["show_tops"] = True
-                else:
-                    context["show_tops"] = False """
 
         # Otros
         context["medals"] = medals
