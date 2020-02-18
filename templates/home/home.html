@@ -35,18 +35,6 @@
 				{% endif %}
 			{% endfor %}
 
-			{% for notification in notifications %}
-				<div>
-					<span class="{{notification.icon}}"></span>
-					<p>{{notification.message}}</p>
-					<a href="{{ notification.link }}">Ver</a>
-				</div>
-			{% empty %}
-				<div>
-					No hay notificaciones recientes
-				</div>
-			{% endfor %}
-
 			<h1 class="tituloNav">Nuevos proyectos</h1>
 			{% if projects %}
 				{% for project, comment, medal in projects %}

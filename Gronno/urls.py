@@ -30,7 +30,7 @@ from apps.project.views import (
     ProjectDeleteView, 
     MedalToggle,
     ReportProject,
-    CommentDelete
+    CommentDelete,
 )
 
 urlpatterns = [
@@ -43,8 +43,9 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
     
-    path('home/', home_views.homepage.as_view(template_name='home/home.html'), name='homepage'),
-    
+    path('home/', home_views.homepage.as_view(), name='homepage'),
+    path('notifications/', home_views.NotificationsView.as_view(), name='notifications'),
+
     path('users/<str:username>/', Profile.as_view(), name='profile'),
     path('users/<str:username>/follow/', FollowView.as_view(), name='follow'),
     path('users/config', ProfileUpdateView, name='config'),

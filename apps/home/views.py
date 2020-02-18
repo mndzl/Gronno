@@ -29,7 +29,7 @@ class homepage(LoginRequiredMixin, ListView):
         for project in self.object_list:
             comm = project.comment_set.all().count()
             if comm>999:
-                comm=str(round(10722/1000,1)) + 'k'
+                comm=str(round(comm/1000,1)) + 'k'
             comments.append(comm)
         context["comments"] = comments
 
@@ -53,6 +53,24 @@ class homepage(LoginRequiredMixin, ListView):
         context["notifications"] = Notification.objects.filter(user=user)
 
         return context
+
+class NotificationsView(ListView):
+    model = Project
+    context_object_name = 'notifications'
+    template_name = 'home/notifications.html'
+
+    def get_queryset(self):
+        return Notification.objects.filter(user=self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
+        context["top_users"] = Gronner.objects.all().order_by('-points')[:3]
+        context["personal_projects"] = self.request.user.project_set.filter(is_active=True).order_by('-date_posted')
+        
+        return context
+    
+
     
     
     

@@ -62,6 +62,8 @@
 			{% if user.is_authenticated %}
 				<div id="rightNavSide">
 					<div id="rightNavItems">
+						<a href="{% url 'notifications' %}" class='notifications'><div class='icon-notifications-outline'></div></a>
+						<div id="divMessageSearch"></div>
 						<div id="projectReady"><a href="{% url 'project_create' %}">Subir nuevo proyecto</a></div>
 						<div id="divMessageSearch"></div>
 						<div id="search">

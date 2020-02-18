@@ -69,46 +69,53 @@ class Gronner(models.Model):
         references = {
             'new_follow': {
                 'icon': 'icon-user-check',
-                'message': f'{other_user.get_full_name()} comenzó a seguirte'
+                'message': f'{other_user.get_full_name()} comenzó a seguirte',
+                'color': '#19941d'
             },
             'new_following_project': {
                 'icon': 'icon-plus',
-                'message': f'{other_user.get_full_name()} subió un nuevo proyecto'
+                'message': f'{other_user.get_full_name()} subió un nuevo proyecto',
+                'color': '#ba3e00'
             }
         }
 
         if category is not None:
             references.update({
                 'new_category_project': {
-                    'icon': f'icon-price-tag style="color: {category.color}"',
-                    'message': f'Se ha subido un nuevo proyecto de {category.name}'
+                    'icon': f'icon-price-tag',
+                    'message': f'Se ha subido un nuevo proyecto de {category.name}',
+                    'color': category.color
                 }
             })
 
         if project is not None:
             references.update({
                 'new_Gold':{
-                    'icon':'icon-medal" style="color:#919191"',
-                    'message': f'{other_user.get_full_name()} dió una medalla de oro a {project.title}'
+                    'icon':'icon-medal',
+                    'message': f'{other_user.get_full_name()} dió una medalla de oro a {project.title}',
+                    'color': ' #D4AF37'
                 }
             })
 
             references.update({
                 'new_Silver': {
-                    'icon':'icon-medal" style="color:#ffe100"',
-                    'message': f'{other_user.get_full_name()} dió una medalla de plata a {project.title}'
+                    'icon':'icon-medal',
+                    'message': f'{other_user.get_full_name()} dió una medalla de plata a {project.title}',
+                    'color': '#C0C0C0'
                 }
             })
             references.update({
                 'new_Bronze': {
-                    'icon': 'icon-medal" style="color:#a6540d',
-                    'message': f'{other_user.get_full_name()} dió una medalla de bronce a {project.title}'
+                    'icon': 'icon-medal',
+                    'message': f'{other_user.get_full_name()} dió una medalla de bronce a {project.title}',
+                    'color': '#CD7F32'
                 }
             })
             references.update({
                 'new_comment': {
                     'icon':'icon-bubble',
-                    'message': f'{other_user.get_full_name()} comentó tu proyecto {project.title}'
+                    'message': f'{other_user.get_full_name()} comentó tu proyecto {project.title}',
+                    'color': '#336ff2'
                 }
             })
 
@@ -122,7 +129,8 @@ class Gronner(models.Model):
             message = references[reason]['message'],
             other_user = other_user,
             icon = references[reason]['icon'],
-            link = link
+            link = link,
+            color = references[reason]['color']
         )
 
 class Follow(models.Model):
@@ -139,6 +147,7 @@ class Notification(models.Model):
     icon = models.CharField(max_length=50)
     date_created = models.DateTimeField(default=timezone.now)
     link = models.CharField(max_length=100, default='/')
+    color = models.CharField(max_length=15, default='#000')
 
     def notificate_followers(sender, **kwargs):
         print('sender recieved')

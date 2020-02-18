@@ -1,0 +1,18 @@
+{% extends 'home/home.html' %}
+{% load static %}
+{% block link2 %}{% static 'css/notifications.css' %}{% endblock link2 %}
+{% block main_content %}
+    <h1>Notificaciones</h1>
+
+    {% for notification in notifications %}
+        <div class='notification'>
+            <a href="{{ notification.link }}" class='link'></a>
+            <span class="icon {{notification.icon}}" style='color: {{ notification.color }}'></span>
+            <p class='notification-message'>{{notification.message}}</p>
+        </div>
+    {% empty %}
+        <div class='noContent'>
+            No hay notificaciones recientes
+        </div>
+    {% endfor %}
+{% endblock main_content %}

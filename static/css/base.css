@@ -44,6 +44,9 @@ body{
     nav{
         padding:0 1em !important;
     }
+    .notifications{
+        margin-right: 1em;
+    }
 
 }
 @media screen and (max-width: 460px){
@@ -327,5 +330,9 @@ footer .divisor{
     width:100%;
     box-sizing: border-box;
     background-color:#004c79;
+    color:#FFF;
+}
+
+.icon-notifications-outline{
     color:#FFF;
 }
