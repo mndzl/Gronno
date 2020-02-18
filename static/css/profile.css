@@ -86,20 +86,26 @@
         font-size: 2em;
         font-weight: bold;
         font-weight: 500;
+        position: relative;
     }
-    #subImageName .icon-user-x, #subImageName .icon-plus{
+    #subImageName .icon-plus{
         top:-.5em;
         right: -1.2em;
         position: absolute;
         font-size: 1.5rem;
         color:#FFF;
+
     }
     .icon-user-x{
         color:#FFF;
     }
     .follow{
-        display: inline;
-        position: relative;
+        position: absolute;
+        height: 1em;
+        width:1em;
+        top:-1em;
+        right:-1em;
+        font-size: .8em;
     }
     #userTitle{
         color:#ff8800;

@@ -15,12 +15,11 @@
             <div id="userImage"><img src="{{ visiting.gronner.image.url }}" style="border:5px solid {{ fav_category.color }}"></div>
             <h1 id="subImageName">{{visiting.first_name}} {{visiting.last_name}}
                 <div class='follow'>
-                    <a href="{% url 'follow' visiting.username %}">
                         {% if are_friends %}
-                            <span class="icon-user-x" title="Dejar de seguir a {{visiting.get_full_name }}"></span>
+                            <a href="{% url 'follow' visiting.username %}"><span class="icon-user-x" title="Dejar de seguir a {{visiting.get_full_name }}"></span></a>
                         {% else %}
                             {% if user != visiting %}
-                                <span class="icon-plus" title="Seguir a {{visiting.get_full_name }}"></span>
+                                <a href="{% url 'follow' visiting.username %}"><span class="icon-plus" title="Seguir a {{visiting.get_full_name }}"></span></a>
                             {% endif %}
                         {% endif %}
                     </a>
