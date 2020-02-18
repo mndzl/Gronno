@@ -12,19 +12,19 @@
 {% block content %}   
     <div id="perfilContainer">
         <div id="infoPerfil">
-            <div id="userImage"><img src="{{ visiting.gronner.image.url }}" style="border:5px solid {{ fav_category.color }}"></div>
-            <h1 id="subImageName">{{visiting.first_name}} {{visiting.last_name}}
+            <div id="userImage">
+                <img src="{{ visiting.gronner.image.url }}" style="border:5px solid {{ fav_category.color }}">
                 <div class='follow'>
-                        {% if are_friends %}
-                            <a href="{% url 'follow' visiting.username %}"><span class="icon-user-x" title="Dejar de seguir a {{visiting.get_full_name }}"></span></a>
-                        {% else %}
-                            {% if user != visiting %}
-                                <a href="{% url 'follow' visiting.username %}"><span class="icon-plus" title="Seguir a {{visiting.get_full_name }}"></span></a>
-                            {% endif %}
+                    {% if are_friends %}
+                        <a href="{% url 'follow' visiting.username %}"><span class="icon-user-x" title="Dejar de seguir a {{visiting.get_full_name }}"></span></a>
+                    {% else %}
+                        {% if user != visiting %}
+                            <a href="{% url 'follow' visiting.username %}"><span class="icon-plus" title="Seguir a {{visiting.get_full_name }}"></span></a>
                         {% endif %}
-                    </a>
+                    {% endif %}
                 </div>
-            </h1>
+            </div>
+            <h1 id="subImageName">{{visiting.first_name}} {{visiting.last_name}}</h1>
             <h4 class = "user_tags">
                 <i class="{{ visiting.gronner.country.flag_css }}" title="{{ visiting.gronner.country.name }}"></i> - 
                 {{ followers }} seguidor/es - 

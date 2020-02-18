@@ -81,6 +81,9 @@
     }
     #userImage{
         background-color: #4b1d00;
+        height:7em;
+        width:7em;
+        position: relative;
     }
     #subImageName{
         font-size: 2em;
@@ -101,11 +104,11 @@
     }
     .follow{
         position: absolute;
-        height: 1em;
-        width:1em;
-        top:-1em;
-        right:-1em;
-        font-size: .8em;
+        top:0;
+        right:0;
+        font-size: 1.5em;
+        top:2em;
+        right:-2em;
     }
     #userTitle{
         color:#ff8800;
@@ -276,7 +279,7 @@
         padding:2em;
         background-color:#FFF;
         border-radius: 10px;
-        margin: 2em 0;
+        margin: 2em auto;
         max-width: 21em;
         border:1px solid #acacac
     }
