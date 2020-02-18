@@ -150,8 +150,6 @@ class Notification(models.Model):
     color = models.CharField(max_length=15, default='#000')
 
     def notificate_followers(sender, **kwargs):
-        print('sender recieved')
-        Notification.objects.create(user=User.objects.get(username='mendezluis'), other_user=kwargs['instance'].author, icon='whereas', link='none', message='hola')
         if kwargs['created']:
             for follow in Follow.objects.filter(following=kwargs['instance'].author):
                 follow.follower.gronner.notificate(other_user=kwargs['instance'].author, reason='new_following_project', project=kwargs['instance'], category=None)
