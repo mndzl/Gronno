@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from apps.project.models import Project, Comment
-from apps.users.models import Gronner, Follow
+from apps.users.models import Gronner, Follow, Notification
 from django.contrib.auth.models import User
 from apps.users.models import Gronner
 from datetime import timedelta, datetime
@@ -52,6 +52,7 @@ class homepage(LoginRequiredMixin, ListView):
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
         context["personal_projects"] = user.project_set.filter(is_active=True).order_by('-date_posted')
+        context["notifications"] = Notification.objects.filter(user=user)
 
         return context
     

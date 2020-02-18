@@ -68,3 +68,10 @@ class Follow(models.Model):
 
     def __str__(self):
         return f'{self.follower} follows {self.following}'
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, related_name='user1', on_delete=models.CASCADE)
+    message = models.CharField(max_length=100)
+    other_user = models.ForeignKey(User, related_name='user2', on_delete=models.CASCADE, blank=True, null=True)
+    icon = models.CharField(max_length=50)
+    date_created = models.DateTimeField(default=timezone.now)

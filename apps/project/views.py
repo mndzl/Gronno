@@ -45,7 +45,9 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
     def post(self, request, pk):
         text = request.POST.get('comment')
         Comment.objects.create(user=request.user, text=text, project=self.get_object())
-
+        
+        # Call to a function to create a notification as new comment
+        
         return redirect(self.request.path_info)
 
 class MedalToggle(LoginRequiredMixin, RedirectView):
@@ -65,12 +67,14 @@ class MedalToggle(LoginRequiredMixin, RedirectView):
             obj.points += new_medal.medal.points
             obj.save()
             obj.author.gronner.save()
+            # Call to a function to create a notification as new medal
         else: 
             if(medals_user.first().medal!=medal):
                 obj.author.gronner.points -=  medals_user.first().medal.points
                 obj.points -= medals_user.first().medal.points
                 medals_user.first().delete()
                 new_medal = Award.objects.create(user=user, medal=medal, project=obj)
+                # Call to a function to create a notification as user changes medal
                 obj.author.gronner.points +=  new_medal.medal.points
                 obj.points += new_medal.medal.points
                 obj.save()
@@ -95,6 +99,7 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.author = self.request.user
         self.request.user.gronner.points += 500
         self.request.user.gronner.save()
+        # Call to a function to create a notification as user has uploaded a new project
         return super().form_valid(form)
 
 class ProjectUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -131,23 +136,6 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
         messages.add_message(self.request, messages.INFO, 'Se ha eliminado tu proyecto')
         return super().post(self, request, *args, **kwargs)
 
-def suspend(project, reason):
-    project.is_active = False
-    project.author.gronner.points -= 500
-    email = EmailMessage(
-        'Proyecto eliminado',
-        f"""Lo sentimos, tu proyecto {project.title} ha sido eliminado debido a que 
-            la comunidad lo ha reportado por la siguiente razon: {reason}.
-            
-            Cualquier inconveniente puede responder este correo y lo ayudaremos a la brevedad.
-            
-            Gronno Developers""",
-        to=[project.author.email]
-    )
-    email.send()
-    project.save()
-    project.author.save()
-
 class ReportProject(LoginRequiredMixin, RedirectView):
     reasons = ['El proyecto no es de la categoría indicada', 'Uso inapropiado del lenguaje', 'No es un proyecto']
 
@@ -164,7 +152,7 @@ class ReportProject(LoginRequiredMixin, RedirectView):
             Report.objects.create(user=user, reason=self.reasons[reason], project=obj)
             messages.add_message(self.request, messages.INFO, 'Tu reporte ha sido tomado, gracias por contribuir a la comunidad.')        
             if reports_project_reason >= 10:
-                suspend(project=obj, reason=self.reasons[reason])
+                obj.suspend(project=obj, reason=self.reasons[reason])
         else:
             messages.add_message(self.request, messages.INFO, 'Ya has reportado a este proyecto anteriormente por la misma razón.')        
 

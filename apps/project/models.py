@@ -5,6 +5,7 @@ import datetime
 from django.urls import reverse
 from PIL import Image, ExifTags
 import os
+from django.core.mail import EmailMessage
 
 from django_s3_storage.storage import S3Storage
 
@@ -109,6 +110,22 @@ class Project(models.Model):
         img[0].save(self.image1.path, file_format[0])
         img[1].save(self.image2.path, file_format[1])
         img[2].save(self.image3.path, file_format[2]) """
+
+    def suspend(self, reason):
+        self.is_active = False
+        self.author.gronner.points -= 500
+        email = EmailMessage(
+            'Proyecto eliminado',
+            f"""Lo sentimos, tu proyecto {self.title} ha sido eliminado debido a que 
+                la comunidad lo ha reportado por la siguiente razon: {reason}.
+                
+                Cualquier inconveniente puede responder este correo y lo ayudaremos a la brevedad.
+                
+                - Gronno Developers""",
+            to=[self.author.email]
+        )
+        email.send()
+        self.author.save()
 
 class Medal(models.Model):
     medal_type = models.CharField(max_length=6)
