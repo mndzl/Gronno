@@ -148,6 +148,7 @@ class Notification(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     link = models.CharField(max_length=100, default='/')
     color = models.CharField(max_length=15, default='#000')
+    seen = models.BooleanField(default=False)
 
     def notificate_followers(sender, **kwargs):
         if kwargs['created']:
