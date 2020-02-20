@@ -150,6 +150,9 @@ class Notification(models.Model):
     color = models.CharField(max_length=15, default='#000')
     seen = models.BooleanField(default=False)
 
+    def see(self):
+        self.seen = False
+
     def notificate_followers(sender, **kwargs):
         if kwargs['created']:
             for follow in Follow.objects.filter(following=kwargs['instance'].author):
