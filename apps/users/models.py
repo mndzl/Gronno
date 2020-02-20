@@ -159,3 +159,41 @@ class Notification(models.Model):
                     category_follower.notificate(other_user=kwargs['instance'].author, reason='new_category_project', project=kwargs['instance'], category=kwargs['instance'].category)
 
     post_save.connect(notificate_followers, sender=Project)
+
+    def get_date(self):
+        time = timezone.now()
+
+        segundos = int((time - self.date_created).total_seconds())
+        
+        if segundos<60:
+            return f'hace {segundos} segundos'
+
+        minutos = 0
+        while segundos-60>=0:
+            minutos += 1
+            segundos -= 60
+        if minutos>=60:
+            horas = 0
+            while minutos-60>=0:
+                horas += 1
+                minutos -= 60
+            if horas>=24:
+                dias = 0
+                while horas-24>=0:
+                    dias += 1
+                    horas -= 24
+                if dias>=31:
+                    meses = 0
+                    while dias-31>=0:
+                        meses += 1
+                        dias -= 31
+                    if meses>=12:
+                        return self.date_created
+                    else:
+                        return f'hace {meses} meses'
+                else:
+                    return f'hace {dias} dias'
+            else:
+                return f'hace {horas} horas'
+        else:
+            return f'hace {minutos} minutos'

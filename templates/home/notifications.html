@@ -6,9 +6,15 @@
 
     {% for notification in notifications %}
         <div class='notification'>
-            <a href="{{ notification.link }}" class='link'></a>
-            <span class="icon {{notification.icon}}" style='color: {{ notification.color }}'></span>
-            <p class='notification-message'>{{notification.message}}</p>
+            <div class='head-notif'>
+                <a href="{{ notification.link }}" class='link'></a>
+                <small>{{ notification.get_date }}</small>           
+            </div>
+
+            <div class='info-notification'>
+                <span class="icon {{notification.icon}}" style='color: {{ notification.color }}'></span>
+                <p class='notification-message'>{{notification.message}}</p>
+            </div>
         </div>
     {% empty %}
         <div class='noContent'>
