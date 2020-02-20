@@ -1,9 +1,7 @@
 @media screen and (max-width:640px){
-    .icon{
-        margin:0 .5em!important;
-    }
+
     p{
-        font-size: .9em;
+        font-size: .8em !important;
     }
 }
 h1{
@@ -16,24 +14,28 @@ h1{
     position: relative;
     padding:1em;
     transition: .2s;
+    justify-content: center;
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items:center;
     border-top: 1px solid rgb(184, 184, 184);
 }
 .notification p{
-    display: inline-block;
+    display: inline;
     font-weight: 300;
+    font-size: 1rem;
 }
 .notification .icon{
-    position: relative;
-    margin:.5em;
+    right:0;
     font-size: 1.5em;
     opacity: .8;
     pointer-events: none;
-    float: left;
 }
 
 .notification:hover{
     background-color: rgb(223, 223, 223);
+}
+.head-notif small{
+    justify-self: center;
+    opacity: .5;
 }
