@@ -149,7 +149,6 @@ class Notification(models.Model):
     link = models.CharField(max_length=100, default='/')
     color = models.CharField(max_length=15, default='#000')
     seen = models.BooleanField(default=False)
-
     def see(self):
         self.seen = True
 
