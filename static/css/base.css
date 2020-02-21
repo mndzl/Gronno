@@ -342,8 +342,9 @@ footer .divisor{
 
 .notifications-count{
     position:absolute;
-    top:-50%;
+    top:0;
     right:0;
+    top:-50%;
     font-family: 'Montserrat', sans-serif;
     font-size: .7em;
     font-weight: 700;
