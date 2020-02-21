@@ -50,6 +50,7 @@ class homepage(LoginRequiredMixin, ListView):
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
         context["personal_projects"] = user.project_set.filter(is_active=True).order_by('-date_posted')
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
 
         return context
 
@@ -61,9 +62,12 @@ class NotificationsView(ListView):
     def get_queryset(self):
         notifications = Notification.objects.filter(user=self.request.user).order_by('-date_created')
         
-        for notification in notifications:
+        for notification in Notification.objects.filter(user=self.request.user):
+            print(notification.seen)
             notification.see()
-        
+            print(notification.seen)
+            notification.save()
+
         return notifications
     
     def get_context_data(self, **kwargs):
@@ -71,7 +75,9 @@ class NotificationsView(ListView):
         context["top_projects"] = Project.objects.filter(is_active=True).order_by('-points')[:3]
         context["top_users"] = Gronner.objects.all().order_by('-points')[:3]
         context["personal_projects"] = self.request.user.project_set.filter(is_active=True).order_by('-date_posted')
-        
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
+
+
         return context
     
 

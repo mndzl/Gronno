@@ -35,6 +35,7 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
         context['golded'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Gold")))
         context['silvered'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Silver")))
         context['bronzed'] = bool(len(Award.objects.filter(user=self.request.user, project=this_object, medal__medal_type="Bronze")))
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
         
         
         # Post Time
@@ -100,6 +101,12 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = "Tu proyecto se ha subido correctamente"
     success_url = "/home/"
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
+        return context
+    
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         self.request.user.gronner.points += 500
@@ -116,6 +123,13 @@ class ProjectUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestM
         form.instance.author = self.request.user
         messages.add_message(self.request, messages.SUCCESS, 'Se ha actualizado tu proyecto')
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
+ 
+        return context
+    
 
     def test_func(self):
         project = self.get_object()

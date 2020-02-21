@@ -335,4 +335,24 @@ footer .divisor{
 
 .icon-notifications-outline{
     color:#FFF;
+    position: relative;
+    width:1em;
+    height:1em;
+}
+
+.notifications-count{
+    position:absolute;
+    top:-50%;
+    right:0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .7em;
+    font-weight: 700;
+    padding:2px;
+    height:1em;
+    width:1em;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    border-radius: 100%;
+    background-color: #ff0000;
 }

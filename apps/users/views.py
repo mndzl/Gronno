@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from apps.project.models import Category, Project
-from apps.users.models import Gronner, Follow
+from apps.users.models import Gronner, Follow, Notification
 from django.utils import timezone
 import datetime
 from django.contrib.auth.models import User
@@ -92,6 +92,8 @@ class Profile(LoginRequiredMixin, ListView):
         context['per_category'] = zip(relation,categories)
         context['followers'] = len(Follow.objects.filter(following=user))
         context['are_friends'] = bool(len(Follow.objects.filter(following=user, follower=self.request.user)))
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
+
 
         return context  
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from apps.project.models import Project, Category
 from django.views.generic import ListView
-from apps.users.models import Gronner
+from apps.users.models import Gronner, Notification
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -39,7 +39,9 @@ def Explore(request):
         'projects': projects,
         'users_search': users_search,
         'categories': categories,
-        'trending':trending
+        'trending':trending,
+        'notifications_number': len(Notification.objects.filter(user=request.user, seen=False))
+
     }
     return render(request, 'explore/explore.html', context)
 
@@ -78,7 +80,9 @@ class CategoryExplore(ListView):
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
         context["followed"] = context["category"] in user.gronner.categories_followed.all()
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
         
+
         return context
     
     

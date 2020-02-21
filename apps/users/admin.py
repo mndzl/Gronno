@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
     inlines = (GronnerInline,)
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'message')
+    list_display = ('user', 'message', 'seen')
 
 
 admin.site.unregister(User)

@@ -13,11 +13,8 @@
                     <p class='notification-message'>{{notification.message}}</p>
                 </div>
             </div>
-
+            
             <span class="icon {{notification.icon}}" style='color: {{ notification.color }}'></span>
-            {% if notification.seen == False %}
-                <span>*</span>
-            {% endif %}
         </div>
     {% empty %}
         <div class='noContent'>

@@ -151,7 +151,7 @@ class Notification(models.Model):
     seen = models.BooleanField(default=False)
 
     def see(self):
-        self.seen = False
+        self.seen = True
 
     def notificate_followers(sender, **kwargs):
         if kwargs['created']:
