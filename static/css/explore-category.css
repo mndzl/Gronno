@@ -29,7 +29,7 @@ h2{
     font-weight: 500;
     margin-bottom: 1em;
 }
-.icon-plus, .icon-tag-cancel{
+a>.icon-plus, a>.icon-tag-cancel{
 	font-size: .7em;
 	vertical-align: top;
 	color:#FFF;

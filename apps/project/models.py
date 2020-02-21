@@ -183,13 +183,13 @@ class Comment(models.Model):
                     if meses>=12:
                         return self.date_commented
                     else:
-                        return f'hace {meses} meses'
+                        return f'hace {meses} mes/es'
                 else:
-                    return f'hace {dias} dias'
+                    return f'hace {dias} d'
             else:
-                return f'hace {horas} horas'
+                return f'hace {horas} h'
         else:
-            return f'hace {minutos} minutos'
+            return f'hace {minutos} m'
 
 class Report(models.Model):
     reason = models.CharField(max_length=50)
