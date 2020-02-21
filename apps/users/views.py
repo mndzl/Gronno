@@ -145,7 +145,7 @@ def ProfileUpdateView(request):
         u_form = UserUpdateForm(instance=user)
         g_form = GronnerUpdateForm(instance=user.gronner)
     
-    return render(request, 'users/configuration.html', {'u_form':u_form, 'g_form':g_form, 'notifications_number':len(Notification.objects.filter(user=self.request.user, seen=False))})
+    return render(request, 'users/configuration.html', {'u_form':u_form, 'g_form':g_form, 'notifications_number':len(Notification.objects.filter(user=request.user, seen=False))})
 
 
 class FollowView(LoginRequiredMixin, RedirectView):
