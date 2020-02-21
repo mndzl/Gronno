@@ -145,8 +145,8 @@ form{
     margin-top:1em;
     text-align: right;
 }
-#category-project{
-    justify-content: end;
+#category-project_before{
+    justify-self: end !important;
 }
 .explore .project-followed-title, .explore .all-categories-title{
     font-size: 1.5em;

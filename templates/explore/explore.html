@@ -73,7 +73,7 @@
     {% else %}
         <div class="explore">
             <div class='all-categories'>
-                <h3 class="all-categories-title">Todas las categorias</h3>
+                <h3 class="all-categories-title">Todas las categorías</h3>
                 {% for category in trending.categories %}
                     <div class="category trending-categories" style="color:{{category.color}}">
                         <a class="link" href="{% url 'category_explore' category.diminutive %}"></a>
@@ -87,7 +87,7 @@
                 {% if trending.projects %}
                     {% for project in trending.projects %}
                         <div class="project" id="project2">
-                            <div class="category-project" id="category-project" style="color:{{project.category.color}}">
+                            <div class="category-project" id="category-project_before" style="color:{{project.category.color}}">
                                 <span class="icon-price-tag"></span>
                                 <div class="category-name">{{ project.category.name }}</div>
                             </div>
@@ -97,7 +97,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <div class="no-categories">No sigues a ninguna categoria</div>
+                    <div class="no-categories">No hay proyectos para mostrar</div>
                 {% endif %}
             </div>
 
