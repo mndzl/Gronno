@@ -68,13 +68,13 @@ class Project(models.Model):
                     if meses>=12:
                         return self.date_posted
                     else:
-                        return f'hace {meses} meses'
+                        return f'hace {meses} mes/es'
                 else:
-                    return f'hace {dias} dias'
+                    return f'hace {dias} d'
             else:
-                return f'hace {horas} horas'
+                return f'hace {horas} h'
         else:
-            return f'hace {minutos} minutos'
+            return f'hace {minutos} m'
 
 
     def get_absolute_url(self):

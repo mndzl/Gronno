@@ -92,7 +92,6 @@ class MedalToggle(LoginRequiredMixin, RedirectView):
                 obj.save()         
 
                 medals_user.first().delete()
-
         return url_
 
 class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
