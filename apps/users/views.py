@@ -26,7 +26,7 @@ class Profile(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Project.objects.filter(author=user, is_active=True, date_posted__gte=timezone.now()-datetime.timedelta(days=31), date_posted__lte=timezone.now()).order_by('-date_posted')
+        return Project.objects.filter(author=user, is_active=True).order_by('-date_posted')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -87,7 +87,7 @@ class Profile(LoginRequiredMixin, ListView):
         context['socials'] = socials
 
         # Adicionales
-        context['recents'] = zip(self.object_list,medals)
+        context['recents'] = zip(self.object_list, medals)
         context['extract_length'] = len(user.gronner.extract)
         context['per_category'] = zip(relation,categories)
         context['followers'] = len(Follow.objects.filter(following=user))
