@@ -138,16 +138,19 @@
         }
         .oro, .plata, .bronce{
             pointer-events: auto !important;
-            transition: .2s;
+            transition:.2s;
         }
         .oro:hover{
-            opacity: 1 !important;
+            opacity: .8 !important;
+            cursor: pointer;
         }
         .plata:hover{
-            opacity: 1 !important;
+            opacity: .8 !important;
+            cursor: pointer;
         }
         .bronce:hover{
-            opacity: 1 !important;
+            opacity: .8 !important;
+            cursor: pointer;
         }
 
 /* Comment */

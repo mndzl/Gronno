@@ -13,6 +13,7 @@ from django.contrib import messages
 from PIL import ImageFile
 from django.core.mail import EmailMessage
 import tzlocal
+from django.http import JsonResponse
 import pytz
 import django.dispatch
 
@@ -49,6 +50,7 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
         self.get_object().author.gronner.notificate(other_user=self.request.user, reason='new_comment', project=self.get_object(), category=None)
         
         return redirect(self.request.path_info)
+
 
 class MedalToggle(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):

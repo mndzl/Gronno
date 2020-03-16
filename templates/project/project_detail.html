@@ -69,16 +69,16 @@
 
         <div class="medallas">
             <div class="medal-container">
-                <div class="bronce" style='opacity:{{ bronzed|yesno:"1,.5" }}'>
-                    <a href="{% url 'give_medal' project.id 'Bronze'  %}"><img src="{% static 'img/bronce.png' %}" alt="Medallas de bronce"></a>
+                <div class="bronce medal" href="{% url 'give_medal' project.id 'Bronze'  %}" style='opacity:{{ bronzed|yesno:"1,.3" }}'>
+                    <a><img src="{% static 'img/bronce.png' %}" id='bronce' alt="Medallas de bronce"></a>
                 </div>
 
-                <div class="plata" style='opacity:{{ silvered|yesno:"1,.5" }}'>
-                    <a href="{% url 'give_medal' project.id 'Silver'  %}"><img src="{% static 'img/plata.png' %}" alt="Medallas de plata"></a>
+                <div class="plata medal" href="{% url 'give_medal' project.id 'Silver'  %}" style='opacity:{{ silvered|yesno:"1,.3" }}'>
+                    <a><img src="{% static 'img/plata.png' %}" id='plata' alt="Medallas de plata"></a>
                 </div>
 
-                <div class="oro" style='opacity:{{ golded|yesno:"1,.5" }}'>
-                    <a href="{% url 'give_medal' project.id 'Gold'  %}"><img src="{% static 'img/oro.png' %}" alt="Medallas de oro"></a>
+                <div class="oro medal" href="{% url 'give_medal' project.id 'Gold'  %}" style='opacity:{{ golded|yesno:"1,.3" }}'>
+                    <a><img src="{% static 'img/oro.png' %}" id='oro' alt="Medallas de oro"></a>
                 </div>
             </div>
 
@@ -132,15 +132,7 @@
     {% endif %}
 
 {% block js %}
-    <script type="text/javascript">
-        flag = document.getElementById('report')
-        reportSelections = document.getElementById('report-select')
-        flag.onclick = function report(){
-            reportSelections.classList.toggle('open');
-        }
-
-    </script>
-
+    <script src='{% static "js/project_detail.js" %}'></script>
 {% endblock js %}
 
 {% endblock main_content %}
