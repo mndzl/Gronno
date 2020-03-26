@@ -44,7 +44,7 @@ $("#new_comment").submit(function(e){
     var name = $("#name").text();
     var dedication = $("#dedication").text();
     var urlusr = $("#usrlink").attr("href");
-    var image = $("#usrimg").attr("src")
+    var image = $("#usrimg").attr("src");
 
     $.post(window.location.href, $(this).serialize())
     .done(function(){
