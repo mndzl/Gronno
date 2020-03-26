@@ -4,7 +4,7 @@ $(document).ready(function(){
     flag.onclick = function report(){
         reportSelections.classList.toggle('open');
     };
-
+    alert("jQuery Load");
 });
 
 $('.medal').click(function(e){
