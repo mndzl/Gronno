@@ -238,7 +238,9 @@
     }
     .comment .comment_user_dedication{
         font-size: .7em;
+        font-weight: 700;
         opacity: .8;
+        color:#5e2a00;
     }
     .comment .comment_content{
         white-space: pre-line;

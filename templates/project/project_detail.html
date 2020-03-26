@@ -92,9 +92,9 @@
         <div class="comment_section">
             <div class='new_comment'>
                 <img class="user_img" src={{ user.gronner.image.url }}>
-                <form method='POST'>
+                <form method='POST' id="new_comment">
                     {% csrf_token %}
-                    <textarea name='comment' placeholder="Comentar" required></textarea>
+                    <textarea id='comment_text' name='comment' placeholder="Comentar" required></textarea>
                     <div class="send">
                         <button type="submit" value=""><span class = 'icon-send'></span></button>
                     </div>
