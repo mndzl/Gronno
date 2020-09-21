@@ -49,6 +49,7 @@
 							<div id="mainPhoto"><a id='usrlink' href="{% url 'profile' user.username %}"><img id='usrimg' src="{{ user.gronner.image.url }}"></a></div>
 								<span class="infouser">
 									<a href="{% url 'profile' user.username %}" class='link'></a>
+									<div id='user-id' style='display:none'>{{user.id}}</div>
 									<div id="name">{{user.first_name}} {{user.last_name}}</div>
 									<div id="username">({{user.username}})</div>
 								</span>
@@ -65,7 +66,7 @@
 			{% if user.is_authenticated %}
 				<div id="rightNavSide">
 					<div id="rightNavItems">
-						<a href="{% url 'notifications' %}" class='notifications'>
+						<div href="#" class='notifications'>
 							<span class='icon-notifications-outline'>
 								{% if notifications_number > 0 %}
 									<div class='notifications-count'>
@@ -73,7 +74,10 @@
 									</div>
 								{% endif %}
 							</span>
-						</a>
+
+							<div class="notifications-box">
+							</div>
+						</div>
 
 						<div id="divMessageSearch"></div>
 						<div id="projectReady"><a href="{% url 'project_create' %}">Subir nuevo proyecto</a></div>
@@ -116,6 +120,7 @@
 
 	{% block js %}
 	{% endblock js %}
+	<script src="{% static 'js/base.js' %}"></script>
 	<div style="display:none" id='dedication'>{{user.gronner.dedication}}</div>
 
 </body>

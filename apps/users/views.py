@@ -11,7 +11,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, UpdateView, RedirectView
 from .forms import GronnerRegisterForm
 from django.contrib import messages
-from django.core import mail
+from django.core import mail, serializers
+from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 # Create your views here.
@@ -72,16 +73,16 @@ class Profile(LoginRequiredMixin, ListView):
         # Obteniendo Redes Sociales
         socials = [{}]
 
-        if user.gronner.facebook is not '':
+        if user.gronner.facebook != '':
             socials.append({'name':'facebook2', 'link':f'https://www.facebook.com/{user.gronner.facebook}', 'color':'#3b5998'})
 
-        if user.gronner.instagram is not '':
+        if user.gronner.instagram != '':
             socials.append({'name':'instagram', 'link':f'https://www.instagram.com/{user.gronner.instagram}', 'color':'#8f0047'})
 
-        if user.gronner.twitter is not '':
+        if user.gronner.twitter != '':
             socials.append({'name':'twitter', 'link':f'https://www.twitter.com/{user.gronner.twitter}', 'color':'#00acee' })
 
-        if user.gronner.linkedin is not '':
+        if user.gronner.linkedin != '':
             socials.append({'name':'linkedin', 'link':f'https://www.linkedin.com/in/{user.gronner.linkedin}', 'color':'#0e76a8'})
         
         context['socials'] = socials
@@ -185,4 +186,12 @@ class FollowCategoryView(LoginRequiredMixin, RedirectView):
             messages.add_message(self.request, messages.SUCCESS, f'Ahora sigues a esta categoría')
 
         return url_
+
+
+def get_notifications(request, user):
+    notifications = list(Notification.objects.filter(user=user)[:5])
+    qs = serializers.serialize('json', notifications)
+    return HttpResponse(qs, content_type='application/json')
+
+
 

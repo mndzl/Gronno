@@ -24,7 +24,7 @@ class Gronner(models.Model):
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', storage=storage)
     birth = models.DateField()
-    categories_followed = models.ManyToManyField(Category, blank=True, null=True)
+    categories_followed = models.ManyToManyField(Category, blank=True)
     country = CountryField(default='Argentina', blank=True, null=True)
     facebook = models.CharField(max_length=50,default='', blank=True)
     instagram = models.CharField(max_length=50, default='', blank=True)
@@ -92,7 +92,7 @@ class Gronner(models.Model):
             references.update({
                 'new_Gold':{
                     'icon':'icon-medal',
-                    'message': f'{other_user.get_full_name()} dió una medalla de oro a {project.title}',
+                    'message': f'{other_user.get_full_name()} dió una medalla de oro',
                     'color': ' #D4AF37'
                 }
             })
@@ -100,21 +100,21 @@ class Gronner(models.Model):
             references.update({
                 'new_Silver': {
                     'icon':'icon-medal',
-                    'message': f'{other_user.get_full_name()} dió una medalla de plata a {project.title}',
+                    'message': f'{other_user.get_full_name()} dió una medalla de plata',
                     'color': '#C0C0C0'
                 }
             })
             references.update({
                 'new_Bronze': {
                     'icon': 'icon-medal',
-                    'message': f'{other_user.get_full_name()} dió una medalla de bronce a {project.title}',
+                    'message': f'{other_user.get_full_name()} dió una medalla de bronce',
                     'color': '#CD7F32'
                 }
             })
             references.update({
                 'new_comment': {
                     'icon':'icon-bubble',
-                    'message': f'{other_user.get_full_name()} comentó tu proyecto {project.title}',
+                    'message': f'{other_user.get_full_name()} comentó tu proyecto',
                     'color': '#336ff2'
                 }
             })

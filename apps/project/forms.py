@@ -8,7 +8,7 @@ class CreateProject(forms.ModelForm):
                                 min_length=120,
                                 max_length=10000,
                                 label='Descripcion', 
-                                widget=forms.Textarea(attrs={'placeholder':'Descripción del proyecto: muéstranos como lo pensaste, como te organizaste, y que cosas aprendiste de él'}), 
+                                widget=forms.Textarea(attrs={'placeholder':'Descripción del proyecto: cuéntanos como lo pensaste, como te organizaste, y que cosas aprendiste de él'}), 
                                 required=True)
     image1 = forms.ImageField(required=True)
     image2 = forms.ImageField(required=True)
