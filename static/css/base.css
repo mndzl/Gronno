@@ -175,7 +175,9 @@ nav{
 #username{
     opacity: .6;
 }
-
+.display{
+    display:block !important; 
+}
 #projectReady{
     justify-self:end; 
     font-size:80%;

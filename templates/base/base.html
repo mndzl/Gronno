@@ -75,7 +75,14 @@
 								{% endif %}
 							</span>
 
-							<div class="notifications-box">
+							<div class="notifications-box" style='display:none'>
+								{% for notification in notifications %}
+									<div class='notification'>
+										-----------
+										<span class='{{notification.icon}}' style='color:{{notification.color}}'></span>
+										<p>{{notification.message}}<p>
+									</div>
+								{% endfor %}
 							</div>
 						</div>
 

@@ -59,6 +59,7 @@ urlpatterns = [
     path('home/', home_views.homepage.as_view(), name='homepage'),
     path('notifications/', home_views.NotificationsView.as_view(), name='notifications'),
     path('get_notifications/<int:user>', get_notifications, name='get_notifications'),
+    path('see_notifications/', home_views.see_notifications, name='see_notifications'),
 
     path('users/<str:username>/', Profile.as_view(), name='profile'),
     path('users/<str:username>/follow/', FollowView.as_view(), name='follow'),

@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 
 class homepage(LoginRequiredMixin, ListView):
     model = Project
@@ -50,11 +51,13 @@ class homepage(LoginRequiredMixin, ListView):
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
         context["personal_projects"] = user.project_set.filter(is_active=True).order_by('-date_posted')
-        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
+        context["notifications"] = list(Notification.objects.filter(user=self.request.user)[:5])
+        context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False)[:5])
 
         return context
 
-class NotificationsView(ListView):
+
+class NotificationsView(LoginRequiredMixin, ListView):
     model = Project
     context_object_name = 'notifications'
     template_name = 'home/notifications.html'
@@ -79,7 +82,15 @@ class NotificationsView(ListView):
 
 
         return context
-    
+
+@login_required
+def see_notifications(request):
+    notifications = Notification.objects.filter(user=request.user, seen=False)
+    for notif in notifications:
+        notif.see()
+        notif.save()
+
+    return JsonResponse({'status':'OK'})
 
     
     

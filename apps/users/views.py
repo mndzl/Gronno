@@ -190,6 +190,10 @@ class FollowCategoryView(LoginRequiredMixin, RedirectView):
 
 def get_notifications(request, user):
     notifications = list(Notification.objects.filter(user=user)[:5])
+    for notif in notifications:
+        notif.seen = True
+        notif.save()
+        
     qs = serializers.serialize('json', notifications)
     return HttpResponse(qs, content_type='application/json')
 
