@@ -2,9 +2,6 @@
     .main-image, img{
         height:4em !important;
     }
-    p{
-        font-size: 1em !important;
-    }
 }
 @media screen and (max-width:450px){
     .main-image, img{
@@ -46,7 +43,7 @@ main{
     width: 100%;
     margin-top: 2em;
 }
-p{
+.content p{
     line-height: 2;
     font-weight: 500;
     font-size: 1.2em;

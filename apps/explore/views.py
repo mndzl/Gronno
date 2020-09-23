@@ -40,7 +40,8 @@ def Explore(request):
         'users_search': users_search,
         'categories': categories,
         'trending':trending,
-        'notifications_number': len(Notification.objects.filter(user=request.user, seen=False))
+        'notifications_number': len(Notification.objects.filter(user=request.user, seen=False)),
+        'notifications': list(Notification.objects.filter(user=request.user).order_by('-date_created')[:5])
 
     }
     return render(request, 'explore/explore.html', context)
@@ -81,6 +82,7 @@ class CategoryExplore(ListView):
         context["projects"] = zip(self.object_list,comments, medals)
         context["followed"] = context["category"] in user.gronner.categories_followed.all()
         context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
+        context['notifications'] = list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
         
 
         return context

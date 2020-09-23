@@ -87,10 +87,10 @@
                 <div class='project-followed-title'>Proyectos de las categorias que sigues</div>
                 {% if trending.projects %}
                     {% for project in trending.projects %}
-                        <div class="project" id="project2">
-                            <div class="category-project" id="category-project_before" style="color:{{project.category.color}}">
+                        <div class="project project2">
+                            <div class="align-right" style="color:{{project.category.color}}">
                                 <span class="icon-price-tag"></span>
-                                <div class="category-name">{{ project.category.name }}</div>
+                                <p class="category-name">{{ project.category.name }}</p>
                             </div>
                             <a class="link" href="{% url 'project_detail' project.id %}"></a>
                             <div class="project-name">{{ project.title }}</div>

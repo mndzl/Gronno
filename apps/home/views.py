@@ -51,7 +51,7 @@ class homepage(LoginRequiredMixin, ListView):
         context["medals"] = medals
         context["projects"] = zip(self.object_list,comments, medals)
         context["personal_projects"] = user.project_set.filter(is_active=True).order_by('-date_posted')
-        context["notifications"] = list(Notification.objects.filter(user=self.request.user)[:5])
+        context["notifications"] = list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
         context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False)[:5])
 
         return context
@@ -66,9 +66,7 @@ class NotificationsView(LoginRequiredMixin, ListView):
         notifications = Notification.objects.filter(user=self.request.user).order_by('-date_created')
         
         for notification in Notification.objects.filter(user=self.request.user):
-            print(notification.seen)
             notification.see()
-            print(notification.seen)
             notification.save()
 
         return notifications

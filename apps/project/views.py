@@ -39,6 +39,9 @@ class ProjectDetailView( LoginRequiredMixin, DetailView):
         context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
         
         
+        context["notifications"] = list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
+
+        
         # Post Time
         context['date_posted'] = this_object.get_date()
 
@@ -105,6 +108,8 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
+        context["notifications"] = list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
+
         return context
     
 
@@ -128,7 +133,9 @@ class ProjectUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestM
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
- 
+        context["notifications"] = list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
+
+
         return context
     
 

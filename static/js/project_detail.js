@@ -1,10 +1,11 @@
 $(document).ready(function(){
     flag = document.getElementById('report');
-    reportSelections = document.getElementById('report-select');
-    flag.onclick = function report(){
-        reportSelections.classList.toggle('open');
-    };
-    alert("jQuery Load");
+    if (flag){
+        reportSelections = document.getElementById('report-select');
+        flag.onclick = function report(){
+            reportSelections.classList.toggle('open');
+        };
+    }
 });
 
 $('.medal').click(function(e){

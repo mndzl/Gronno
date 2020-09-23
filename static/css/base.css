@@ -47,7 +47,12 @@ body{
     .notifications{
         margin-right: 1em;
     }
-
+    .notifications-nav-box{
+        left:-5em !important;
+    }
+    .notification-nav{
+        font-size:.9rem;
+    }
 }
 @media screen and (max-width: 460px){
     .logout{
@@ -111,6 +116,7 @@ body{
     display: flex;
     justify-content: end;
     align-items: center;
+    position:relative;
 }
 
 header{
@@ -190,12 +196,7 @@ nav{
     opacity: .8;
     transition:.5s;
 }
-.notifications-box{
-    position:absolute;
-    color:white;
-    z-index:10;
-    background-color:black;
-}
+
 #projectReady a:hover{
     opacity: 1;
 }
@@ -347,7 +348,6 @@ footer .divisor{
     width:1em;
     height:1em;
 }
-
 .notifications-count{
     position:absolute;
     top:0;
@@ -365,4 +365,44 @@ footer .divisor{
     align-items:center;
     border-radius: 100%;
     background-color: #ff0000;
+}
+.notifications{
+    cursor:pointer;
+
+}
+.notifications-nav-box{
+    position:absolute;
+    z-index:-1;
+    background-color:rgb(143, 79, 39);
+    top:2em;
+    left:0;
+    opacity:0;
+    transition:.3s;
+}
+.notification-nav{
+    color:white;
+    opacity:.9;
+    display:flex;
+    padding:1em;
+    position:relative;
+    align-items: center;
+    font-size:14px;
+}
+.message-notification-date{
+    opacity:.7;
+    font-size:.8em;
+}
+.notification-nav .icon{
+    font-size:1.5em;
+    margin-left:.5rem;
+}
+.notification-nav:last-child{
+    margin-bottom: 0;
+}
+.notification-nav:hover{
+    background-color: rgb(126, 70, 35);
+}
+.display{
+    z-index: 4;
+    opacity:1 !important;
 }

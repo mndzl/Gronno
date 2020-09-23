@@ -94,7 +94,7 @@ class Profile(LoginRequiredMixin, ListView):
         context['followers'] = len(Follow.objects.filter(following=user))
         context['are_friends'] = bool(len(Follow.objects.filter(following=user, follower=self.request.user)))
         context["notifications_number"] = len(Notification.objects.filter(user=self.request.user, seen=False))
-
+        context['notifications'] = list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
 
         return context  
 
@@ -146,7 +146,14 @@ def ProfileUpdateView(request):
         u_form = UserUpdateForm(instance=user)
         g_form = GronnerUpdateForm(instance=user.gronner)
     
-    return render(request, 'users/configuration.html', {'u_form':u_form, 'g_form':g_form, 'notifications_number':len(Notification.objects.filter(user=request.user, seen=False))})
+    context = {
+        'u_form':u_form, 
+        'g_form':g_form, 
+        'notifications_number':len(Notification.objects.filter(user=request.user, seen=False)),
+        'notifications': list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
+    }
+
+    return render(request, 'users/configuration.html', context)
 
 
 class FollowView(LoginRequiredMixin, RedirectView):

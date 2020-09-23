@@ -66,7 +66,7 @@
 			{% if user.is_authenticated %}
 				<div id="rightNavSide">
 					<div id="rightNavItems">
-						<div href="#" class='notifications'>
+						<div class='notifications'>
 							<span class='icon-notifications-outline'>
 								{% if notifications_number > 0 %}
 									<div class='notifications-count'>
@@ -75,12 +75,19 @@
 								{% endif %}
 							</span>
 
-							<div class="notifications-box" style='display:none'>
+							<div class="notifications-nav-box">
 								{% for notification in notifications %}
-									<div class='notification'>
-										-----------
-										<span class='{{notification.icon}}' style='color:{{notification.color}}'></span>
-										<p>{{notification.message}}<p>
+									<div class='notification-nav'>
+										<a class='link' href='{{notification.link}}'></a>
+										<div class="message-notification">
+											<p class='message-notification-text'>{{notification.message}}<p>
+											<p class='message-notification-date'>{{notification.get_date}}</p>
+										</div>
+										<span class='icon {{notification.icon}}' style='color:{{notification.color}}'></span>
+									</div>
+								{% empty %}
+									<div class="notification-nav">
+										<p>No hay notificaciones</p>
 									</div>
 								{% endfor %}
 							</div>
@@ -124,10 +131,9 @@
             </div>
         </div>
     </footer>
-
+	<script src="{% static 'js/base.js' %}"></script>
 	{% block js %}
 	{% endblock js %}
-	<script src="{% static 'js/base.js' %}"></script>
 	<div style="display:none" id='dedication'>{{user.gronner.dedication}}</div>
 
 </body>

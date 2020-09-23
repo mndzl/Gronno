@@ -40,6 +40,9 @@ body{
     border-bottom: 1px solid #FFF;
     color:#FFF;
 }
+.search input::placeholder{
+    color:#FFF;
+}
 form{
     display: flex;
     justify-content: center;
@@ -73,7 +76,6 @@ form{
     margin-top: 1em;
 }
 .icon-price-tag{
-    float: left;
     margin-right: .5em;
 }
 .category, .user{
@@ -101,10 +103,6 @@ form{
 .project .category-project{
     display: flex;
     align-items: center;
-    justify-content: start;
-}
-#project2{
-    margin:0 !important;
 }
 .category{
     display: flex;
@@ -127,12 +125,12 @@ form{
 .category-project, .project-name, .project-author{
     pointer-events: none;
 }
-#project2, .category, .user{
+.project2, .category, .user{
     border-radius: 10px;
     padding:1em 0;
     transition: .5s;
 }
-#project2:hover, .category:hover, .user:hover{
+.project2:hover, .category:hover, .user:hover{
     background-color: rgb(223, 223, 223);
     padding-left: 1em;
 }
@@ -144,9 +142,6 @@ form{
 .explore .project-followed{
     margin-top:1em;
     text-align: right;
-}
-#category-project_before{
-    justify-self: end !important;
 }
 .explore .project-followed-title, .explore .all-categories-title{
     font-size: 1.5em;
@@ -171,17 +166,20 @@ form{
     padding-left: 1em;
     background-color:rgb(223, 223, 223);
 }
-.project-followed #project2{
+.project-followed .project2{
     padding: 1em 0;
     border-radius: 10px;
     transition: .5s;
     margin: 0 !important;
 }
-#project2:hover{
+.project2:hover{
     background-color: rgb(223, 223, 223);
     padding-right: 1em;
 }
 .category-followed{
     margin:0 !important;
     padding:0 !important;
+}
+.align-right .category-name{
+    display: inline;
 }
