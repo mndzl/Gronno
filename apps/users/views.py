@@ -150,7 +150,7 @@ def ProfileUpdateView(request):
         'u_form':u_form, 
         'g_form':g_form, 
         'notifications_number':len(Notification.objects.filter(user=request.user, seen=False)),
-        'notifications': list(Notification.objects.filter(user=self.request.user).order_by('-date_created')[:5])
+        'notifications': list(Notification.objects.filter(user=request.user).order_by('-date_created')[:5])
     }
 
     return render(request, 'users/configuration.html', context)
