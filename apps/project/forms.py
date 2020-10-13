@@ -12,7 +12,7 @@ class CreateProject(forms.ModelForm):
                                 required=True)
     image1 = forms.ImageField(required=True)
     image2 = forms.ImageField(required=True)
-    image3 = forms.ImageField(required=True)
+    image3 = forms.ImageField(required=True, label="(Principal)")
 
 
     class Meta:
