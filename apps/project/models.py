@@ -114,18 +114,18 @@ class Project(models.Model):
     def suspend(self, reason):
         self.is_active = False
         self.author.gronner.points -= 500
-        """email = EmailMessage(
-            'Proyecto eliminado',
-            f"""Lo sentimos, tu proyecto {self.title} ha sido eliminado debido a que 
-                la comunidad lo ha reportado por la siguiente razon: {reason}.
-                
-                Cualquier inconveniente puede responder este correo y lo ayudaremos a la brevedad.
-                
-                - Gronno Developers""",
-            to=[self.author.email]
-        )
-        email.send()
-        """
+        #email = EmailMessage(
+        #    'Proyecto eliminado',
+        #    f"""Lo sentimos, tu proyecto {self.title} ha sido eliminado debido a que 
+        #        la comunidad lo ha reportado por la siguiente razon: {reason}.
+        #        
+        #        Cualquier inconveniente puede responder este correo y lo ayudaremos a la brevedad.
+        #        
+        #        - Gronno Developers""",
+        #    to=[self.author.email]
+        #)
+        #email.send()
+        
         self.author.save()
 
 class Medal(models.Model):
