@@ -110,7 +110,7 @@ def register(request):
             newuser = User.objects.filter(username=username).first()
             Gronner.objects.create(user=newuser, dedication=dedication, country=country, birth = birth)
 
-            subject = '¡Bienvenido/a a Gronno!'
+            """subject = '¡Bienvenido/a a Gronno!'
             html_message = render_to_string('users/emailtemplate.html', {'name': newuser.first_name})
             plain_message = strip_tags(html_message)
             from_email = 'gronnodevs@gmail.com'
@@ -118,6 +118,7 @@ def register(request):
 
             mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
             mail.send_mail(f'{newuser.get_full_name()} se ha registrado a Gronno', plain_message, from_email, ['mendezgla.56@gmail.com'], html_message=html_message)
+            """
             Notification.objects.create(user=newuser, message='¡Bienvenido/a a Gronno! Haz click aquí y termina de configurar tu perfil', icon='icon-cog', link='/users/config')
 
             return redirect('login')
